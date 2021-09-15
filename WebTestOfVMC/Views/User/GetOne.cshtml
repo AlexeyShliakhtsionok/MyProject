@@ -1,0 +1,24 @@
+﻿@using WebTestOfVMC.Models
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using EnumExt;
+@model UserInfo
+
+
+
+<div class="info">
+    @Html.HiddenFor(Model => Model.UserId)
+    @Html.DisplayFor(Model => Model.LastName)
+    @Html.DisplayFor(Model => Model.FirstName)
+    @Html.DisplayFor(Model => Model.SurName)
+    @Html.DisplayFor(Model => Model.IsDeleted)
+    @Html.ActionLink("Редактировать", "UpdatePage", "User", new { Id = @Model.UserId }, new { type = "button", @class = "btn btn-success" })
+    @Html.ActionLink("Удалить", "DeletePage", "User", new { Id = @Model.UserId }, new { type = "button", @class = "btn btn-danger" })
+
+</div>
+
+<div>
+    <p><h4> Участки, доступные для просмотра</h4></p>
+    <p>
+        Some code here...
+    </p>
+</div>

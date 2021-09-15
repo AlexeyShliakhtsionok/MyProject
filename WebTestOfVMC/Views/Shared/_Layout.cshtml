@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - АС "Дефектоскопия"</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/lib/chosen/chosen.css" rel="stylesheet" />
+    <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-2">
+            <div class="container">
+
+                @if (ViewContext.HttpContext.User.Identity.IsAuthenticated == false)
+                {
+                <a class="navbar-brand" asp-area="" asp-controller="Account" asp-action="Login">АС "Дефектоскопия"</a>
+                }
+                @if (ViewContext.HttpContext.User.Identity.IsAuthenticated == true)
+                {
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">АС "Дефектоскопия"</a>
+                }
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+                    @if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+
+                            @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="Index">Управление аккаунтами</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">Направления и перегоны</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">Отделения и участки дефектоскопии</a>
+                                </li>
+
+                            }
+
+                            @if (ViewContext.HttpContext.User.IsInRole("AdministrationSupervisor"))
+                            {
+                                <li class="nav-item">
+
+                                    <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">Мое отделение</a>
+                               
+                                </li>
+                            }
+                                <li>
+                                    <div class="form-group">
+                                        <a class="btn btn-outline-dark" id="logout" asp-area="" asp-controller="Account" asp-action="Logout">Выход</a>
+                                    </div>
+
+                                </li>
+                        </ul>
+                    }
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-1">
+             @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - Дорожная лаборатория дефектоскопии
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/lib/chosen/chosen.jquery.js"></script>
+    <script src="~/lib/select2/js/select2.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

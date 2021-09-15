@@ -1,0 +1,66 @@
+﻿
+@using WebTestOfVMC.Models
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using EnumExt;
+@using Microsoft.AspNetCore.Mvc.Rendering;
+@model List<OrganisationInfo>
+
+<br />
+<div>
+    @await Component.InvokeAsync("OrganisationInfo")
+</div>
+
+<br />
+<div class="table">
+    <table class="table">
+        <tr class="p1 intable">
+            <th>Наименование организации</th>
+            <th>Вышестоящая организация</th>
+            <th>Подчиненные организации</th>
+        </tr>
+        @foreach (var d in Model)
+        {
+            <tr>
+                <td>@d.OrgName</td>
+                @if (d.Parent != null)
+                {
+                    <td>@d.Parent.OrgName</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                @if (d.Children != null)
+                {
+                    <td>
+                        @foreach (var item in d.Children)
+                        {
+                            @item.OrgName <text>, </text>
+                        }
+                    </td>
+                }
+                <td>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+
+        function onSuccess(data) {
+            $(document).on("ajaxSuccess", function () {
+                alert(data.newData.emailMessage);
+                window.location = data.newData.url;
+            });
+        }
+
+        $(document).ready(function () {
+   
+            console.log("ololo");
+            $("#multidropdown").select2();
+
+        });
+    </script>
+}
