@@ -28,11 +28,12 @@ select {
   border-color: #1861ac;
 }
 
-html {
+/*html {
     font-size: 20px;
     min-width: fit-content;
-    
-}
+    position: relative;*/
+    /*height: max-content;*/
+/*}*/
 @media (min-width: 1200px) {
     html {
         font-size: 16px;
@@ -69,22 +70,64 @@ html {
         line-height: inherit;
     }
 
-    html {
-        position: relative;
-        min-height: 100%;
-    }
-
     body, html {
         margin-bottom: 40px;
     }
 
-    .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        white-space: nowrap;
-        line-height: 60px;
-    }
+/*.footer {
+    position: absolute;
+    bottom: 10px;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 20px;
+    margin-bottom: inherit;
+}*/
+
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.wrapper {
+    position: relative;
+    min-height: 100%;
+}
+
+.content {
+    padding-bottom: 90px;
+}
+
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     .btn-success {
         font-size: 10px;
@@ -311,12 +354,47 @@ label {
     text-align: center;
 }
 
+.nod {
+    width: 250px;
+    height: 250px;
+    border-color: darkblue;
+    box-shadow: 10px;
+    border-radius: 10px;
+    
+}
+
+.nodes-container {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.node {
+    width: 405px;
+    border-radius: 10px;
+    padding: 5px 5px 5px 5px;
+    display: -webkit-inline-box;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 10px;
+    text-align: -webkit-center;
+    background-color: #002b8e;
+}
+
+.node-image {
+    height: 200px;
+    width: 392px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right:auto;
+}
 
 
 
 
-
-@font-face {
+/*@font-face {
     font-family: 'FontAwesome';
     src: url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2') format('woff2'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff') format('woff'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/fonts/fontawesome-webfont.ttf') format('truetype');
     font-weight: normal;
@@ -339,5 +417,5 @@ label {
 .glyphicon-chevron-left:before {
     content: "\f053";
 }
-
+*/
 

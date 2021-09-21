@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Content Remove="Views\Operator\UpdateUser.cshtml" />
+    <Content Remove="Views\User\CreatePage.cshtml" />
     <Content Remove="Views\User\DeletePage.cshtml" />
   </ItemGroup>
 
@@ -13,10 +14,6 @@
     <ProjectReference Include="..\Project\CommonClasses\CommonClasses.csproj" />
     <ProjectReference Include="..\RailDBProject\RailDBProject.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>

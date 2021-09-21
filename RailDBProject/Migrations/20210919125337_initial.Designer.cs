@@ -10,8 +10,8 @@ using RailDBProject;
 namespace RailDBProject.Migrations
 {
     [DbContext(typeof(RailDBContext))]
-    [Migration("20210825180035_initialDB")]
-    partial class initialDB
+    [Migration("20210919125337_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

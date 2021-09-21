@@ -7,21 +7,20 @@
 @model UserInfo
 
 <div class="form-group">
-    <a button class="btn btn-outline-dark" data-toggle="modal" data-target="#registerModal">Регистрация</a>
+    <a button class="btn btn-outline-dark" data-toggle="modal" data-target="#registerModal">Редактирование</a>
 </div>
 
 
-<form asp-action="CreateUser" asp-controller="User" data-ajax="true"
+<form asp-action="UpdateUser" asp-controller="User" asp-route-id="@Model.UserId" data-ajax="true"
       data-ajax-method="POST" data-ajax-success="onSuccess">
 
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-
                 <div class="modal-body">
                     <div class="text-center-modal">
                         <div class="form-group">
-                            <p id="p1">Регистрация</p>
+                            <p id="p1">Редактирование</p>
                             @Html.HiddenFor(Model => Model.UserId)
                             <br />
                             @Html.LabelFor(Model => Model.LastName)
@@ -51,15 +50,13 @@
                             @Html.LabelFor(Model => Model.Organisation)<br />
                             @Html.DropDownListFor(Model => Model.OrganisationId, Model.SelectList)
                             <br />
-                            @if (ViewContext.HttpContext.User.Identity.IsAuthenticated == true)
-                            {
-                                @Html.LabelFor(Model => Model.UserRole)
-                                @Html.DropDownListFor(Model => Model.UserRole, Model.UserRole.GetSelectList())
-                                @Html.ValidationMessageFor(Model => Model.UserRole)
-                            }
+                            @Html.LabelFor(Model => Model.UserRole)
+                            @Html.DropDownListFor(Model => Model.UserRole, Model.UserRole.GetSelectList())
+                            @Html.ValidationMessageFor(Model => Model.UserRole)
+                            <br />
                             <br />
                             <div class="form-group">
-                                <input type="submit" class="btn btn-outline-dark" value="Зарегистрировать" id="sub" />
+                                <input type="submit" class="btn btn-outline-dark" value="Сохранить изменения" id="sub" />
                             </div>
                         </div>
                     </div>

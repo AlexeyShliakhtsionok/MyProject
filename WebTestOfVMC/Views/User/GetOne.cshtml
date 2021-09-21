@@ -12,8 +12,6 @@
     @Html.DisplayFor(Model => Model.SurName)
     @Html.DisplayFor(Model => Model.IsDeleted)
     @Html.ActionLink("Редактировать", "UpdatePage", "User", new { Id = @Model.UserId }, new { type = "button", @class = "btn btn-success" })
-    @Html.ActionLink("Удалить", "DeletePage", "User", new { Id = @Model.UserId }, new { type = "button", @class = "btn btn-danger" })
-
 </div>
 
 <div>

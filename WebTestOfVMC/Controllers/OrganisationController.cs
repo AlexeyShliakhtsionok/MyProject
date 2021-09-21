@@ -132,6 +132,29 @@ namespace WebTestOfVMC.Controllers
 
             return PartialView(model);
         }
+
+
+
+
+        //??????????????
+        public IActionResult GetNodes()
+        {
+            var organisations = _organisationServices.GetOrganisationList();
+
+            var model = new List<OrganisationInfo>();
+
+            model = organisations.Select(u => new OrganisationInfo
+            {
+                OrganisationId = u.OrganisationId,
+                OrgName = u.OrgName,
+                Children = u.Children,
+                Parent = u.Parent,
+                Users = u.Users,
+                GlobalSections = u.GlobalSections,
+                IsDeleted = u.IsDeleted
+            }).ToList();
+            return View(model);
+        }
     }
 }
 

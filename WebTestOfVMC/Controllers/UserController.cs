@@ -72,6 +72,7 @@ namespace WebTestOfVMC.Controllers
         [HttpPost]
         public IActionResult UpdateUser(UserInfo info)
         {
+            
             var _user = _userServices.GetById(info.UserId);
             _user.FirstName = info.FirstName;
             _user.LastName = info.LastName;
@@ -92,8 +93,7 @@ namespace WebTestOfVMC.Controllers
 
             return Json(new
             {
-                isDdelete = _user.IsDeleted,
-                newData = new { success = "Пользователь помечен, как удаленный"}
+                newData = new { url = Url.Action("Index", "User") }
             });
         }
 

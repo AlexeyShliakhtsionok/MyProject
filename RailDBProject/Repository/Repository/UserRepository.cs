@@ -15,9 +15,7 @@ namespace RailDBProject.Repository.Repository
 
         public override void Delete(User user)
         {
-            user.IsDeleted = true;
-            _context.Update(user);
-           
+            _context.Users.Remove(user);
         }
     }
 }
