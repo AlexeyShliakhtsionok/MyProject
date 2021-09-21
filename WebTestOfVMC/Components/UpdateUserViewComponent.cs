@@ -17,10 +17,10 @@ namespace WebTestOfVMC.Components
         {
             this._userServices = _userServices;
         }
-        public IViewComponentResult Invoke(UserInfo inform)
+        public IViewComponentResult Invoke(int id)
         {
 
-            var _user = _userServices.GetById(inform.UserId);
+            var _user = _userServices.GetById(id);
             UserInfo info = new UserInfo();
 
             info.FirstName = _user.FirstName;
