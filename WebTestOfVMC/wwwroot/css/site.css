@@ -64,9 +64,10 @@ select {
         line-height: inherit;
     }
 
-    body, html {
-        margin-bottom: 40px;
-    }
+body, html {
+    margin-bottom: 40px;
+    background-image: url("../images/background.jpg");
+}
 
 
 html,
@@ -128,17 +129,20 @@ body {
         right: 10px;
     }
 
-    .btn-outline-dark:hover {
-        color: #000000;
-        background-color: #cae5ff;
-        border-color: #343a40;
-    }
+.btn-outline-dark:hover {
+    color: #000000;
+    background-color: #cae5ff;
+    border-color: #343a40;
+    margin: 5px;
+}
 
     .btn-outline-dark {
         color: #ffff;
         background-color: #343a40;
         border-color: #cae5ff;
         right: 0;
+        margin: 5px;
+
     }
 
     #logotype {
@@ -188,7 +192,7 @@ body {
         width: 100%;
         border-radius: 5px;
         background-color: #002b8e;
-        padding: 20px 20px 20px 20px;
+        padding: 5px 20px 20px 20px;
         box-shadow: 0 0 10px;
     }
 
@@ -360,6 +364,23 @@ label {
     margin-left: auto;
     margin-right:auto;
 }
+
+.edit-button {
+    float: left;
+    margin-right: 5px;
+    height: 10px;
+}
+.delete-button {
+    float: left;
+    margin-right: 5px;
+    height: 10px;
+}
+
+.filters {
+    float: right;
+    margin-right: 5px;
+}
+
 
 
 

@@ -9,22 +9,34 @@
 @model IndexViewModel
 
 <p class="p1">Пользователи</p>
-<form method="get">
-    <div class="form-inline">
-
-        <label>Организация: </label>
-        <select name="company" asp-items="Model.FilterViewModel.Organisations" class="form-control"></select>
-
-        <input type="submit" value="Фильтр" class="btn btn-outline-dark" />
-    </div>
-</form>
 <br />
 
 
 <div class="table">
 
+    <div id="manipulation-buttons">
+        <div class="edit-button">
+            @await Component.InvokeAsync("UpdateUser")
+        </div>
+        <div class="delete-button">
+                <input type="submit" class="btn btn-outline-dark" value="Удалить" id="delete-btn"/>
+        </div>
+        <div class="filters">
+            <form method="get">
+                <div class="form-inline">
+
+                    <p1 class="p1">Организация: </p1>
+                    <select name="company" asp-items="Model.FilterViewModel.Organisations" class="form-control"></select>
+
+                    <input type="submit" value="Применить фильтр" class="btn btn-outline-dark" />
+                </div>
+            </form>
+        </div>
+    </div>
+
     <table class="table">
         <tr class="p1 intable">
+            <th></th>
             <th>
                 <a asp-action="Index"
                    asp-controller="User"
@@ -71,35 +83,21 @@
                    asp-route-name="@(Model.FilterViewModel.SelectedName)"
                    asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"><p class="p1">Группа</p></a>
             </th>
-            <th></th>
-            <th></th>
+
+
         </tr>
+
 
         @foreach (User u in Model.Users)
         {
-
             <tr>
-
+                <td><input type="checkbox" id="@u.UserId" class="chbx" /></td>
                 <td>@u.LastName</td>
                 <td>@u.FirstName</td>
                 <td>@u.SurName</td>
                 <td>@u.Organisation.OrgName</td>
                 <td>@u.Email</td>
                 <td>@u.UserRole.GetEnumDescription()</td>
-
-                <td>
-
-                    @await Component.InvokeAsync("UpdateUser", u.UserId)
-
-                </td>
-                <td class="btn-td">
-                    <form asp-action="DeleteUser" asp-controller="User" asp-route-id="@u.UserId" data-ajax="true"
-                          data-ajax-method="POST" data-ajax-success="onSuccess">
-
-                        <input type="submit" class="btn btn-outline-dark" value="Удалить" id="btsubmit" />
-
-                    </form>
-                </td>
             </tr>
         }
 
@@ -131,14 +129,60 @@
     </a>
 }
 
-
 @section Scripts{
 
     <script>
-        function onSuccess(data) {
-            $(document).on("ajaxSuccess", function () {
-                window.location = data.newData.url;
+
+        $(document).ready(function () {
+
+            var element;
+            $(".edit-button").hide();
+            $(".delete-button").hide();
+            $("input[type=checkbox]").change(function () {
+                element = $(this).attr("id");
+                if (this.checked) {
+                    $(".edit-button").show();
+                    $(".delete-button").show();
+                    $(".chbx").hide();
+                    $(this).show();
+                }
+                else {
+                    $(".chbx").show();
+                    $(".edit-button").hide();
+                    $(".delete-button").hide();
+                }
             });
-        }
+
+            $("#delete-btn").click(function () {
+                $.ajax({
+                    url: '/User/DeleteUser/',
+                    type: 'POST',
+                    dataType: 'html',
+                    data: { id: element },
+                    success: onSuccess
+                });
+            });
+
+            function onSuccess(data) {
+                $(document).on("ajaxSuccess", function () {
+                    alert(data.newData.emailMessage);
+                    window.location = data.newData.url;
+                });
+            }
+
+
+
+            $("#test").click(function () {
+
+                alert(window.location.href);
+               
+
+            });
+
+        });
+
     </script>
 }
+
+
+

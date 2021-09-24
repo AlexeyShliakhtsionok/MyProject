@@ -17,23 +17,14 @@ namespace WebTestOfVMC.Components
         {
             this._userServices = _userServices;
         }
+
+        [HttpGet]
         public IViewComponentResult Invoke(int id)
         {
-
-            var _user = _userServices.GetById(id);
             UserInfo info = new UserInfo();
-
-            info.FirstName = _user.FirstName;
-            info.LastName = _user.LastName;
-            info.SurName = _user.SurName;
-            info.Email = _user.Email;
-            info.Login = _user.Login;
-            info.Password = _user.Password;
+            info.UserId = id;
             info.OrganisationCollection = _userServices.GetOrganisationList();
-            info.UserId = _user.UserId;
-            info.Organisation = _user.Organisation;
             info.SelectList = _userServices.GetOrganisationList().GetOrganisationSelectList();
-            info.UserRole = _user.UserRole;
 
             return View(info);
         }

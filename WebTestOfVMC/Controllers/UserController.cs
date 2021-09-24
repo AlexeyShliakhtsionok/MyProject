@@ -8,7 +8,6 @@ using Common.ListExtentions;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 using CommonClasses.PaginationAndSort;
-using System;
 using Microsoft.EntityFrameworkCore;
 using FilterSortPagingApp.Models;
 using Project.BLL.Services.IServiceIntefaces;
@@ -70,7 +69,7 @@ namespace WebTestOfVMC.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateUser(UserInfo info)
+        public IActionResult UpdateUser(UserInfo info, int id)
         {
             
             var _user = _userServices.GetById(info.UserId);
@@ -88,12 +87,16 @@ namespace WebTestOfVMC.Controllers
         [HttpPost]
         public IActionResult DeleteUser(int id)
         {
+            
             var _user = _userServices.GetById(id);
             _userServices.DeleteUser(_user);
 
             return Json(new
             {
-                newData = new { url = Url.Action("Index", "User") }
+                newData = new {
+                    url = Url.Action("Index", "User"),
+                    emailMessage = "Удаление прошло успешно!"
+                }
             });
         }
 
@@ -112,7 +115,7 @@ namespace WebTestOfVMC.Controllers
                 Password = info.Password,
                 UserRole = info.UserRole
             };
-            var _usersForEmailCheck = _userServices.GetUsers().ToList();
+
             if (_userServices.CheckByEmail(info.Email) == false)
             {
                 _userServices.CreateUser(user);
@@ -121,7 +124,6 @@ namespace WebTestOfVMC.Controllers
                     newData = new
                     {
                         emailMessage = "Регистрация прошла успешно!",
-                        resultInfo = "RedirectTrue",
                         url = Url.Action("Login", "Account")
                     }
                 });
@@ -133,7 +135,6 @@ namespace WebTestOfVMC.Controllers
                     newData = new
                     {
                         emailMessage = "Пользователь с таким e-mail уже существует!",
-                        resultInfo = "RedirectFalse",
                         url = Url.Action("Login", "Account")
                     }
                 });

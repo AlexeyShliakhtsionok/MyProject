@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/lib/chosen/chosen.css" rel="stylesheet" />
     <link href="~/lib/select2/css/select2.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -32,42 +33,42 @@
 
                     @if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
                     {
-                    <ul class="navbar-nav flex-grow-1">
+                        <ul class="navbar-nav flex-grow-1">
 
-                        @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="Index">Управление аккаунтами</a>
+                            @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="Index">Управление аккаунтами</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">Направления и перегоны</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Organisation" asp-action="GetNodes">Отделения и участки дефектоскопии</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Organisation" asp-action="GetNodes">Учетные формы</a>
+                                </li>
+                            }
+
+                            @if (ViewContext.HttpContext.User.IsInRole("AdministrationSupervisor"))
+                            {
+                                <li class="nav-item">
+
+                                    <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">Мое отделение</a>
+
+                                </li>
+                            }
+                            <li>
+                                <div class="form-group">
+                                    <a class="btn btn-outline-dark" id="logout" asp-area="" asp-controller="Account" asp-action="Logout">Выход</a>
+                                </div>
+
                             </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">Направления и перегоны</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Organisation" asp-action="GetNodes">Отделения и участки дефектоскопии</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Organisation" asp-action="GetNodes">Учетные формы</a>
-                            </li>
-                        }
-
-                        @if (ViewContext.HttpContext.User.IsInRole("AdministrationSupervisor"))
-                        {
-                            <li class="nav-item">
-
-                                <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">Мое отделение</a>
-
-                            </li>
-                        }
-                        <li>
-                            <div class="form-group">
-                                <a class="btn btn-outline-dark" id="logout" asp-area="" asp-controller="Account" asp-action="Logout">Выход</a>
-                            </div>
-
-                        </li>
-                    </ul>
+                        </ul>
                     }
 
                 </div>
@@ -77,6 +78,7 @@
 
     <div class="container">
         <main role="main" class="pb-1">
+
              @RenderBody()
         </main>
     </div>

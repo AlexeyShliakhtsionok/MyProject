@@ -42,11 +42,12 @@
 
 </div>
 
+
 @section Scripts{
 
     <script>
-        function onSuccess(data)
-        {
+
+        function onSuccess(data) {
             $(document).on("ajaxSuccess", function () {
                 alert(data.newData.emailMessage);
                 window.location = data.newData.url;
