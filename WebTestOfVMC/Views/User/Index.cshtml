@@ -8,18 +8,21 @@
 
 @model IndexViewModel
 
-<p class="p1">Пользователи</p>
+<p class="filter-text">Пользователи</p>
 <br />
 
 
 <div class="table">
 
     <div id="manipulation-buttons">
+        <div class="create-button">
+            @await Component.InvokeAsync("UserInfo")
+        </div>
         <div class="edit-button">
             @await Component.InvokeAsync("UpdateUser")
         </div>
         <div class="delete-button">
-                <input type="submit" class="btn btn-outline-dark" value="Удалить" id="delete-btn"/>
+            <input type="submit" class="btn btn-outline-dark" value="Удалить" id="delete-btn" />
         </div>
         <div class="filters">
             <form method="get">
@@ -36,7 +39,9 @@
 
     <table class="table">
         <tr class="p1 intable">
-            <th></th>
+            <th>
+                <p class="p1">№ п/п</p>
+            </th>
             <th>
                 <a asp-action="Index"
                    asp-controller="User"
@@ -87,11 +92,13 @@
 
         </tr>
 
-
+        @{ int rowNo = 0; }
         @foreach (User u in Model.Users)
         {
-            <tr>
-                <td><input type="checkbox" id="@u.UserId" class="chbx" /></td>
+
+
+            <tr class="table-row" id="@u.UserId">
+                <td>@(rowNo += 1)</td>
                 <td>@u.LastName</td>
                 <td>@u.FirstName</td>
                 <td>@u.SurName</td>
@@ -99,6 +106,7 @@
                 <td>@u.Email</td>
                 <td>@u.UserRole.GetEnumDescription()</td>
             </tr>
+
         }
 
     </table>
@@ -133,49 +141,65 @@
 
     <script>
 
+        function onSuccess(data) {
+            $(document).on("ajaxSuccess", function () {
+                
+                    alert(data.newData.emailMessage);
+                    window.location = data.newData.urladmin;
+            });
+        }
+
+        var clicked = false;
+        var element = null;
+
         $(document).ready(function () {
 
-            var element;
             $(".edit-button").hide();
             $(".delete-button").hide();
-            $("input[type=checkbox]").change(function () {
-                element = $(this).attr("id");
-                if (this.checked) {
+
+            $(".table-row").click(function () {
+
+                if (!clicked)
+                {
+                    element = $(this).attr("id");
+                    $(this).css({ 'backgroundColor': '#fff', 'color': '#000' });
+                    clicked = true;
                     $(".edit-button").show();
                     $(".delete-button").show();
-                    $(".chbx").hide();
-                    $(this).show();
                 }
-                else {
-                    $(".chbx").show();
-                    $(".edit-button").hide();
-                    $(".delete-button").hide();
-                }
+                else
+                {
+                    if ($(this).attr("id") == element) {
+                        $(this).css({ 'backgroundColor': '', 'color': '' });
+                        clicked = false;
+                        $(".edit-button").hide();
+                        $(".delete-button").hide();
+                    }
+                    $(".table-row").click(function () { return false });
+                };
             });
 
             $("#delete-btn").click(function () {
                 $.ajax({
-                    url: '/User/DeleteUser/',
+                    url: '@Url.Action("DeleteUser","User")',
                     type: 'POST',
                     dataType: 'html',
                     data: { id: element },
-                    success: onSuccess
+                    success: function (data) {
+                        alert("Удаление прошло успешно!")
+                        window.location.reload();
+                    }
                 });
             });
 
-            function onSuccess(data) {
-                $(document).on("ajaxSuccess", function () {
-                    alert(data.newData.emailMessage);
-                    window.location = data.newData.url;
-                });
-            }
 
 
 
-            $("#test").click(function () {
 
-                alert(window.location.href);
-               
+            $("#open_modal").click(function () {
+
+                alert("...............");
+
 
             });
 
@@ -186,3 +210,24 @@
 
 
 
+ @*$(".table-row").click(function () {
+
+                if (!clicked) {
+                    element = $(this).attr("id");
+                    $(this).css({ 'backgroundColor': '#fff', 'color': '#000' });
+                    clicked = true;
+                    $(".edit-button").show();
+                    $(".delete-button").show();
+                }
+                else if (clicked) {
+                    if ($(this).attr("id") == element) {
+                        $(this).css();
+                        $(".edit-button").hide();
+                        $(".delete-button").hide();
+                        clicked = false;
+                    }
+                    else {
+                        $(".table-row").click(function () { return false });
+                    }
+                };
+            });*@

@@ -91,12 +91,10 @@ namespace WebTestOfVMC.Controllers
             var _user = _userServices.GetById(id);
             _userServices.DeleteUser(_user);
 
-            return Json(new
-            {
-                newData = new {
+            return Json( new {
                     url = Url.Action("Index", "User"),
                     emailMessage = "Удаление прошло успешно!"
-                }
+               
             });
         }
 
@@ -124,7 +122,8 @@ namespace WebTestOfVMC.Controllers
                     newData = new
                     {
                         emailMessage = "Регистрация прошла успешно!",
-                        url = Url.Action("Login", "Account")
+                        url = Url.Action("Login", "Account"),
+                        urladmin = Url.Action("Index", "User")
                     }
                 });
             }
@@ -180,7 +179,7 @@ namespace WebTestOfVMC.Controllers
         public async Task<IActionResult> Index(int? company, string name, int page = 1,
             SortState sortOrder = SortState.FirstNameAsc)
         {
-            int pageSize = 15;
+            int pageSize = 10;
 
             IQueryable<User> users = _userServices.GetQuarable();
            

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WebTestOfVMC.Models;
 
-namespace WebApplication.Controllers.Defect
+namespace WebApplication.Controllers
 {
     public class DefectController : Controller
     {

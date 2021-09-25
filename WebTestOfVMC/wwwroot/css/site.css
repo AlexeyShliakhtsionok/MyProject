@@ -156,11 +156,19 @@ body {
         padding: 5px 5px 5px 5px;
     }
 
-    .p1 {
-        font-size: 20px;
-        color: white;
-        text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
-    }
+.p1 {
+    font-size: 15px;
+    margin: 5px;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+
+.filter-text {
+    font-size: 25px;
+    margin: 5px;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
 
     .container {
         margin-left: 20px;
@@ -371,6 +379,12 @@ label {
     height: 10px;
 }
 .delete-button {
+    float: left;
+    margin-right: 5px;
+    height: 10px;
+}
+
+.create-button {
     float: left;
     margin-right: 5px;
     height: 10px;
