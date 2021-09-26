@@ -17,12 +17,12 @@ namespace WebTestOfVMC.Controllers
     public class UserController : Controller
     {
         private readonly IUserServices _userServices;
-        private readonly IOrganisationServices _organisationService;
-        
-        public UserController(IUserServices _userServices, IOrganisationServices _organisationService)
+        private readonly IOrganisationServices _organisationServices;
+
+        public UserController(IUserServices _userServices, IOrganisationServices _organisationServices)
         {
-            this._organisationService = _organisationService;
             this._userServices = _userServices;
+            this._organisationServices = _organisationServices;
         }
 
         [HttpGet]
@@ -63,25 +63,36 @@ namespace WebTestOfVMC.Controllers
                 Password = _user.Password,
                 Organisation = _user.Organisation,
                 UserRole = _user.UserRole,
-                IsDeleted = _user.IsDeleted
+                IsDeleted = _user.IsDeleted,
+                OrganisationCollection = _userServices.GetOrganisationList(),
+                SelectList = _userServices.GetOrganisationList().GetOrganisationSelectList()
+
             };
-            return View(model);
+            return PartialView(model);
         }
 
         [HttpPost]
-        public IActionResult UpdateUser(UserInfo info, int id)
+        public IActionResult UpdateUser(UserInfo info)
         {
-            
+            var newOrg = _organisationServices.GetById(info.OrganisationId);
             var _user = _userServices.GetById(info.UserId);
             _user.FirstName = info.FirstName;
             _user.LastName = info.LastName;
             _user.SurName = info.SurName;
             _user.Login = info.Login;
             _user.Password = info.Password;
-            _user.Organisation = info.Organisation;
+            _user.Organisation = newOrg;
             _user.UserRole = info.UserRole;
             _userServices.UpdateUser(_user);
-            return RedirectToAction("GetAll", "User");
+
+            return Json(new
+            {
+                newData = new
+                {
+                    emailMessage = "Редактирование прошло успешно",
+                    url = Url.Action("Index", "User")
+                }
+            });
         }
 
         [HttpPost]
@@ -140,44 +151,7 @@ namespace WebTestOfVMC.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult UpdatePage(int id)
-        {
-            var _user = _userServices.GetById(id);
-
-            List<Organisation> orgList = _userServices.GetOrganisationList();
-
-            var model = new UserInfo
-            {
-                UserId = _user.UserId,
-                FirstName = _user.FirstName,
-                LastName = _user.LastName,
-                SurName = _user.SurName,
-                Email = _user.Email,
-                Organisation = _user.Organisation,
-                UserRole = _user.UserRole,
-                IsDeleted = _user.IsDeleted,
-                Login = _user.Login,
-                Password = _user.Password,
-                SelectList = orgList.GetOrganisationSelectList()
-            };
-            return View(model);
-        }
-
-        public IActionResult CreatePage()
-        {
-            List<Organisation> orgList = _userServices.GetOrganisationList();
-            var SelectList = orgList.GetOrganisationSelectList();
-            var model = new UserInfo
-            {
-                SelectList = SelectList,
-            };
-           
-            return PartialView(model);
-        }
-
-        public async Task<IActionResult> Index(int? company, string name, int page = 1,
-            SortState sortOrder = SortState.FirstNameAsc)
+         public async Task<IActionResult> Index(int? company, string name, int page = 1, SortState sortOrder = SortState.FirstNameAsc)
         {
             int pageSize = 10;
 
@@ -230,7 +204,7 @@ namespace WebTestOfVMC.Controllers
             {
                 PageViewModel = new PageViewModel(count, page, pageSize),
                 SortViewModel = new SortViewModel(sortOrder),
-                FilterViewModel = new FilterViewModel(_organisationService.GetOrganisationList(), company, name),
+                FilterViewModel = new FilterViewModel(_userServices.GetOrganisationList(), company, name),
                 Users = items
             };
             return View(viewModel);

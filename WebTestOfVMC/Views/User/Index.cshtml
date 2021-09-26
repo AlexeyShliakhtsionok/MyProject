@@ -19,7 +19,7 @@
             @await Component.InvokeAsync("UserInfo")
         </div>
         <div class="edit-button">
-            @await Component.InvokeAsync("UpdateUser")
+            <input type="submit" class="btn btn-outline-dark" value="Редактировать" id="edit-btn" />
         </div>
         <div class="delete-button">
             <input type="submit" class="btn btn-outline-dark" value="Удалить" id="delete-btn" />
@@ -95,8 +95,6 @@
         @{ int rowNo = 0; }
         @foreach (User u in Model.Users)
         {
-
-
             <tr class="table-row" id="@u.UserId">
                 <td>@(rowNo += 1)</td>
                 <td>@u.LastName</td>
@@ -106,7 +104,6 @@
                 <td>@u.Email</td>
                 <td>@u.UserRole.GetEnumDescription()</td>
             </tr>
-
         }
 
     </table>
@@ -137,21 +134,56 @@
     </a>
 }
 
+<form asp-action="UpdateUser" asp-controller="User" asp-route-id="id" data-ajax="true"
+      data-ajax-method="POST" data-ajax-success="onUpdate">
+
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center-modal">
+                        <div class="form-group">
+                            <p id="p1">Редактирование</p>
+
+                            <div id="userDiv"></div>
+
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-outline-dark" value="Сохранить изменения" id="sub" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
 @section Scripts{
 
     <script>
 
         function onSuccess(data) {
             $(document).on("ajaxSuccess", function () {
-                
+
                     alert(data.newData.emailMessage);
                     window.location = data.newData.urladmin;
             });
         }
 
+        function onUpdate(data) {
+            $(document).on("ajaxSuccess", function () {
+
+                alert(data.newData.emailMessage);
+                window.location = data.newData.url;
+            });
+        }
+
         var clicked = false;
         var element = null;
-
+        var userDiv = $("#userDiv");
+       
         $(document).ready(function () {
 
             $(".edit-button").hide();
@@ -181,9 +213,9 @@
 
             $("#delete-btn").click(function () {
                 $.ajax({
-                    url: '@Url.Action("DeleteUser","User")',
-                    type: 'POST',
-                    dataType: 'html',
+                    url: "@Url.Action("DeleteUser","User")",
+                    type: "POST",
+                    dataType: "html",
                     data: { id: element },
                     success: function (data) {
                         alert("Удаление прошло успешно!")
@@ -192,42 +224,21 @@
                 });
             });
 
-
-
-
-
-            $("#open_modal").click(function () {
-
-                alert("...............");
-
-
+            $("#edit-btn").click(function ()
+            {
+                $.ajax({
+                        url: "@Url.Action("GetOne", "User")",
+                        type: "GET",
+                        dataType: "html",
+                        data: { id: element },
+                    success: function (data) {
+                        userDiv.html(data);
+                        
+                        $("#updateModal").modal("show");
+                    }
+                });
             });
-
         });
 
     </script>
 }
-
-
-
- @*$(".table-row").click(function () {
-
-                if (!clicked) {
-                    element = $(this).attr("id");
-                    $(this).css({ 'backgroundColor': '#fff', 'color': '#000' });
-                    clicked = true;
-                    $(".edit-button").show();
-                    $(".delete-button").show();
-                }
-                else if (clicked) {
-                    if ($(this).attr("id") == element) {
-                        $(this).css();
-                        $(".edit-button").hide();
-                        $(".delete-button").hide();
-                        clicked = false;
-                    }
-                    else {
-                        $(".table-row").click(function () { return false });
-                    }
-                };
-            });*@

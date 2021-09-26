@@ -5,13 +5,13 @@
 @model UserInfo
 
 <div class="form-group">
-    <a button class="btn btn-outline-dark" id="open_modal" data-toggle="modal" data-target="#registerModal" data-id="@Model.UserId">Редактировать</a>
+    <a button class="btn btn-outline-dark" id="open_modal" data-toggle="modal" data-target="#updateModal" data-id="@Model.UserId">Редактировать</a>
 </div>
 
-<form asp-action="CreateUser" asp-controller="User" data-ajax="true"
+<form asp-action="UpdateUser" asp-controller="User" asp-route-id ="id" data-ajax="true"
       data-ajax-method="POST" data-ajax-success="onSuccess">
 
-    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">

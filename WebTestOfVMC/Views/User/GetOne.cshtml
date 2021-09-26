@@ -5,18 +5,56 @@
 
 
 
-<div class="info">
-    @Html.HiddenFor(Model => Model.UserId)
-    @Html.DisplayFor(Model => Model.LastName)
-    @Html.DisplayFor(Model => Model.FirstName)
-    @Html.DisplayFor(Model => Model.SurName)
-    @Html.DisplayFor(Model => Model.IsDeleted)
-    @Html.ActionLink("Редактировать", "UpdatePage", "User", new { Id = @Model.UserId }, new { type = "button", @class = "btn btn-success" })
-</div>
 
-<div>
-    <p><h4> Участки, доступные для просмотра</h4></p>
-    <p>
-        Some code here...
-    </p>
-</div>
+    <div id="userId">
+        @Html.HiddenFor(Model => Model.UserId)
+    </div>
+
+    <div id="userLastName">
+        @Html.LabelFor(Model => Model.LastName)
+        <br />
+        @Html.EditorFor(Model => Model.LastName)
+    </div>
+
+    <div id="userFirstName">
+        @Html.LabelFor(Model => Model.FirstName)
+        <br />
+        @Html.EditorFor(Model => Model.FirstName)
+    </div>
+
+    <div id="userSurName">
+        @Html.LabelFor(Model => Model.SurName)
+        <br />
+        @Html.EditorFor(Model => Model.SurName)
+    </div>
+
+    <div id="userEmail">
+        @Html.LabelFor(Model => Model.Email)
+        <br />
+        @Html.EditorFor(Model => Model.Email)
+    </div>
+
+    <div id="userLogin">
+        @Html.LabelFor(Model => Model.Login)
+        <br />
+        @Html.EditorFor(Model => Model.Login)
+    </div>
+
+    <div id="userPassword">
+        @Html.LabelFor(Model => Model.Password)
+        <br />
+        @Html.EditorFor(Model => Model.Password)
+    </div>
+
+    <div id="userOrganisations">
+        @Html.LabelFor(Model => Model.Organisation)
+        <br />
+        @Html.DropDownListFor(Model => Model.OrganisationId, Model.SelectList)
+    </div>
+
+    <div id="userRoles">
+        @Html.LabelFor(Model => Model.UserRole)
+        <br />
+        @Html.DropDownListFor(Model => Model.UserRole, Model.UserRole.GetSelectList())
+    </div>
+
