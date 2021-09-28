@@ -8,11 +8,13 @@ namespace RailDBProject.Model
         newUser,
         [Description("Администратор")]
         Administrator,
-        [Description("Руководитель управления дороги")]
+        [Description("Управление БелЖД")]
         AdministrationSupervisor,
-        [Description("Руководитель отделения дороги")]
+        [Description("Отделение БелЖД")]
         NodeSupervisor,
-        [Description("Мастер участка дефектоскопии")]
-        LineSupervisor
+        [Description("Дистанция пути")]
+        LineSupervisor,
+        [Description("Центр диагностики БелДЖ")]
+        DiagnosticEmploye
     }
 }

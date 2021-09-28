@@ -5,6 +5,10 @@ using RailDBProject.Model;
 using System.Collections.Generic;
 using System.Linq;
 using WebTestOfVMC.Models;
+using CommonClasses.PaginationAndSort.Organisations;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using FilterSortPagingApp.Models.Organisations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebTestOfVMC.Controllers
@@ -18,54 +22,91 @@ namespace WebTestOfVMC.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
-        {
-            var organisations = _organisationServices.GetOrganisationList();
-           
-            var model = new List<OrganisationInfo>();
-
-            model = organisations.Select(u => new OrganisationInfo
-            {
-                OrganisationId = u.OrganisationId,
-                OrgName = u.OrgName,
-                Children = u.Children,
-                Parent = u.Parent,
-                Users = u.Users,
-                GlobalSections = u.GlobalSections,
-                IsDeleted = u.IsDeleted
-            }).ToList();
-            return View(model);
-        }
-
-        [HttpGet]
         public IActionResult GetOne(int id)
         {
-            var organisation = _organisationServices.GetById(id);
-            return View(organisation);
+            var _organisation = _organisationServices.GetById(id);
+
+            OrganisationInfo organisation = new OrganisationInfo();
+
+                organisation.OrganisationId = _organisation.OrganisationId;
+                organisation.OrgName = _organisation.OrgName;
+
+                if (_organisation.Parent != null)
+                {
+                    organisation.Parent = _organisation.Parent;
+                }
+
+                if (_organisation.Children != null)
+                {
+                    organisation.Children = _organisation.Children;
+                }
+                organisation.GlobalSections = _organisation.GlobalSections;
+                organisation.Users = _organisation.Users;
+                organisation.IsDeleted = _organisation.IsDeleted;
+                organisation.SelectList = _organisationServices.GetOrganisationList().GetOrganisationSelectList();
+                organisation.OrganisationCollection = _organisationServices.GetOrganisationList();
+                organisation.MultiSelectList = new MultiSelectList(organisation.OrganisationCollection, "OrganisationId", "OrgName");
+
+            return PartialView(organisation);
         }
 
         [HttpPost]
         public IActionResult UpdateOrganisation(OrganisationInfo info)
         {
             var _organisation = _organisationServices.GetById(info.OrganisationId);
+            var _childList = new List<Organisation>();
+
+            if (info.SelectedOrganisations != null)
+            {
+                foreach (var item in info.SelectedOrganisations)
+                {
+                    _childList.Add(_organisationServices.GetById(item));
+                }
+                _organisation.Children = _childList;
+            }
+            else
+            {
+                _organisation.Children = null;
+            }
+
             _organisation.OrgName = info.OrgName;
-            _organisation.Children = info.Children;
-            _organisation.Parent = info.Parent;
+            _organisation.Parent = _organisationServices.GetById(info.Parent.OrganisationId);
             _organisation.Users = info.Users;
             _organisation.IsDeleted = info.IsDeleted;
-
             _organisationServices.UpdateOrganisation(_organisation);
 
-            return RedirectToAction("GetAll", "Organisation");
+            return Json(new
+            {
+                newData = new
+                {
+                    emailMessage = "Редактирование прошло успешно",
+                    url = Url.Action("Index", "Organisation")
+                }
+            });
         }
 
         [HttpPost]
         public IActionResult DeleteOrganisation(int id)
         {
             var _organisation = _organisationServices.GetById(id);
-            _organisationServices.DeleteOrganisation(_organisation);
 
-            return RedirectToAction("GetAll", "Organisation");
+
+
+            if (_organisation.Children != null)
+            {
+                foreach (var item in _organisation.Children)
+                {
+                    item.Parent = null;
+                }
+                _organisation.Children = null;
+            }
+
+            _organisationServices.DeleteOrganisation(_organisation);
+            return Json(new
+            {
+                emailMessage = "Удаление прошло успешно!",
+                url = Url.Action("Index", "Organisation")
+            });
         }
 
         public IActionResult CreateOrganisation(OrganisationInfo info)
@@ -110,33 +151,11 @@ namespace WebTestOfVMC.Controllers
 
             return Json(new
             {
-                newData = new
-                {
-                    emailMessage = "Регистрация прошла успешно!",
-                    resultInfo = "RedirectTrue",
-                    url = Url.Action("Login", "Account")
-                }
+                url = Url.Action("Index", "Organisation"),
+                emailMessage = "Добавление прошло успешно!"
             });
         }
-        public IActionResult CreatePage()
-        {
-            List<Organisation> orgList = _organisationServices.GetOrganisationList();
-            var SelectList = orgList.GetOrganisationSelectList();
 
-            var model = new OrganisationInfo()
-            {
-                OrganisationCollection = orgList,
-                SelectList = SelectList,
-                MultiSelectList = new MultiSelectList(orgList, "OrganisationId", "OrgName")
-            };
-
-            return PartialView(model);
-        }
-
-
-
-
-        //??????????????
         public IActionResult GetNodes()
         {
             var organisations = _organisationServices.GetOrganisationList();
@@ -154,6 +173,41 @@ namespace WebTestOfVMC.Controllers
                 IsDeleted = u.IsDeleted
             }).ToList();
             return View(model);
+        }
+
+        public async Task<IActionResult> Index(int? company, string name, int page = 1, SortState sortOrder = SortState.OrganisationAsc)
+        {
+            int pageSize = 10;
+
+            IQueryable<Organisation> organisations = _organisationServices.GetQuarable();
+
+
+            if (company != null && company != 0)
+            {
+                organisations = organisations.Where(p => p.OrganisationId == company);
+            }
+
+            switch (sortOrder)
+            {
+                case SortState.OrganisationDesc:
+                    organisations = organisations.OrderByDescending(s => s.OrgName);
+                    break;
+                case SortState.OrganisationAsc:
+                    organisations = organisations.OrderBy(s => s.OrgName);
+                    break;
+            }
+
+            var count = await organisations.CountAsync();
+            var items = await organisations.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            IndexViewModel viewModel = new IndexViewModel
+            {
+                PageViewModel = new PageViewModel(count, page, pageSize),
+                SortViewModel = new SortViewModel(sortOrder),
+                FilterViewModel = new FilterViewModel(_organisationServices.GetOrganisationList(), company, name),
+                Organisations = items
+            };
+            return View(viewModel);
         }
     }
 }

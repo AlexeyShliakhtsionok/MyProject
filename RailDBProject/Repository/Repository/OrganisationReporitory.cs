@@ -12,10 +12,5 @@ namespace RailDBProject.Repository.Repository
         {
             get { return _context; }
         }
-        public override void Delete(Organisation organisation)
-        {
-            organisation.IsDeleted = true;
-            _context.Update(organisation);
-        }
     }
 }

@@ -33,6 +33,9 @@ namespace WebTestOfVMC.Models
         [Required(ErrorMessage = "Поле не может быть пустым")]
         public UserRole UserRole { get; set; }
         public bool IsDeleted { get; set; }
+        [Display(Name = "№ телефона")]
+        [DataType(DataType.PhoneNumber)]
+        public string PhoneNumber { get; set; }
         public int OrganisationId { get; set; }
         [Display(Name = "Организация: ")]
         [Required(ErrorMessage = "Поле не может быть пустым")]

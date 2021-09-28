@@ -1,0 +1,65 @@
+﻿
+
+@if (Html.ViewContext.HttpContext.User.IsInRole("newUser"))
+{
+    <div id="unverificate">
+
+
+
+    </div>
+}
+
+@if (Html.ViewContext.HttpContext.User.IsInRole("Administrator"))
+{
+    <div id="administrator">
+
+
+    </div>
+}
+
+@if (Html.ViewContext.HttpContext.User.IsInRole("newUser"))
+{
+    <div id="administrator">
+
+
+    </div>
+}
+
+@if (Html.ViewContext.HttpContext.User.IsInRole("AdministrationSupervisor"))
+{
+    <div id="administrationSupervisor">
+
+        <div id="data-management">
+            <a></a>
+        </div>
+        <div id="nodes">
+
+        </div>
+
+
+    </div>
+}
+
+@if (Html.ViewContext.HttpContext.User.IsInRole("NodeSupervisor"))
+{
+    <div id="nodeSupervisor">
+
+
+    </div>
+}
+
+@if (Html.ViewContext.HttpContext.User.IsInRole("LineSupervisor"))
+{
+    <div id="lineSupervisor">
+
+
+    </div>
+}
+
+@if (Html.ViewContext.HttpContext.User.IsInRole("DiagnosticEmploye"))
+{
+    <div id="administrator">
+
+
+    </div>
+}

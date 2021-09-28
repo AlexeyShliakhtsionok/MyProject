@@ -333,6 +333,9 @@ namespace RailDBProject.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SurName")
                         .IsRequired()
                         .HasMaxLength(15)

@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 using CommonClasses.PaginationAndSort;
 using Microsoft.EntityFrameworkCore;
-using FilterSortPagingApp.Models;
+using FilterSortPagingApp.Models.Users;
 using Project.BLL.Services.IServiceIntefaces;
+using CommonClasses.PaginationAndSort.Users;
 
 namespace WebTestOfVMC.Controllers
 {
@@ -76,6 +77,7 @@ namespace WebTestOfVMC.Controllers
         {
             var newOrg = _organisationServices.GetById(info.OrganisationId);
             var _user = _userServices.GetById(info.UserId);
+
             _user.FirstName = info.FirstName;
             _user.LastName = info.LastName;
             _user.SurName = info.SurName;
@@ -98,14 +100,15 @@ namespace WebTestOfVMC.Controllers
         [HttpPost]
         public IActionResult DeleteUser(int id)
         {
-            
+
             var _user = _userServices.GetById(id);
             _userServices.DeleteUser(_user);
 
-            return Json( new {
-                    url = Url.Action("Index", "User"),
-                    emailMessage = "Удаление прошло успешно!"
-               
+            return Json(new
+            {
+                url = Url.Action("Index", "User"),
+                emailMessage = "Удаление прошло успешно!"
+
             });
         }
 
@@ -151,18 +154,18 @@ namespace WebTestOfVMC.Controllers
             }
         }
 
-         public async Task<IActionResult> Index(int? company, string name, int page = 1, SortState sortOrder = SortState.FirstNameAsc)
+        public async Task<IActionResult> Index(int? company, string name, int page = 1, SortState sortOrder = SortState.FirstNameAsc)
         {
             int pageSize = 10;
 
             IQueryable<User> users = _userServices.GetQuarable();
-           
+
 
             if (company != null && company != 0)
             {
                 users = users.Where(p => p.OrganisationId == company);
             }
-            
+
             switch (sortOrder)
             {
                 case SortState.FirstNameDesc:

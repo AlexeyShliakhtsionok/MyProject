@@ -42,5 +42,10 @@ namespace Project.BLL.Services
             _uow.SaveChanges();
             return _organisation;
         }
+
+        public IQueryable<Organisation> GetQuarable()
+        {
+            return _uow.Organisations.ReadAll();
+        }
     }
 }

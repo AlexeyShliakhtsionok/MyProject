@@ -1,0 +1,42 @@
+﻿@using WebTestOfVMC.Models
+
+@model OrganisationInfo
+
+<div id="organisationId">
+    @Html.HiddenFor(Model => Model.OrganisationId)
+</div>
+
+<div id="organisationName">
+    @Html.LabelFor(Model => Model.OrgName)
+    <br />
+    @Html.EditorFor(Model => Model.OrgName)
+</div>
+
+<div id="organisationParent">
+    @Html.LabelFor(Model => Model.Parent)
+    <br />
+    @Html.DropDownListFor(Model => Model.Parent.OrganisationId, Model.SelectList)
+</div>
+
+<div id="organisationChildren">
+    @Html.LabelFor(Model => Model.Children)
+    <br />
+    @Html.ListBoxFor(Model => Model.SelectedOrganisations, Model.MultiSelectList,
+    new { id = "multidropdown", multiple = "multiple" })
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#multidropdown").select2();
+    });
+
+
+</script>
+
+@section Scripts{
+    $(document).ready(function () {
+    $("#multidropdown").select2();
+    });
+
+}
