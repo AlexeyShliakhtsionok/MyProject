@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using FilterSortPagingApp.Models.Users;
 using Project.BLL.Services.IServiceIntefaces;
 using CommonClasses.PaginationAndSort.Users;
+using EmailServices.Interface;
 
 namespace WebTestOfVMC.Controllers
 {
@@ -19,11 +20,13 @@ namespace WebTestOfVMC.Controllers
     {
         private readonly IUserServices _userServices;
         private readonly IOrganisationServices _organisationServices;
+        private readonly IEmailService _emailService;
 
-        public UserController(IUserServices _userServices, IOrganisationServices _organisationServices)
+        public UserController(IUserServices _userServices, IOrganisationServices _organisationServices, IEmailService _emailService)
         {
             this._userServices = _userServices;
             this._organisationServices = _organisationServices;
+            this._emailService = _emailService;
         }
 
         [HttpGet]
@@ -131,6 +134,9 @@ namespace WebTestOfVMC.Controllers
             if (_userServices.CheckByEmail(info.Email) == false)
             {
                 _userServices.CreateUser(user);
+                User administrator = _userServices.GetUsers().FirstOrDefault(u => u.UserRole.ToString() == "Administrator");
+                _emailService.SendEmailAdmin(info.FirstName, info.LastName, info.SurName, administrator.Email);
+                _emailService.SendEmailUser(info.FirstName, info.LastName, info.SurName, info.Email, info.Password);
                 return Json(new
                 {
                     newData = new

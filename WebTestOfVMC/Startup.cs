@@ -1,3 +1,5 @@
+using EmailServices.Interface;
+using EmailServices.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +39,7 @@ namespace WebTestOfVMC
                {
                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                });
+            services.AddSingleton<IEmailService, EmailService>();
 
         }
 

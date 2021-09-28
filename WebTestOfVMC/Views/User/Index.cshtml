@@ -8,168 +8,157 @@
 
 @model IndexViewModel
 
-            <p class="filter-text">Пользователи</p>
-            <br />
+<p class="filter-text">Пользователи</p>
+<br />
 
 
-            <div class="table">
+<div class="table">
 
-                <div id="manipulation-buttons">
-                    <div class="create-button">
-                        @await Component.InvokeAsync("UserInfo")
-                    </div>
-                    <div class="edit-button">
-                        <input type="submit" class="btn btn-outline-dark" value="Редактировать" id="edit-btn" />
-                    </div>
-                    <div class="delete-button">
-                        <input type="submit" class="btn btn-outline-dark" value="Удалить" id="delete-btn" />
-                    </div>
-                    <div class="filters">
-                        <form method="get">
-                            <div class="form-inline">
+    <div id="manipulation-buttons">
+        <div class="create-button">
+            @await Component.InvokeAsync("UserInfo")
+        </div>
+        <div class="edit-button">
+            <input type="submit" class="btn btn-outline-dark" value="Редактировать" id="edit-btn" />
+        </div>
+        <div class="delete-button">
+            <input type="submit" class="btn btn-outline-dark" value="Удалить" id="delete-btn" />
+        </div>
+        <div class="filters">
+            <form method="get">
+                <div class="form-inline">
 
-                                <p1 class="p1">Организация: </p1>
-                                <select name="company" asp-items="Model.FilterViewModel.Organisations" class="form-control"></select>
+                    <p1 class="p1">Организация: </p1>
+                    <select name="company" asp-items="Model.FilterViewModel.Organisations" class="form-control"></select>
 
-                                <input type="submit" value="Применить фильтр" class="btn btn-outline-dark" />
-                            </div>
-                        </form>
-                    </div>
+                    <input type="submit" value="Применить фильтр" class="btn btn-outline-dark" />
                 </div>
+            </form>
+        </div>
+    </div>
 
-                <table class="table">
-                    <tr class="p1 intable">
-                        <th>
-                            <p class="p1">№ п/п</p>
-                        </th>
-                        <th>
-                            <a asp-action="Index"
-                               asp-controller="User"
-                               asp-route-sortOrder="@(Model.SortViewModel.LastNameSort)"
-                               asp-route-name="@(Model.FilterViewModel.SelectedName)"
-                               asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"><p class="p1">Фамилия <img src="~/images/sort.png" id="sort" /></p></a>
-
-                        </th>
-
-                        <th>
-                            <a asp-action="Index"
-                               asp-controller="User"
-                               asp-route-sortOrder="@(Model.SortViewModel.FirstNameSort)"
-                               asp-route-name="@(Model.FilterViewModel.SelectedName)"
-                               asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"><p class="p1">Имя <img src="~/images/sort.png" id="sort" /></p></a>
-                        </th>
-
-                        <th>
-                            <a asp-action="Index"
-                               asp-controller="User"
-                               asp-route-sortOrder="@(Model.SortViewModel.MiddleNameSort)"
-                               asp-route-name="@(Model.FilterViewModel.SelectedName)"
-                               asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"><p class="p1">Отчество <img src="~/images/sort.png" id="sort" /></p></a>
-                        </th>
-
-                        <th>
-                            <a asp-action="Index"
-                               asp-controller="User"
-                               asp-route-sortOrder="@(Model.SortViewModel.OrganisationSort)"
-                               asp-route-name="@(Model.FilterViewModel.SelectedName)"
-                               asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"><p class="p1">Организация <img src="~/images/sort.png" id="sort" /></p></a>
-                        </th>
-
-                        <th>
-                            <a asp-action="Index"
-                               asp-controller="User"
-                               asp-route-sortOrder="@(Model.SortViewModel.EmailSort)"
-                               asp-route-name="@(Model.FilterViewModel.SelectedName)"
-                               asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"><p class="p1">E-mail <img src="~/images/sort.png" id="sort" /></p></a>
-                        </th>
-                        <th>
-                            <a asp-action="Index"
-                               asp-controller="User"
-                               asp-route-sortOrder="@(Model.SortViewModel.UserRoleSort)"
-                               asp-route-name="@(Model.FilterViewModel.SelectedName)"
-                               asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"><p class="p1">Группа <img src="~/images/sort.png" id="sort" /></p></a>
-                        </th>
-
-
-                    </tr>
-
-                    @{ int rowNo = 0; }
-                    @foreach (User u in Model.Users)
-                    {
-                        <tr class="table-row" id="@u.UserId">
-                            <td>@(rowNo += 1)</td>
-                            <td>@u.LastName</td>
-                            <td>@u.FirstName</td>
-                            <td>@u.SurName</td>
-                            <td>@u.Organisation.OrgName</td>
-                            <td>@u.Email</td>
-                            <td>@u.UserRole.GetEnumDescription()</td>
-                        </tr>
-                    }
-
-                </table>
-            </div>
-
-            @if (Model.PageViewModel.HasPreviousPage)
-            {
+    <table class="table">
+        <tr class="p1 intable">
+            <th>
+                <p class="p1">№ п/п</p>
+            </th>
+            <th>
                 <a asp-action="Index"
-                   asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+                   asp-controller="User"
+                   asp-route-sortOrder="@(Model.SortViewModel.LastNameSort)"
                    asp-route-name="@(Model.FilterViewModel.SelectedName)"
-                   asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"
-                   asp-route-sortorder="@(Model.SortViewModel.Current)"
-                   class="btn  btn-outline-dark">
-                    <i class="glyphicon glyphicon-chevron-left"></i>
-                    Назад
-                </a>
-            }
-            @if (Model.PageViewModel.HasNextPage)
-            {
+                   asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"><p class="p1">Фамилия <img src="~/images/sort.png" id="sort" /></p></a>
+
+            </th>
+
+            <th>
                 <a asp-action="Index"
-                   asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+                   asp-controller="User"
+                   asp-route-sortOrder="@(Model.SortViewModel.FirstNameSort)"
                    asp-route-name="@(Model.FilterViewModel.SelectedName)"
-                   asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"
-                   asp-route-sortorder="@(Model.SortViewModel.Current)"
-                   class="btn btn-outline-dark">
-                    Вперед
-                    <i class="glyphicon glyphicon-chevron-right"></i>
-                </a>
-            }
+                   asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"><p class="p1">Имя <img src="~/images/sort.png" id="sort" /></p></a>
+            </th>
 
-            <form asp-action="UpdateUser" asp-controller="User" asp-route-id="id" data-ajax="true"
-                  data-ajax-method="POST" data-ajax-success="onUpdate">
+            <th>
+                <a asp-action="Index"
+                   asp-controller="User"
+                   asp-route-sortOrder="@(Model.SortViewModel.MiddleNameSort)"
+                   asp-route-name="@(Model.FilterViewModel.SelectedName)"
+                   asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"><p class="p1">Отчество <img src="~/images/sort.png" id="sort" /></p></a>
+            </th>
 
-                <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <div class="text-center-modal">
-                                    <div class="form-group">
-                                        <p id="p1">Редактирование</p>
+            <th>
+                <a asp-action="Index"
+                   asp-controller="User"
+                   asp-route-sortOrder="@(Model.SortViewModel.OrganisationSort)"
+                   asp-route-name="@(Model.FilterViewModel.SelectedName)"
+                   asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"><p class="p1">Организация <img src="~/images/sort.png" id="sort" /></p></a>
+            </th>
 
-                                        <div id="userDiv"></div>
+            <th>
+                <a asp-action="Index"
+                   asp-controller="User"
+                   asp-route-sortOrder="@(Model.SortViewModel.EmailSort)"
+                   asp-route-name="@(Model.FilterViewModel.SelectedName)"
+                   asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"><p class="p1">E-mail <img src="~/images/sort.png" id="sort" /></p></a>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-controller="User"
+                   asp-route-sortOrder="@(Model.SortViewModel.UserRoleSort)"
+                   asp-route-name="@(Model.FilterViewModel.SelectedName)"
+                   asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"><p class="p1">Группа <img src="~/images/sort.png" id="sort" /></p></a>
+            </th>
 
-                                        <div class="form-group">
-                                            <input type="submit" class="btn btn-outline-dark" value="Сохранить изменения" id="sub" />
-                                        </div>
-                                    </div>
-                                </div>
+
+        </tr>
+
+        @{ int rowNo = 0; }
+        @foreach (User u in Model.Users)
+        {
+            <tr class="table-row" id="@u.UserId">
+                <td>@(rowNo += 1)</td>
+                <td>@u.LastName</td>
+                <td>@u.FirstName</td>
+                <td>@u.SurName</td>
+                <td>@u.Organisation.OrgName</td>
+                <td>@u.Email</td>
+                <td>@u.UserRole.GetEnumDescription()</td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       asp-route-name="@(Model.FilterViewModel.SelectedName)"
+       asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)"
+       class="btn  btn-outline-dark">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       asp-route-name="@(Model.FilterViewModel.SelectedName)"
+       asp-route-company="@(Model.FilterViewModel.SelectedOrganisation)"
+       asp-route-sortorder="@(Model.SortViewModel.Current)"
+       class="btn btn-outline-dark">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}
+
+<form asp-action="UpdateUser" asp-controller="User" asp-route-id="id" data-ajax="true"
+      data-ajax-method="POST" data-ajax-success="onUpdate">
+
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center-modal">
+                        <div class="form-group">
+                            <p id="p1">Редактирование</p>
+
+                            <div id="userDiv"></div>
+
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-outline-dark" value="Сохранить изменения" id="sub" />
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-            </form>
-
-        
-
-
-
-
-
-
-
-
-
+</form>
 
 @section Scripts{
 
@@ -196,7 +185,7 @@
         var userDiv = $("#userDiv");
 
         $(document).ready(function () {
-
+            $(".multidropdown").select2();
             $(".edit-button").hide();
             $(".delete-button").hide();
 
@@ -219,6 +208,7 @@
                         $(".delete-button").hide();
                     }
                     $(".table-row").click(function () { return false });
+                    alert("Для выбора новой записи разактивируйте ранее выбранную!")
                 };
             });
 

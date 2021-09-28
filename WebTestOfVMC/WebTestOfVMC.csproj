@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Project\CommonClasses\CommonClasses.csproj" />
+    <ProjectReference Include="..\Project\EmailService\EmailServices.csproj" />
     <ProjectReference Include="..\RailDBProject\RailDBProject.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>

@@ -22,13 +22,13 @@
     @Html.LabelFor(Model => Model.Children)
     <br />
     @Html.ListBoxFor(Model => Model.SelectedOrganisations, Model.MultiSelectList,
-    new { id = "multidropdown", multiple = "multiple" })
+    new { @class = "multidropdown", multiple = "multiple" })
 </div>
 
 
 <script>
     $(document).ready(function () {
-        $("#multidropdown").select2();
+        $(".multidropdown").select2();
     });
 
 
