@@ -2,13 +2,13 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 a {
-  color: #002b8e;
+    color: #002b8e;
 }
 
 select {
@@ -17,15 +17,15 @@ select {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 @media (min-width: 1200px) {
@@ -33,36 +33,37 @@ select {
         font-size: 16px;
     }
 }
- .container {
+
+.container {
     max-width: 100%;
 }
 
-    .border-top {
-        border-top: 1px solid #e5e5e5;
-    }
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
 
-    .border-bottom {
-        border-bottom: 1px solid #e5e5e5;
-    }
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
 
-    .bg-white {
-        background-color: #002b8e !important;
-    }
+.bg-white {
+    background-color: #002b8e !important;
+}
 
-    .box-shadow {
-        box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-    }
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
 
-    .navbar-light .navbar-brand {
-        color: #fff;
-        text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
-        font-size: 25px;
-    }
+.navbar-light .navbar-brand {
+    color: #fff;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    font-size: 25px;
+}
 
-    button.accept-policy {
-        font-size: 1rem;
-        line-height: inherit;
-    }
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
 
 body, html {
     margin-bottom: 40px;
@@ -90,45 +91,45 @@ body {
     bottom: 0;
     width: 100%;
     height: 80px;
-    margin-top:5px;
+    margin-top: 5px;
 }
 
 
-    .btn-success {
-        font-size: 10px;
-        width: 100px;
-        height: 40px;
-    }
+.btn-success {
+    font-size: 10px;
+    width: 100px;
+    height: 40px;
+}
 
-    .btn-danger {
-        font-size: 10px;
-        width: 100px;
-        height: 40px;
-    }
+.btn-danger {
+    font-size: 10px;
+    width: 100px;
+    height: 40px;
+}
 
-    .text-center .form-group label {
-        width: 120px;
-        color: #ffff;
-    }
+.text-center .form-group label {
+    width: 120px;
+    color: #ffff;
+}
 
-    .text-center .form-group input[type=text] {
-        width: 200px;
-    }
+.text-center .form-group input[type=text] {
+    width: 200px;
+}
 
-    .text-center {
-        font-size: 15px;
-        width: min-content;
-        border-radius: 10px;
-        background-color: #002b8e;
-        padding: 20px 20px 20px 20px;
-        box-shadow: 0 0 10px;
-    }
+.text-center {
+    font-size: 15px;
+    width: min-content;
+    border-radius: 10px;
+    background-color: #002b8e;
+    padding: 20px 20px 20px 20px;
+    box-shadow: 0 0 10px;
+}
 
-    #logout {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
+#logout {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
 
 .btn-outline-dark:hover {
     color: #000000;
@@ -137,25 +138,24 @@ body {
     margin: 5px;
 }
 
-    .btn-outline-dark {
-        color: #ffff;
-        background-color: #343a40;
-        border-color: #cae5ff;
-        right: 0;
-        margin: 5px;
+.btn-outline-dark {
+    color: #ffff;
+    background-color: #343a40;
+    border-color: #cae5ff;
+    right: 0;
+    margin: 5px;
+}
 
-    }
+#logotype {
+    width: 100%;
+    height: 100%;
+}
 
-    #logotype {
-        width: 100%;
-        height: 100%;
-    }
-
-    .logotype {
-        background-color: white;
-        border-radius: 50%;
-        padding: 5px 5px 5px 5px;
-    }
+.logotype {
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px 5px 5px 5px;
+}
 
 .p1 {
     font-size: 15px;
@@ -171,78 +171,78 @@ body {
     text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
 }
 
-    .container {
-        margin-left: 20px;
-        margin-right: 20px;
-        width: auto;
-    }
+.container {
+    margin-left: 20px;
+    margin-right: 20px;
+    width: auto;
+}
 
-    .autorization-window {
-        float: left;
-    }
+.autorization-window {
+    float: left;
+}
 
-    .info {
-        background-color: #efdede;
-        border: 3px;
-        box-shadow: 10px;
-    }
+.info {
+    background-color: #efdede;
+    border: 3px;
+    box-shadow: 10px;
+}
 
-    .table .form-group label {
-        width: 120px;
-        color: #ffff;
-    }
+.table .form-group label {
+    width: 120px;
+    color: #ffff;
+}
 
-    .table .form-group input[type=text] {
-        width: 200px;
-    }
+.table .form-group input[type=text] {
+    width: 200px;
+}
 
-    .table {
+.table {
+    font-size: 15px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #002b8e;
+    padding: 5px 20px 20px 20px;
+    box-shadow: 0 0 10px;
+}
+
+    .table > table {
         font-size: 15px;
         width: 100%;
+        background-color: #d0dff8;
+        padding: 20px 20px 20px 20px;
+        border-color: #002b8e;
         border-radius: 5px;
-        background-color: #002b8e;
-        padding: 5px 20px 20px 20px;
-        box-shadow: 0 0 10px;
+        box-shadow: 10px;
+        border: 3px;
+        margin: 0;
     }
 
-        .table > table {
-            font-size: 15px;
-            width: 100%;
-            background-color: #d0dff8;
-            padding: 20px 20px 20px 20px;
-            border-color: #002b8e;
-            border-radius: 5px;
-            box-shadow: 10px;
-            border: 3px;
-            margin: 0;
-        }
-
-        .table td, .table th {
-            padding: 1px;
-            vertical-align: baseline;
-            border-top: 2px solid darkblue;
-            height: 20px;
-            text-align: center;
-            border-collapse: collapse;
-        }
-
-    td {
-        border-right: 2px solid darkblue;
-        border-bottom: 2px solid darkblue;
-        border-left: 2px solid darkblue;
+    .table td, .table th {
+        padding: 1px;
+        vertical-align: baseline;
+        border-top: 2px solid darkblue;
+        height: 20px;
+        text-align: center;
         border-collapse: collapse;
     }
 
-    .th {
-        border-right: 2px solid darkblue;
-        border-bottom: 2px solid darkblue;
-        border-left: 2px solid darkblue;
-        border-collapse: collapse;
-    }
+td {
+    border-right: 2px solid darkblue;
+    border-bottom: 2px solid darkblue;
+    border-left: 2px solid darkblue;
+    border-collapse: collapse;
+}
 
-    .btn-td {
-        width: 10px;
-    }
+.th {
+    border-right: 2px solid darkblue;
+    border-bottom: 2px solid darkblue;
+    border-left: 2px solid darkblue;
+    border-collapse: collapse;
+}
+
+.btn-td {
+    width: 10px;
+}
 
 .intable {
     border-right: 2px solid darkblue;
@@ -298,18 +298,18 @@ div > .model-body {
     padding: 20px 20px 20px 20px;
     box-shadow: 0 0 10px;
 }
+
 #p1 {
     font-size: 20px;
     color: white;
     text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
     text-align: center;
-    
-    
 }
+
     #p1:hover {
-        color: #cae5ff; 
+        color: #cae5ff;
         cursor: pointer;
-        text-decoration:underline
+        text-decoration: underline
     }
 
 .select2-container--default .select2-selection--multiple {
@@ -344,7 +344,6 @@ label {
     border-color: darkblue;
     box-shadow: 10px;
     border-radius: 10px;
-    
 }
 
 .nodes-title {
@@ -362,6 +361,7 @@ label {
     align-items: center;
     justify-content: space-around;
 }
+
 .node {
     width: 405px;
     border-radius: 10px;
@@ -379,7 +379,7 @@ label {
     width: 392px;
     border-radius: 10px;
     margin-left: auto;
-    margin-right:auto;
+    margin-right: auto;
 }
 
 .edit-button {
@@ -387,6 +387,7 @@ label {
     margin-right: 5px;
     height: 10px;
 }
+
 .delete-button {
     float: left;
     margin-right: 5px;
@@ -410,7 +411,7 @@ label {
 }
 
 #main-menu-window {
-    display:flex;
+    display: flex;
     width: 100%;
     height: 85vh;
     position: relative;
@@ -421,7 +422,7 @@ label {
 }
 
 #navigation-area {
-    display:block;
+    display: block;
     position: relative;
     float: left;
     width: 300px;
@@ -430,6 +431,7 @@ label {
     border-radius: 10px;
     margin-right: 2.5px;
 }
+
 #submenu-area {
     display: block;
     padding: 10px 10px 50px 10px;
