@@ -22,7 +22,6 @@ namespace WebTestOfVMC.Components
             _info.MultiSelectList = new MultiSelectList(_info.OrganisationCollection,
                 "OrganisationId", "OrgName");
 
-
             return View(_info);
         }
     }

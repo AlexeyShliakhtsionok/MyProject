@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CommonClasses.PaginationAndSort.Users
+namespace CommonClasses.PaginationAndSort.SortingClasses
 {
-    public enum SortState
+    public enum UserSortState
     {
         FirstNameAsc,
         FirstNameDesc,
@@ -12,7 +12,7 @@ namespace CommonClasses.PaginationAndSort.Users
         LastNameAsc,
         LastNameDesc,
 
-        MiddleNameAsc, 
+        MiddleNameAsc,
         MiddleNameDesc,
 
         OrganisationAsc,

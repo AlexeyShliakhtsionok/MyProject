@@ -1,0 +1,44 @@
+﻿@using WebTestOfVMC.Models
+
+@model GlobalSectionInfo
+
+<div class="form-group">
+    <a button class="btn btn-outline-dark" data-toggle="modal" data-target="#registerModal">Добавить</a>
+</div>
+
+
+<form asp-action="CreateGlobalSection" asp-controller="GlobalSection" data-ajax="true"
+      data-ajax-method="POST" data-ajax-success="onSuccess">
+
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <div class="text-center-modal">
+                        <div class="form-group">
+                            <p id="p1">Добавить организацию</p>
+                            <br />
+                            <div class="form-group">
+                                @Html.HiddenFor(Model => Model.GlobalSectId)
+
+                                @Html.LabelFor(Model => Model.GlobaSectionName)
+                                @Html.EditorFor(Model => Model.GlobaSectionName)
+                                @Html.ValidationMessageFor(Model => Model.GlobaSectionName)
+                                <br />
+                                @Html.LabelFor(Model => Model.GlobalWayNumber)
+                                @Html.EditorFor(Model => Model.GlobalWayNumber)
+                                @Html.ValidationMessageFor(Model => Model.GlobalWayNumber)
+                                <br />
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-outline-dark" value="Добавить" id="sub" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

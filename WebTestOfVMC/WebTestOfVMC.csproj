@@ -20,6 +20,9 @@
   <ItemGroup>
     <None Include="Views\Account\Login.cshtml" />
     <None Include="Views\Account\Register.cshtml" />
+    <None Include="Views\GlobalSection\GetOne.cshtml" />
+    <None Include="Views\GlobalSection\Index.cshtml" />
+    <None Include="Views\Shared\Components\GlobalSectionInfo\Default.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

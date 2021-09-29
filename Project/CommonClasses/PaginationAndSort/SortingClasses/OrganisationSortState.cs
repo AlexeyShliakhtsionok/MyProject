@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CommonClasses.PaginationAndSort.Organisations
+namespace CommonClasses.PaginationAndSort.SortingClasses
 {
-    public enum SortState
+    public enum OrganisationSortState
     {
         OrganisationAsc,
         OrganisationDesc,

@@ -1,15 +1,17 @@
 ﻿using Common.ListExtentions;
+using CommonClasses.PaginationAndSort.Filters;
+using CommonClasses.PaginationAndSort.IndexViewModelClasses;
+using CommonClasses.PaginationAndSort.PageViewClass;
+using CommonClasses.PaginationAndSort.SortingClasses;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Project.BLL.Services.IServiceIntefaces;
 using RailDBProject.Model;
 using System.Collections.Generic;
 using System.Linq;
-using WebTestOfVMC.Models;
-using CommonClasses.PaginationAndSort.Organisations;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using FilterSortPagingApp.Models.Organisations;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using WebTestOfVMC.Models;
 
 namespace WebTestOfVMC.Controllers
 {
@@ -24,7 +26,7 @@ namespace WebTestOfVMC.Controllers
         [HttpGet]
         public IActionResult GetOne(int id)
         {
-            var _organisation = _organisationServices.GetById(id);
+            Organisation _organisation = _organisationServices.GetById(id);
 
             OrganisationInfo organisation = new OrganisationInfo();
 
@@ -40,7 +42,7 @@ namespace WebTestOfVMC.Controllers
                 {
                     organisation.Children = _organisation.Children;
                 }
-                organisation.GlobalSections = _organisation.GlobalSections;
+                
                 organisation.Users = _organisation.Users;
                 organisation.IsDeleted = _organisation.IsDeleted;
                 organisation.SelectList = _organisationServices.GetOrganisationList().GetOrganisationSelectList();
@@ -128,7 +130,6 @@ namespace WebTestOfVMC.Controllers
                     OrgName = info.OrgName,
                     Parent = _organisationServices.GetById(info.Parent.OrganisationId),
                     Children = _childList,
-                    GlobalSections = info.GlobalSections,
                     Users = info.Users,
                     IsDeleted = info.IsDeleted
                 };
@@ -141,7 +142,6 @@ namespace WebTestOfVMC.Controllers
                 {
                     OrgName = info.OrgName,
                     Children = _childList,
-                    GlobalSections = info.GlobalSections,
                     Users = info.Users,
                     IsDeleted = info.IsDeleted
                 };
@@ -169,13 +169,12 @@ namespace WebTestOfVMC.Controllers
                 Children = u.Children,
                 Parent = u.Parent,
                 Users = u.Users,
-                GlobalSections = u.GlobalSections,
                 IsDeleted = u.IsDeleted
             }).ToList();
             return View(model);
         }
 
-        public async Task<IActionResult> Index(int? company, string name, int page = 1, SortState sortOrder = SortState.OrganisationAsc)
+        public async Task<IActionResult> Index(int? company, string name, int page = 1, OrganisationSortState sortOrder = OrganisationSortState.OrganisationAsc)
         {
             int pageSize = 10;
 
@@ -189,10 +188,10 @@ namespace WebTestOfVMC.Controllers
 
             switch (sortOrder)
             {
-                case SortState.OrganisationDesc:
+                case OrganisationSortState.OrganisationDesc:
                     organisations = organisations.OrderByDescending(s => s.OrgName);
                     break;
-                case SortState.OrganisationAsc:
+                case OrganisationSortState.OrganisationAsc:
                     organisations = organisations.OrderBy(s => s.OrgName);
                     break;
             }
@@ -200,11 +199,11 @@ namespace WebTestOfVMC.Controllers
             var count = await organisations.CountAsync();
             var items = await organisations.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
 
-            IndexViewModel viewModel = new IndexViewModel
+            OrganisationIndexViewModel viewModel = new OrganisationIndexViewModel
             {
-                PageViewModel = new PageViewModel(count, page, pageSize),
-                SortViewModel = new SortViewModel(sortOrder),
-                FilterViewModel = new FilterViewModel(_organisationServices.GetOrganisationList(), company, name),
+                PageView = new PageView(count, page, pageSize),
+                OrganisationSortViewModel = new OrganisationSortViewModel(sortOrder),
+                OrganisationFilter = new OrganisationFilter(_organisationServices.GetOrganisationList(), company, name),
                 Organisations = items
             };
             return View(viewModel);

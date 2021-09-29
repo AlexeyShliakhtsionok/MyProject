@@ -21,12 +21,38 @@ namespace Common.ListExtentions
             items.Add(new SelectListItem("please select", ""));
             foreach (var item in items)
             {
-                if (item.Text == "please select")
+                if (item.Text == "-----")
                 {
                     item.Selected = true;
                 }
             }
            return new SelectList(items, "Value", "Text");
         }
+
+        public static SelectList GetGlobalSectionSelectList(this List<GlobalSection> list)
+        {
+            List<SelectListItem> items = new List<SelectListItem>(list.Count);
+            foreach (var li in list)
+            {
+                items.Add(new SelectListItem
+                {
+                    Text = li.GlobaSectionName,
+                    Value = li.GlobalSectId.ToString()
+                });
+            }
+            items.Add(new SelectListItem("-----", ""));
+            foreach (var item in items)
+            {
+                if (item.Text == "please select")
+                {
+                    item.Selected = true;
+                }
+            }
+            return new SelectList(items, "Value", "Text");
+        }
+
+
+
+
     }
 }

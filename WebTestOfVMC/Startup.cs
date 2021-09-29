@@ -34,6 +34,7 @@ namespace WebTestOfVMC
             services.AddScoped<IOperatorServices, OperatorService>();
             services.AddScoped<IUserServices, UserServices>();
             services.AddScoped<IOrganisationServices, OrganisationServices>();
+            services.AddScoped<IGlobalSectionServices, GlobalSectionServices>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                .AddCookie(options => //CookieAuthenticationOptions
                {
