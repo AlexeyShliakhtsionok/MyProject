@@ -17,7 +17,7 @@ namespace RailDBProject.Model
         [Required]
         public int GlobalWayNumber { get; set; }
         public int OrganisationId { get; set; }
-        public int? SubOrgId { get; set; }
+
         public virtual ICollection<Organisation> Organisations { get; set; }
         public virtual ICollection<LocalSection> LocalSections { get; set; }
     }

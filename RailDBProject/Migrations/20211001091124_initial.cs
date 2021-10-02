@@ -49,6 +49,7 @@ namespace RailDBProject.Migrations
                     OrganisationId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrgName = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
+                    OrganisationRole = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     ParentOrganisationId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -144,6 +145,7 @@ namespace RailDBProject.Migrations
                     Password = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     UserRole = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OrganisationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

@@ -11,6 +11,8 @@ namespace WebTestOfVMC.Models
         [Display(Name = "Наименование организации")]
         public string OrgName { get; set; }
         public bool IsDeleted { get; set; }
+        [Display(Name = "Звено")]
+        public OrganisationRole OrganisationRole { get; set; }
         [Display(Name = "Вышестоящая организация")]
         public virtual Organisation Parent { get; set; }
         [Display(Name = "Нижестоящая организация")]

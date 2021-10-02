@@ -1,57 +1,41 @@
 ﻿@using WebTestOfVMC.Models
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using EnumExt;
-@model UserInfo
+@model GlobalSectionInfo
 
-<div id="userId">
-    @Html.HiddenFor(Model => Model.UserId)
+<div id="globalSectionId">
+    @Html.HiddenFor(Model => Model.GlobalSectId)
 </div>
 
-<div id="userLastName">
-    @Html.LabelFor(Model => Model.LastName)
+<div id="globalSectionNameName">
+    @Html.LabelFor(Model => Model.GlobaSectionName)
     <br />
-    @Html.EditorFor(Model => Model.LastName)
+    @Html.EditorFor(Model => Model.GlobaSectionName)
 </div>
 
-<div id="userFirstName">
-    @Html.LabelFor(Model => Model.FirstName)
+<div id="globalSectionWayNumber">
+    @Html.LabelFor(Model => Model.GlobalWayNumber)
     <br />
-    @Html.EditorFor(Model => Model.FirstName)
+    @Html.EditorFor(Model => Model.GlobalWayNumber)
 </div>
 
-<div id="userSurName">
-    @Html.LabelFor(Model => Model.SurName)
+<div id="globalSectionOrganisations">
+    @Html.LabelFor(Model => Model.Organisations)
     <br />
-    @Html.EditorFor(Model => Model.SurName)
+    @Html.DropDownListFor(Model => Model.SelectedOrganisation, Model.MultiSelectList, new { @class = "multidropdown", multiple = "multiple" })
 </div>
 
-<div id="userEmail">
-    @Html.LabelFor(Model => Model.Email)
-    <br />
-    @Html.EditorFor(Model => Model.Email)
-</div>
 
-<div id="userLogin">
-    @Html.LabelFor(Model => Model.Login)
-    <br />
-    @Html.EditorFor(Model => Model.Login)
-</div>
+<script>
+    $(document).ready(function () {
+        $(".multidropdown").select2();
+    });
 
-<div id="userPassword">
-    @Html.LabelFor(Model => Model.Password)
-    <br />
-    @Html.EditorFor(Model => Model.Password)
-</div>
 
-<div id="userOrganisations">
-    @Html.LabelFor(Model => Model.Organisation)
-    <br />
-    @Html.DropDownListFor(Model => Model.OrganisationId, Model.SelectList)
-</div>
+</script>
 
-<div id="userRoles">
-    @Html.LabelFor(Model => Model.UserRole)
-    <br />
-    @Html.DropDownListFor(Model => Model.UserRole, Model.UserRole.GetSelectList())
-</div>
-
+@section Scripts{
+    $(document).ready(function () {
+    $(".multidropdown").select2();
+    });
+}

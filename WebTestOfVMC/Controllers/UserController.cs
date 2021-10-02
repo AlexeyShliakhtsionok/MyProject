@@ -31,28 +31,6 @@ namespace WebTestOfVMC.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Administrator")]
-        public IActionResult GetAll()
-        {
-            var users = _userServices.GetUsers();
-
-            var model = new List<UserInfo>();
-
-            model = users.Select(u => new UserInfo
-            {
-                UserId = u.UserId,
-                FirstName = u.FirstName,
-                LastName = u.LastName,
-                SurName = u.SurName,
-                Email = u.Email,
-                Organisation = u.Organisation,
-                UserRole = u.UserRole,
-                IsDeleted = u.IsDeleted
-            }).ToList();
-            return View(model);
-        }
-
-        [HttpGet]
         public IActionResult GetOne(int id)
         {
             var _user = _userServices.GetById(id);
@@ -79,7 +57,7 @@ namespace WebTestOfVMC.Controllers
         [HttpPost]
         public IActionResult UpdateUser(UserInfo info)
         {
-            var newOrg = _organisationServices.GetById(info.OrganisationId);
+            var newOrg = _organisationServices.GetById(info.OrganisationId); // related entity
             var _user = _userServices.GetById(info.UserId);
 
             _user.FirstName = info.FirstName;

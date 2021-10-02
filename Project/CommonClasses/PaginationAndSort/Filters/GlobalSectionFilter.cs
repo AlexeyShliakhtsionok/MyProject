@@ -19,5 +19,10 @@ namespace CommonClasses.PaginationAndSort.Filters
         public SelectList GlobalSections { get; private set; }
         public int? SelectedGlobalSection { get; private set; }
         public string SelectedName { get; private set; }
+
+        public static implicit operator GlobalSectionFilter(OrganisationFilter v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

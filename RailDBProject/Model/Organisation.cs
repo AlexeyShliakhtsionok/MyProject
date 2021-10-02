@@ -15,6 +15,9 @@ namespace RailDBProject.Model
         [Required]
         [MaxLength(70)]
         public string OrgName { get; set; }
+        [Required]
+        public OrganisationRole OrganisationRole { get; set; }
+
         public bool IsDeleted { get; set; }
         public virtual Organisation Parent { get; set; }
         public virtual ICollection<Organisation> Children { get; set; }

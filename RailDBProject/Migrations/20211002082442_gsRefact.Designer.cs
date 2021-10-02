@@ -10,8 +10,8 @@ using RailDBProject;
 namespace RailDBProject.Migrations
 {
     [DbContext(typeof(RailDBContext))]
-    [Migration("20210926145234_extendModel")]
-    partial class extendModel
+    [Migration("20211002082442_gsRefact")]
+    partial class gsRefact
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -184,9 +184,6 @@ namespace RailDBProject.Migrations
                     b.Property<int>("OrganisationId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SubOrgId")
-                        .HasColumnType("int");
-
                     b.HasKey("GlobalSectId");
 
                     b.ToTable("GlobalSections");
@@ -285,6 +282,9 @@ namespace RailDBProject.Migrations
                         .IsRequired()
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
+
+                    b.Property<int>("OrganisationRole")
+                        .HasColumnType("int");
 
                     b.Property<int?>("ParentOrganisationId")
                         .HasColumnType("int");

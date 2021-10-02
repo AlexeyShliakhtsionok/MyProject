@@ -1,12 +1,13 @@
 ﻿using EmailServices.Interface;
 using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace EmailServices.Service
 {
     public class EmailService : IEmailService
     {
-        public void SendEmailAdmin(string firstName, string lastName, string surName, string email)
+        public async void SendEmailAdmin(string firstName, string lastName, string surName, string email)
         {
             MailMessage message = new MailMessage();
             message.IsBodyHtml = true;
@@ -22,10 +23,10 @@ namespace EmailServices.Service
                 client.Credentials = new NetworkCredential("defektoskopiyaas@gmail.com", "stager050522");
                 client.Port = 587;
                 client.EnableSsl = true;
-                client.Send(message);
+                await Task.Run(() => client.Send(message)); 
             }
         }
-        public void SendEmailUser(string firstName, string lastName, string surName, string email, string password)
+        public async void SendEmailUser(string firstName, string lastName, string surName, string email, string password)
         {
             MailMessage message = new MailMessage();
             message.IsBodyHtml = true;
@@ -45,7 +46,7 @@ namespace EmailServices.Service
                 client.Credentials = new NetworkCredential("defektoskopiyaas@gmail.com", "stager050522");
                 client.Port = 587;
                 client.EnableSsl = true;
-                client.Send(message);
+                await Task.Run(() => client.Send(message));
             }
         }
     }

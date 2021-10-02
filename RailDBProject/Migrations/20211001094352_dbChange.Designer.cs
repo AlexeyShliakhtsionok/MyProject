@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RailDBProject;
 
 namespace RailDBProject.Migrations
 {
     [DbContext(typeof(RailDBContext))]
-    partial class RailDBContextModelSnapshot : ModelSnapshot
+    [Migration("20211001094352_dbChange")]
+    partial class dbChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,9 +179,6 @@ namespace RailDBProject.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("GlobalWayNumber")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrganisationId")
                         .HasColumnType("int");
 
                     b.HasKey("GlobalSectId");

@@ -12,7 +12,7 @@ namespace CommonClasses.PaginationAndSort.IndexViewModelClasses
     {
         public IEnumerable<GlobalSection> GlobalSections { get; set; }
         public PageView PageView { get; set; }
-        public GlobalSectionFilter GlobalSectionFilter { get; set; }
+        public OrganisationFilter OrganisationFilter { get; set; }
         public GlobalSectionSortViewModel GlobalSectionSortViewModel { get; set; }
     }
 }

@@ -24,11 +24,13 @@
 
                                 @Html.LabelFor(Model => Model.GlobaSectionName)
                                 @Html.EditorFor(Model => Model.GlobaSectionName)
-                                @Html.ValidationMessageFor(Model => Model.GlobaSectionName)
                                 <br />
                                 @Html.LabelFor(Model => Model.GlobalWayNumber)
                                 @Html.EditorFor(Model => Model.GlobalWayNumber)
-                                @Html.ValidationMessageFor(Model => Model.GlobalWayNumber)
+                                <br />
+                                @Html.LabelFor(Model => Model.Organisations)
+                                @Html.DropDownListFor(Model => Model.SelectedOrganisation,
+                                                        Model.MultiSelectList, new { @class = "multidropdown", multiple = "multiple" })
                                 <br />
                             </div>
                             <br />

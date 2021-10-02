@@ -10,7 +10,7 @@ using RailDBProject;
 namespace RailDBProject.Migrations
 {
     [DbContext(typeof(RailDBContext))]
-    [Migration("20210919125337_initial")]
+    [Migration("20211001091124_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -286,6 +286,9 @@ namespace RailDBProject.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
+                    b.Property<int>("OrganisationRole")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ParentOrganisationId")
                         .HasColumnType("int");
 
@@ -334,6 +337,9 @@ namespace RailDBProject.Migrations
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SurName")
                         .IsRequired()

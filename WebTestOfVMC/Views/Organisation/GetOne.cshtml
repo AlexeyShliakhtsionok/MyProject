@@ -1,4 +1,5 @@
 ﻿@using WebTestOfVMC.Models
+@using EnumExt;
 
 @model OrganisationInfo
 
@@ -10,6 +11,12 @@
     @Html.LabelFor(Model => Model.OrgName)
     <br />
     @Html.EditorFor(Model => Model.OrgName)
+</div>
+
+<div id="organisationRole">
+    @Html.LabelFor(Model => Model.OrganisationRole)
+    <br />
+    @Html.DropDownListFor(Model => Model.OrganisationRole, Model.OrganisationRole.GetSelectList())
 </div>
 
 <div id="organisationParent">

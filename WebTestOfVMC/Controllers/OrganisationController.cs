@@ -42,7 +42,9 @@ namespace WebTestOfVMC.Controllers
                 {
                     organisation.Children = _organisation.Children;
                 }
-                
+
+                organisation.GlobalSections = _organisation.GlobalSections;
+                organisation.OrganisationRole = _organisation.OrganisationRole;
                 organisation.Users = _organisation.Users;
                 organisation.IsDeleted = _organisation.IsDeleted;
                 organisation.SelectList = _organisationServices.GetOrganisationList().GetOrganisationSelectList();
@@ -70,7 +72,8 @@ namespace WebTestOfVMC.Controllers
             {
                 _organisation.Children = null;
             }
-
+            //_organisation.GlobalSections = info.GlobalSections;
+            _organisation.OrganisationRole = info.OrganisationRole;
             _organisation.OrgName = info.OrgName;
             _organisation.Parent = _organisationServices.GetById(info.Parent.OrganisationId);
             _organisation.Users = info.Users;
@@ -91,8 +94,6 @@ namespace WebTestOfVMC.Controllers
         public IActionResult DeleteOrganisation(int id)
         {
             var _organisation = _organisationServices.GetById(id);
-
-
 
             if (_organisation.Children != null)
             {
@@ -128,10 +129,12 @@ namespace WebTestOfVMC.Controllers
                 Organisation _organisation = new Organisation()
                 {
                     OrgName = info.OrgName,
+                    OrganisationRole = info.OrganisationRole,
                     Parent = _organisationServices.GetById(info.Parent.OrganisationId),
                     Children = _childList,
                     Users = info.Users,
-                    IsDeleted = info.IsDeleted
+                    IsDeleted = info.IsDeleted,
+                    //GlobalSections = info.GlobalSections
                 };
 
                 _organisationServices.CreateOrganisation(_organisation);
@@ -141,9 +144,11 @@ namespace WebTestOfVMC.Controllers
                 Organisation _organisation = new Organisation()
                 {
                     OrgName = info.OrgName,
+                    OrganisationRole = info.OrganisationRole,
                     Children = _childList,
                     Users = info.Users,
-                    IsDeleted = info.IsDeleted
+                    IsDeleted = info.IsDeleted,
+                    //GlobalSections = info.GlobalSections
                 };
 
                 _organisationServices.CreateOrganisation(_organisation);
