@@ -41,10 +41,10 @@ namespace WebTestOfVMC.Controllers
             switch (sortOrder)
             {
                 case GlobalSectionSortState.GlobalSectionNameDesc:
-                    sections = sections.OrderByDescending(s => s.GlobaSectionName);
+                    sections = sections.OrderByDescending(s => s.GlobalSectionName);
                     break;
                 case GlobalSectionSortState.GlobalSectionNameAsc:
-                    sections = sections.OrderBy(s => s.GlobaSectionName);
+                    sections = sections.OrderBy(s => s.GlobalSectionName);
                     break;
                 case GlobalSectionSortState.GlobalWayDesc:
                     sections = sections.OrderByDescending(s => s.GlobalWayNumber);
@@ -76,56 +76,48 @@ namespace WebTestOfVMC.Controllers
             {
                 GlobalSectId = _globalSection.GlobalSectId,
                 GlobalWayNumber = _globalSection.GlobalWayNumber,
-                GlobaSectionName = _globalSection.GlobaSectionName,
+                GlobalSectionName = _globalSection.GlobalSectionName,
                 Organisations = _globalSection.Organisations,
                 OrganisationCollection = _organisations,
                 SelectList = _organisations.GetOrganisationSelectList(),
                 MultiSelectList = new MultiSelectList(_organisations, "OrganisationId", "OrgName")
-        };
+            };
             return PartialView(model);
         }
 
-
         public IActionResult UpdateGlobalSection(GlobalSectionInfo info)
         {
-            List<Organisation> _organisations = new List<Organisation>(); // Создаем лист организаций
+            List<Organisation> _organisations = new List<Organisation>();
 
-            foreach (var item in info.SelectedOrganisation) // Наполняем лист организациями, выбранными в DropDownList
+            foreach (var item in info.SelectedOrganisation)
             {
                 _organisations.Add(_organisationServices.GetById(item));
             }
 
-            var _globalSection = _globalSectionSetvice.GetById(info.GlobalSectId); // Считываем из БД участок, который редактируем
+            var _globalSection = _globalSectionSetvice.GetById(info.GlobalSectId);
 
-            //if (!_organisations.Equals(_globalSection.Organisations)) // Если Лист выбранных в Dropdown-листе организаций не эквивалентен существующему в БД
-            //{
-                foreach (var selected in _organisations) // Если организация из выбранных в DropDown отсутствует в списке из БД, то добавляем
+            foreach (var selected in _organisations)
+            {
+                if (!_globalSection.Organisations.Any(o => o.OrganisationId == selected.OrganisationId))
                 {
-                    if (!_globalSection.Organisations.Any(o => o.OrganisationId == selected.OrganisationId))
-                    {
-                        _globalSection.Organisations.Add(selected);
-                    }
+                    _globalSection.Organisations.Add(selected);
                 }
-                //_globalSectionSetvice.UpdateGlobalSection(_globalSection); 
+            }
 
-                /*_globalSection = _globalSectionSetvice.GetById(info.GlobalSectId);*/ // Коллекция могла измениться - считываем участок еще раз
-               
-                List<int> _orgToRemove = new List<int>(); // Лист для id элементов, требующих удаления
-
-                foreach (var existed in _globalSection.Organisations) // Заполняем _orgToRemove (сразу не удаляю, т.к. форич слетит на следующей после удаления итерации
+            List<int> _orgToRemove = new List<int>(); 
+            foreach (var existed in _globalSection.Organisations) 
+            {
+                if (!_organisations.Any(o => o.OrganisationId == existed.OrganisationId))
                 {
-                    if (!_organisations.Any(o => o.OrganisationId == existed.OrganisationId))
-                    {
-                        _orgToRemove.Add(existed.OrganisationId);
-                    }
+                    _orgToRemove.Add(existed.OrganisationId);
                 }
+            }
 
-                for (int i = 0; _orgToRemove != null && i < _orgToRemove.Count; i++) // Удаляем
-                {
-                    _globalSection.Organisations.Remove(_organisationServices.GetById(_orgToRemove[i]));
-                }
-            //}
-            _globalSection.GlobaSectionName = info.GlobaSectionName;
+            for (int i = 0; _orgToRemove != null && i < _orgToRemove.Count; i++)
+            {
+                _globalSection.Organisations.Remove(_organisationServices.GetById(_orgToRemove[i]));
+            }
+             _globalSection.GlobalSectionName = info.GlobalSectionName;
             _globalSection.GlobalWayNumber = info.GlobalWayNumber;
 
             _globalSectionSetvice.UpdateGlobalSection(_globalSection);
@@ -139,8 +131,6 @@ namespace WebTestOfVMC.Controllers
                 }
             });
         }
-
-        
 
         [HttpPost]
         public IActionResult DeleteGlobalSection(int id)
@@ -172,7 +162,7 @@ namespace WebTestOfVMC.Controllers
             GlobalSection globalSection = new GlobalSection
             {
                 GlobalSectId = info.GlobalSectId,
-                GlobaSectionName = info.GlobaSectionName,
+                GlobalSectionName = info.GlobalSectionName,
                 GlobalWayNumber = info.GlobalWayNumber,
                 Organisations = _orgList
             };

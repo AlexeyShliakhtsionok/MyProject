@@ -11,6 +11,10 @@ namespace RailDBProject.Model
         [Key]
         public int DefectId { get; set; }
         [Required]
+        public int Kilometer { get; set; }
+        [Required]
+        public int Pkt { get; set; }
+        [Required]
         public DateTime DateOfDetection { get; set; }
         [Required]
         public int Path { get; set; }
@@ -28,24 +32,6 @@ namespace RailDBProject.Model
         public DefectCodes DefectCode { get; set; }
         public bool IsDeleted { get; set; }
 
-        public virtual Coordinate Coordinate { get; set; }
-
-        public static implicit operator DefectAudit(Defect entity)
-        {
-            DefectAudit transfer = new DefectAudit();
-            transfer.DefectCode = entity.DefectCode;
-            transfer.DateOfDetection = entity.DateOfDetection;
-            transfer.Id = entity.DefectId.ToString();
-            transfer.Path = entity.Path;
-            transfer.WaySide = entity.WaySide;
-            transfer.Manufacture = entity.Manufacture;
-            transfer.ManufactureYear = entity.ManufactureYear;
-            transfer.DefectLenght = entity.DefectLenght;
-            transfer.DefectDepth = entity.DefectDepth;
-            return transfer;
-            //реализация архива и делита разделить или удалить одну из них.
-            //Предусмотреть сериализацию состояния БД на случай коллапса
-            //сделать интеграцию с файлами EXCEL
-        }
+        public virtual LocalSection LocalSection { get; set; }
     }
 }

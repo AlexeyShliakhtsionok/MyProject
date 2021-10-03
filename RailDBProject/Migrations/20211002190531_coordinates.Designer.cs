@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RailDBProject;
 
 namespace RailDBProject.Migrations
 {
     [DbContext(typeof(RailDBContext))]
-    partial class RailDBContextModelSnapshot : ModelSnapshot
+    [Migration("20211002190531_coordinates")]
+    partial class coordinates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,7 +122,7 @@ namespace RailDBProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("GlobalSectionName")
+                    b.Property<string>("GlobaSectionName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -146,7 +148,7 @@ namespace RailDBProject.Migrations
                     b.Property<int?>("GlobalSectionGlobalSectId")
                         .HasColumnType("int");
 
-                    b.Property<string>("LocalSectionName")
+                    b.Property<string>("LocaSectionlName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");

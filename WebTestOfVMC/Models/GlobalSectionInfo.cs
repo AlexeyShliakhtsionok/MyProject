@@ -12,7 +12,7 @@ namespace WebTestOfVMC.Models
     {
         public int GlobalSectId { get; set; }
         [Display(Name = "Наименование участка")]
-        public string GlobaSectionName { get; set; }
+        public string GlobalSectionName { get; set; }
         [Display(Name = "Номер пути")]
         public int GlobalWayNumber { get; set; }
         [Display(Name = "Обслуживающие организации")]

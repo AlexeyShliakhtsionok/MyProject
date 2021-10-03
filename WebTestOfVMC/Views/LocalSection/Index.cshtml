@@ -4,17 +4,16 @@
 @using CommonClasses.PaginationAndSort.IndexViewModelClasses;
 @using RailDBProject.Model;
 
-@model GlobalSectionIndexViewModel
+@model LocalSectionIndexViewModel
 
-<p class="filter-text">Учаски/Направления</p>
+<p class="filter-text">Перегоны</p>
 <br />
-
 
 <div class="table">
 
     <div id="manipulation-buttons">
         <div class="create-button">
-            @await Component.InvokeAsync("GlobalSectionInfo")
+            @await Component.InvokeAsync("LocalSectionInfo")
         </div>
         <div class="edit-button">
             <input type="submit" class="btn btn-outline-dark" value="Редактировать" id="edit-btn" />
@@ -26,8 +25,8 @@
             <form method="get">
                 <div class="form-inline">
 
-                    <p1 class="p1">Организация: </p1>
-                    <select name="company" asp-items="Model.OrganisationFilter.Organisations" class="form-control"></select>
+                    <p1 class="p1">Направления: </p1>
+                    <select name="glSection" asp-items="Model.GlobalSectionFilter.GlobalSections" class="form-control"></select>
 
                     <input type="submit" value="Применить фильтр" class="btn btn-outline-dark" />
                 </div>
@@ -36,54 +35,47 @@
     </div>
     <br />
     <br />
-        <table class="table">
-            <tr class="p1 intable">
-                <th>
-                    <p class="p1">№ п/п</p>
-                </th>
-                <th>
-                    <a asp-action="Index"
-                       asp-controller="GlobalSection"
-                       asp-route-sortOrder="@(Model.GlobalSectionSortViewModel.GlobalWaySort)">
-                        <p class="p1">№ пути<img src="~/images/sort.png" id="sort" /></p>
-                    </a>
+    <table class="table">
+        <tr class="p1 intable">
+            <th>
+                <p class="p1">№ п/п</p>
+            </th>
+            <th>
+                <a asp-action="Index"
+                   asp-controller="LocalSection"
+                   asp-route-sortOrder="@(Model.LocalSectionSortViewModel.LocalWaySort)">
+                    <p class="p1">№ пути<img src="~/images/sort.png" id="sort" /></p>
+                </a>
 
-                </th>
+            </th>
 
-                <th>
-                    <a asp-action="Index"
-                       asp-controller="GlobalSection"
-                       asp-route-sortOrder="@(Model.GlobalSectionSortViewModel.GlobalSectionNameSort)">
-                        <p class="p1">Наименование участка<img src="~/images/sort.png" id="sort" /></p>
-                    </a>
-                </th>
+            <th>
+                <a asp-action="Index"
+                   asp-controller="LocalSection"
+                   asp-route-sortOrder="@(Model.LocalSectionSortViewModel.LocalSectionNameSort)">
+                    <p class="p1">Наименование перегона<img src="~/images/sort.png" id="sort" /></p>
+                </a>
+            </th>
+        </tr>
+
+        @{ int rowNo = 0; }
+
+        @foreach (LocalSection u in Model.LocalSections)
+        {
+            <tr class="table-row" id="@u.LocalSectoionId">
+                <td>@(rowNo += 1)</td>
+                <td>@u.LocalWayNumber</td>
+                <td>@u.LocalSectionName</td>
             </tr>
+        }
+    </table>
 
-            @{ int rowNo = 0; }
-
-            @*@if (Model.GlobalSections != null)
-            {*@
-
-                @foreach (GlobalSection u in Model.GlobalSections)
-                {
-                    <tr class="table-row" id="@u.GlobalSectId">
-                        <td>@(rowNo += 1)</td>
-                        <td>@u.GlobalWayNumber</td>
-                        <td>@u.GlobalSectionName</td>
-                    </tr>
-                }
-            @*}*@
-
-
-
-        </table>
-    
 
     @if (Model.PageView.HasPreviousPage)
     {
         <a asp-action="Index"
            asp-route-page="@(Model.PageView.PageNumber - 1)"
-           asp-route-sortorder="@(Model.GlobalSectionSortViewModel.Current)"
+           asp-route-sortorder="@(Model.LocalSectionSortViewModel.Current)"
            class="btn  btn-outline-dark">
             <i class="glyphicon glyphicon-chevron-left"></i>
             Назад
@@ -93,14 +85,14 @@
     {
         <a asp-action="Index"
            asp-route-page="@(Model.PageView.PageNumber + 1)"
-           asp-route-sortorder="@(Model.GlobalSectionSortViewModel.Current)"
+           asp-route-sortorder="@(Model.LocalSectionSortViewModel.Current)"
            class="btn btn-outline-dark">
             Вперед
             <i class="glyphicon glyphicon-chevron-right"></i>
         </a>
     }
 
-    <form asp-action="UpdateGlobalSection" asp-controller="GlobalSection" asp-route-id="id" data-ajax="true"
+    <form asp-action="UpdateLocalSection" asp-controller="LocalSection" asp-route-id="id" data-ajax="true"
           data-ajax-method="POST" data-ajax-success="onUpdate">
 
         <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -126,15 +118,15 @@
     </form>
 </div>
 
-    @section Scripts{
+@section Scripts{
 
-        <script>
+    <script>
 
         function onSuccess(data) {
             $(document).on("ajaxSuccess", function () {
 
-                    alert(data.newData.emailMessage);
-                    window.location = data.newData.url;
+                    alert(data.emailMessage);
+                    window.location = data.url;
             });
         }
 
@@ -207,5 +199,5 @@
             });
         });
 
-        </script>
-    }
+    </script>
+}

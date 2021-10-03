@@ -29,10 +29,8 @@ namespace RailDBProject
         public DbSet<Defect> Defects { get; set; }
         public DbSet<GlobalSection> GlobalSections { get; set; }
         public DbSet<LocalSection> LocalSections { get; set; }
-        public DbSet<Coordinate> Coordinates { get; set; }
         public DbSet<Organisation> Organisations { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<DefectAudit> DefectAudits { get; set; }
         public DbSet<Defectoscope> Defectoscopes { get; set; }
         public DbSet<Operator> Operators { get; set; }
     }

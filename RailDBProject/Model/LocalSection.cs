@@ -13,11 +13,11 @@ namespace RailDBProject.Model
         public int LocalSectoionId { get; set; }
         [Required]
         [MaxLength(50)]
-        public string LocaSectionlName { get; set; }
+        public string LocalSectionName { get; set; }
         [Required]
         public int LocalWayNumber { get; set; }
 
         public virtual GlobalSection GlobalSection { get; set; }
-        public virtual ICollection<Coordinate> Coordinates { get; set; }
+        public virtual ICollection<Defect> Defects  { get; set; }
     }
 }

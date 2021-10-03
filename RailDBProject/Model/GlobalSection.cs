@@ -13,7 +13,7 @@ namespace RailDBProject.Model
         public int GlobalSectId { get; set; }
         [Required]
         [MaxLength(50)]
-        public string GlobaSectionName { get; set; }
+        public string GlobalSectionName { get; set; }
         [Required]
         public int GlobalWayNumber { get; set; }
         public int OrganisationId { get; set; }

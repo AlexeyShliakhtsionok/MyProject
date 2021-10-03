@@ -24,12 +24,6 @@ namespace RailDBProject.Repository
             get => _globalSections == null ? _globalSections = new GlobalSectionRepository(_context) : _globalSections;
         }
 
-        public ICoordinateRepository _coordinates;
-        public ICoordinateRepository Coordinates
-        {
-            get => _coordinates == null ? _coordinates = new CoordinateRepository(_context) : _coordinates;
-        }
-
         public ILocalSectionRepository _localSections;
         public ILocalSectionRepository LocalSections
         {
@@ -46,12 +40,6 @@ namespace RailDBProject.Repository
         public IUserRepository Users
         {
             get => _users == null ? _users = new UserRepository(_context) : _users;
-        }
-
-        public IDefectAuditRepository _defectAudits;
-        public IDefectAuditRepository DefectAudits
-        {
-            get => _defectAudits == null ? _defectAudits = new DefectAuditRepository(_context) : _defectAudits;
         }
 
         public IOperatorRepository _operators;

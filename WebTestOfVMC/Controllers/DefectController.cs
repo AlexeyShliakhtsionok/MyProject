@@ -32,7 +32,6 @@ namespace WebApplication.Controllers
                 Path = o.Path,
                 ManufactureYear = o.ManufactureYear,
                 DefectId = o.DefectId,
-                Coordinate = o.Coordinate,
                 WaySide = o.WaySide
             }).ToList();
 

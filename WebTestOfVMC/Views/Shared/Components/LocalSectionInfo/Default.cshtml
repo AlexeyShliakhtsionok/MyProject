@@ -1,13 +1,17 @@
 ﻿@using WebTestOfVMC.Models
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using EnumExt;
+@using Common.ListExtentions;
+@using RailDBProject.Model;
 
-@model GlobalSectionInfo
+@model LocalSectionInfo
 
 <div class="form-group">
     <a button class="btn btn-outline-dark" data-toggle="modal" data-target="#registerModal">Добавить</a>
 </div>
 
 
-<form asp-action="CreateGlobalSection" asp-controller="GlobalSection" data-ajax="true"
+<form asp-action="CreateLocalSection" asp-controller="LocalSection" data-ajax="true"
       data-ajax-method="POST" data-ajax-success="onSuccess">
 
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
@@ -20,18 +24,21 @@
                             <p id="p1">Добавить организацию</p>
                             <br />
                             <div class="form-group">
-                                @Html.HiddenFor(Model => Model.GlobalSectId)
+                                @Html.HiddenFor(Model => Model.LocalSectoionId)
 
-                                @Html.LabelFor(Model => Model.GlobalSectionName)
-                                @Html.EditorFor(Model => Model.GlobalSectionName)
+                                @Html.LabelFor(Model => Model.LocaSectionlName)
                                 <br />
-                                @Html.LabelFor(Model => Model.GlobalWayNumber)
-                                @Html.EditorFor(Model => Model.GlobalWayNumber)
+                                @Html.EditorFor(Model => Model.LocaSectionlName)
+                                @Html.ValidationMessageFor(Model => Model.LocaSectionlName)
                                 <br />
-                                @Html.LabelFor(Model => Model.Organisations)
-                                @Html.DropDownListFor(Model => Model.SelectedOrganisation,
-                                                        Model.MultiSelectList, new { @class = "multidropdown", multiple = "multiple" })
+                                @Html.LabelFor(Model => Model.LocalWayNumber)
                                 <br />
+                                @Html.EditorFor(Model => Model.LocalWayNumber)
+                                @Html.ValidationMessageFor(Model => Model.LocalWayNumber)
+                                                               <br />
+                                @Html.LabelFor(Model => Model.GlobalSection)
+                                <br />
+                                @Html.DropDownListFor(Model => Model.SelectedGlobalSections, Model.SelectList)
                             </div>
                             <br />
                             <div class="form-group">

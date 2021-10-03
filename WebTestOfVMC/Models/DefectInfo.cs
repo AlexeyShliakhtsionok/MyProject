@@ -13,6 +13,5 @@ namespace WebTestOfVMC.Models
         public double DefectDepth;
         public double DefectLenght;
         public DefectCodes DefectCode;
-        public Coordinate Coordinate;
     }
 }
