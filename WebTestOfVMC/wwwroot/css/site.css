@@ -446,3 +446,67 @@ label {
 .block_1 {
     display: flex;
 }
+
+
+
+
+
+.test_menu {
+    position: relative;
+    display: inline-block;
+}
+
+    .test_menu li {
+        list-style-type: none;
+        position: relative;
+        z-index: 100;
+        color: white;
+        cursor: pointer;
+        background-color: #002b8e;
+        margin-left: -35px;
+        border-radius: 10px;
+    }
+
+
+        .test_menu li a {
+            color: white;
+            padding: 20px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .test_menu li a:hover {
+                background: #0B3A66;
+                color: black;
+            }
+
+        .test_menu li ul a {
+            color: blue;
+            padding: 20px;
+            text-decoration: none;
+            display: block;
+            border: solid;
+            border-color: white;
+            top: 20px;
+        }
+
+        .test_menu li.active ul.small a:hover {
+            background-color: black;
+            color: #fff;
+        }
+
+        .test_menu li ul {
+            display: none;
+        }
+
+        .test_menu li:hover ul {
+            display: block;
+            position: absolute;
+            top: 0px;
+            left: 100%;
+        }
+
+        .test_menu li ul li a {
+            width: 300px;
+        }
+
