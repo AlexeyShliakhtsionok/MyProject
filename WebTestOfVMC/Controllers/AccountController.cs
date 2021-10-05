@@ -41,8 +41,6 @@ namespace WebTestOfVMC.Controllers
                 User _user = await _userServices.GetQuarable().FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
                 if (_user != null)
                 {
-                   
-                    //_user.UserRole = 
                     await Authenticate(_user.Email, _user.UserRole);
                     return RedirectToAction("Index", "Home");
                 }
@@ -57,7 +55,6 @@ namespace WebTestOfVMC.Controllers
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, userName),
                 new Claim(ClaimsIdentity.DefaultRoleClaimType, userRole.ToString())
-
             };
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
@@ -70,4 +67,3 @@ namespace WebTestOfVMC.Controllers
         }
     }
 }
-

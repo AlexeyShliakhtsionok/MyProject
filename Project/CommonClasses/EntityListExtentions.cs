@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using EnumExt;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using RailDBProject.Model;
 using System.Collections.Generic;
 using System.Windows.Controls.Primitives;
@@ -18,7 +19,7 @@ namespace Common.ListExtentions
                     Value = li.OrganisationId.ToString()
                 });
             }
-            items.Add(new SelectListItem("please select", ""));
+            items.Add(new SelectListItem("-----", ""));
             foreach (var item in items)
             {
                 if (item.Text == "-----")
@@ -43,7 +44,7 @@ namespace Common.ListExtentions
             items.Add(new SelectListItem("-----", ""));
             foreach (var item in items)
             {
-                if (item.Text == "please select")
+                if (item.Text == "-----")
                 {
                     item.Selected = true;
                 }
@@ -65,7 +66,7 @@ namespace Common.ListExtentions
             items.Add(new SelectListItem("-----", ""));
             foreach (var item in items)
             {
-                if (item.Text == "please select")
+                if (item.Text == "-----")
                 {
                     item.Selected = true;
                 }
@@ -73,7 +74,26 @@ namespace Common.ListExtentions
             return new SelectList(items, "Value", "Text");
         }
 
-
-
+        public static SelectList GetDefectSelectList(this List<Defect> list)
+        {
+            List<SelectListItem> items = new List<SelectListItem>(list.Count);
+            foreach (var li in list)
+            {
+                items.Add(new SelectListItem
+                {
+                    Text = li.DefectCode.GetEnumDescription(),
+                    Value = li.DefectId.ToString()
+                });
+            }
+            items.Add(new SelectListItem("-----", ""));
+            foreach (var item in items)
+            {
+                if (item.Text == "-----")
+                {
+                    item.Selected = true;
+                }
+            }
+            return new SelectList(items, "Value", "Text");
+        }
     }
 }

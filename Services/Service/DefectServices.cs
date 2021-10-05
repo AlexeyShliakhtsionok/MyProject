@@ -18,5 +18,39 @@ namespace Project.BLL.Services
             return _uow.Defects
                   .ReadAll().Where(d => d.IsDeleted == false).ToList();
         }
+
+        public void CreateDefect(Defect defect)
+        {
+            _uow.Defects.Create(defect);
+            _uow.SaveChanges();
+        }
+
+        public void DeleteDefect(Defect defect)
+        {
+            _uow.Defects.Delete(defect);
+            _uow.SaveChanges();
+        }
+
+        public Defect GetById(int id)
+        {
+            return _uow.Defects.Read(id);
+        }
+
+        public List<Defect> GetDefectList()
+        {
+            return _uow.Defects.ReadAll().ToList();
+        }
+
+        public IQueryable<Defect> GetQuarable()
+        {
+            return _uow.Defects.ReadAll();
+        }
+
+        public Defect UpdateDefect(Defect defect)
+        {
+            _uow.Defects.Update(defect);
+            _uow.SaveChanges();
+            return defect;
+        }
     }
 }

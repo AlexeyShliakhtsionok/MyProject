@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace RailDBProject.Model
 {
     [Serializable]
@@ -30,6 +31,7 @@ namespace RailDBProject.Model
         public double DefectLenght { get; set; }
         [Required]
         public DefectCodes DefectCode { get; set; }
+        public string DefectCodeName { get; set; }
         public bool IsDeleted { get; set; }
 
         public virtual LocalSection LocalSection { get; set; }

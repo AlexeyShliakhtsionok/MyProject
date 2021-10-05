@@ -47,6 +47,9 @@ namespace RailDBProject.Migrations
                     b.Property<int>("DefectCode")
                         .HasColumnType("int");
 
+                    b.Property<string>("DefectCodeName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("DefectDepth")
                         .HasColumnType("float");
 

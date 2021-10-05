@@ -489,6 +489,9 @@ label {
             border-color: white;
             top: 20px;
         }
+        .test_menu li ul li a {
+            border-radius: 10px;
+        }
 
         .test_menu li.active ul.small a:hover {
             background-color: black;

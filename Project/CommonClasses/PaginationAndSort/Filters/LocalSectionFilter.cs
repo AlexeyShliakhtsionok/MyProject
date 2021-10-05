@@ -11,7 +11,7 @@ namespace CommonClasses.PaginationAndSort.Filters
         public LocalSectionFilter(List<LocalSection> localSections, int? localSection, string localSectionName)
         {
             localSections.Insert(0, new LocalSection { LocalSectionName = "Все", LocalSectoionId = 0 });
-            LocalSections = new SelectList(localSections, "LocalSEctionId", "LocalSEctionName", localSection);
+            LocalSections = new SelectList(localSections, "LocalSEctionId", "LocalSectionName", localSection);
             SelectedLocalSection = localSection;
             SelectedName = localSectionName;
         }

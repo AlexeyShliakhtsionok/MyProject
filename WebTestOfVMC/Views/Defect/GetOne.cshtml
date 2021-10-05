@@ -1,0 +1,50 @@
+﻿@using WebTestOfVMC.Models
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using EnumExt;
+@model DefectInfo
+
+<div id="userId">
+    @Html.HiddenFor(Model => Model.DefectId)
+</div>
+
+<div id="userLastName">
+    @Html.LabelFor(Model => Model.DefectCode)
+    <br />
+    @Html.DropDownListFor(Model => Model.DefectCode, Model.DefectCode.GetSelectList())
+</div>
+
+<div id="userFirstName">
+    @Html.LabelFor(Model => Model.DefectDepth)
+    <br />
+    @Html.EditorFor(Model => Model.DefectDepth)
+</div>
+
+<div id="userSurName">
+    @Html.LabelFor(Model => Model.DefectLenght)
+    <br />
+    @Html.EditorFor(Model => Model.DefectLenght)
+</div>
+
+<div id="userEmail">
+    @Html.LabelFor(Model => Model.ManufactureYear)
+    <br />
+    @Html.EditorFor(Model => Model.ManufactureYear)
+</div>
+
+<div id="userLogin">
+    @Html.LabelFor(Model => Model.Path)
+    <br />
+    @Html.EditorFor(Model => Model.Path)
+</div>
+
+<div id="userPassword">
+    @Html.LabelFor(Model => Model.DateOfDetection)
+    <br />
+    @Html.EditorFor(Model => Model.DateOfDetection)
+</div>
+
+<div id="userOrganisations">
+    @Html.LabelFor(Model => Model.WaySide)
+    <br />
+    @Html.DropDownListFor(Model => Model.WaySide, Model.WaySide.GetSelectList())
+</div>
