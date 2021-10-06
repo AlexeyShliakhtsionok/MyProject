@@ -55,12 +55,13 @@ namespace WebTestOfVMC.Controllers
         [HttpPost]
         public IActionResult UpdateUser(UserInfo info)
         {
-            var newOrg = _organisationServices.GetById(info.OrganisationId); // related entity
+            var newOrg = _organisationServices.GetById(info.OrganisationId);
             var _user = _userServices.GetById(info.UserId);
 
             _user.FirstName = info.FirstName;
             _user.LastName = info.LastName;
             _user.SurName = info.SurName;
+            _user.Email = info.Email;
             _user.Login = info.Login;
             _user.Password = info.Password;
             _user.Organisation = newOrg;

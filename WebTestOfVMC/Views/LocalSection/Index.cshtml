@@ -166,7 +166,10 @@
                         $(".delete-button").hide();
                     }
                     $(".table-row").click(function () { return false });
-                    alert("Для выбора новой записи разактивируйте ранее выбранную!")
+
+                    if ($(this).attr("id") != element) {
+                        alert("Для выбора новой записи разактивируйте ранее выбранную!")
+                    }
                 };
             });
 

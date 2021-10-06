@@ -76,11 +76,12 @@ namespace WebTestOfVMC.Controllers
 
         public IActionResult CreateLocalSection(LocalSectionInfo info)
         {
+            var _globalForLocal = _globalSectionServices.GetById(info.GlobalSection.OrganisationId);
                 LocalSection _localSection = new LocalSection()
                 {
                     LocalWayNumber = info.LocalWayNumber,
                     LocalSectionName = info.LocaSectionlName,
-                    GlobalSection = info.GlobalSection
+                    GlobalSection = _globalForLocal
                 };
 
                 _localSectionServices.CreateLocalSection(_localSection);

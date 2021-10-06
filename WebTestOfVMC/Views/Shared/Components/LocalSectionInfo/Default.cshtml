@@ -35,10 +35,10 @@
                                 <br />
                                 @Html.EditorFor(Model => Model.LocalWayNumber)
                                 @Html.ValidationMessageFor(Model => Model.LocalWayNumber)
-                                                               <br />
+                                <br />
                                 @Html.LabelFor(Model => Model.GlobalSection)
                                 <br />
-                                @Html.DropDownListFor(Model => Model.SelectedGlobalSections, Model.SelectList)
+                                @Html.DropDownListFor(Model => Model.GlobalSection.OrganisationId, Model.SelectList) @*!!!!!!!!!!!!!!!!!!!!*@
                             </div>
                             <br />
                             <div class="form-group">

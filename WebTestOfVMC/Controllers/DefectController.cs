@@ -24,7 +24,6 @@ namespace WebApplication.Controllers
             this._localSectionServices = _localSectionServices;
         }
 
-
         [HttpGet]
         public IActionResult GetAll()
         {
