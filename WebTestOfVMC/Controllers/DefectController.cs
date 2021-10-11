@@ -19,12 +19,15 @@ namespace WebApplication.Controllers
         private readonly IDefectServices _defectService;
         private readonly ILocalSectionServices _localSectionServices;
         private readonly IGlobalSectionServices _globalSectionServices;
+        private readonly IOrganisationServices _organisationServices;
 
-        public DefectController(IDefectServices _defectService, ILocalSectionServices _localSectionServices, IGlobalSectionServices _globalSectionServices)
+        public DefectController(IDefectServices _defectService, ILocalSectionServices _localSectionServices,
+                IGlobalSectionServices _globalSectionServices, IOrganisationServices _organisationServices)
         {
             this._defectService = _defectService;
             this._localSectionServices = _localSectionServices;
             this._globalSectionServices = _globalSectionServices;
+            this._organisationServices = _organisationServices;
         }
 
         [HttpGet]
@@ -49,7 +52,8 @@ namespace WebApplication.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Index(int? defect, int? glSection, string glName, string name, int page = 1, DefectSortState sortOrder = DefectSortState.DateOfDetectionAsc)
+        public async Task<IActionResult> Index(int? defect, int? glSection, int? organisation, int? localSection, string localName,
+                                              string orgName, string glName, string name, int page = 1, DefectSortState sortOrder = DefectSortState.DateOfDetectionAsc)
         {
             int pageSize = 10;
 
@@ -62,9 +66,20 @@ namespace WebApplication.Controllers
                 string selectedName = selectedDefect.DefectCodeName;
                 defects = defects.Where(d => d.DefectCodeName == selectedName);
             }
+
             if (glSection != null && glSection != 0)
             {
                 defects = defects.Where(g => g.LocalSection.GlobalSection.GlobalSectId == glSection);
+            }
+
+            if (localSection != null && localSection != 0)
+            {
+                defects = defects.Where(l => l.LocalSection.LocalSectoionId == localSection);
+            }
+
+            if (organisation != null && organisation != 0)
+            {
+                defects = defects.Where(o => o.LocalSection.GlobalSection.Organisations.Any(o => o.OrganisationId == organisation));
             }
 
             switch (sortOrder)
@@ -127,7 +142,9 @@ namespace WebApplication.Controllers
                 PageView = new PageView(count, page, pageSize),
                 DefectSortViewModel = new DefectSortViewModel(sortOrder),
                 DefectFilter = new DefectFilter(_defectService.GetDefectList(), defect, name),
+                OrganisationFilter = new OrganisationFilter(_organisationServices.GetOrganisationList(), organisation, orgName),
                 GlobalSectionFilter = new GlobalSectionFilter(_globalSectionServices.GetGlobalSectionList(), glSection, glName),
+                LocalSectionFilter = new LocalSectionFilter(_localSectionServices.GetLocalSectionList(), localSection, localName),
                 Defects = items
             };
             return View(viewModel);
