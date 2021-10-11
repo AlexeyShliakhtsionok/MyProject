@@ -12,27 +12,48 @@ namespace WebTestOfVMC.Models
         [Display(Name = "Дата обнаружения: ")]
         [Required(ErrorMessage = "Поле не может быть пустым")]
         public DateTime DateOfDetection { get; set; }
+
+
         [Display(Name = "Нить: ")]
         [Required(ErrorMessage = "Поле не может быть пустым")]
         public WaySide WaySide { get; set; }
+
+
         [Display(Name = "Звено: ")]
         [Required(ErrorMessage = "Поле не может быть пустым")]
         public int Path { get; set; }
+
+
+        [Display(Name = "Производитель: ")]
+        [Required(ErrorMessage = "Поле не может быть пустым")]
+        public Manufacture Manufacture { get; set; }
+
+
         [Display(Name = "Год прокатки: ")]
         [Required(ErrorMessage = "Поле не может быть пустым")]
         public string ManufactureYear { get; set; }
+
+
         [Display(Name = "Глубина дефекта: ")]
         [Required(ErrorMessage = "Поле не может быть пустым")]
         public double DefectDepth { get; set; }
+
+
         [Display(Name = "Протяженность дефекта: ")]
         [Required(ErrorMessage = "Поле не может быть пустым")]
         public double DefectLenght { get; set; }
+
+
         [Display(Name = "Код дефекта: ")]
         [Required(ErrorMessage = "Поле не может быть пустым")]
         public DefectCodes DefectCode { get; set; }
+
+
         [Display(Name = "Код дефекта: ")]
         [Required(ErrorMessage = "Поле не может быть пустым")]
         public string DefectCodeName { get; set; }
+
+
         public bool IsDeleted { get; set; }
         public LocalSection LocalSection { get; set; }
 

@@ -12,7 +12,7 @@
 </div>
 
 
-<form asp-action="CreateLocalSection" asp-controller="LocalSection" data-ajax="true"
+<form asp-action="CreateDefect" asp-controller="Defect" data-ajax="true"
       data-ajax-method="POST" data-ajax-success="onSuccess">
 
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
@@ -25,40 +25,77 @@
                             <p id="p1">Добавить дефект</p>
                             <br />
                             <div class="form-group">
-                                @Html.HiddenFor(Model => Model.DefectId)
 
+                                <div id="defectId">
+                                    @Html.HiddenFor(Model => Model.DefectId)
+                                </div>
 
-                                @Html.LabelFor(Model => Model.DateOfDetection)
-                                <br />
-                                @Html.EditorFor(Model => Model.DateOfDetection)
-                                @Html.ValidationMessageFor(Model => Model.DateOfDetection)
-                                <br />
+                                <div class="dateOfDetection">
+                                    @Html.LabelFor(Model => Model.DateOfDetection)
+                                    <br />
+                                    @Html.EditorFor(Model => Model.DateOfDetection)
+                                </div>
 
+                                <div class="globalSect">
+                                    @Html.LabelFor(Model => Model.LocalSection.GlobalSection)
+                                    <br />
+                                    <div class="dropDownId">
+                                        @Html.DropDownListFor(Model => Model.LocalSection.GlobalSection, Model.GlobalSectionSelectList)
+                                    </div>
+                                    @Html.ValidationMessageFor(Model => Model.LocalSection.GlobalSection)
+                                    <br />
+                                </div>
 
-                                @Html.LabelFor(Model => Model.LocalSection.GlobalSection)
-                                <br />
-                                @Html.DropDownListFor(Model => Model.LocalSection.GlobalSection, Model.GlobalSectionSelectList)
-                                @Html.ValidationMessageFor(Model => Model.LocalSection.GlobalSection)
-                                <br />
+                                <div class="localSect">
+                                    @Html.LabelFor(Model => Model.LocalSection)
+                                    <br />
+                                    <div class="selectDiv"></div>
+                                    @*@Html.DropDownListFor(Model => Model.LocalSection, Model.LocalSectionSelectList)*@
+                                    @Html.ValidationMessageFor(Model => Model.LocalSection)
+                                    <br />
+                                </div>
 
+                                <div class="defCode">
+                                    @Html.LabelFor(Model => Model.DefectCode)
+                                    <br />
+                                    @Html.DropDownListFor(Model => Model.DefectCode, Model.DefectCode.GetSelectList())
+                                </div>
 
-                                @Html.LabelFor(Model => Model.LocalSection)
-                                <br />
-                                @Html.DropDownListFor(Model => Model.LocalSection, Model.LocalSectionSelectList)
-                                @Html.ValidationMessageFor(Model => Model.LocalSection)
-                                <br />
+                                <div class="defDepth">
+                                    @Html.LabelFor(Model => Model.DefectDepth)
+                                    <br />
+                                    @Html.EditorFor(Model => Model.DefectDepth)
+                                </div>
 
+                                <div class="defLenght">
+                                    @Html.LabelFor(Model => Model.DefectLenght)
+                                    <br />
+                                    @Html.EditorFor(Model => Model.DefectLenght)
+                                </div>
 
-                                @Html.LabelFor(Model => Model.LocalSection.LocalWayNumber)
-                                <br />
-                                @Html.DropDownListFor(Model => Model.LocalSection, Model.LocalSectionSelectList)
-                                @Html.ValidationMessageFor(Model => Model.LocalSection.GlobalSection)
-                                <br />
-                                @Html.DropDownListFor(Model => Model.LocalSection, Model.LocalSectionSelectList)
-                                @Html.ValidationMessageFor(Model => Model.LocalSection.GlobalSection)
-                                <br />
+                                <div class="manufactYear">
+                                    @Html.LabelFor(Model => Model.Manufacture)
+                                    <br />
+                                    @Html.DropDownListFor(Model => Model.Manufacture, Model.Manufacture.GetSelectList())
+                                </div>
 
+                                <div class="manufactYear">
+                                    @Html.LabelFor(Model => Model.ManufactureYear)
+                                    <br />
+                                    @Html.EditorFor(Model => Model.ManufactureYear)
+                                </div>
 
+                                <div class="path">
+                                    @Html.LabelFor(Model => Model.Path)
+                                    <br />
+                                    @Html.EditorFor(Model => Model.Path)
+                                </div>
+
+                                <div class="waySide">
+                                    @Html.LabelFor(Model => Model.WaySide)
+                                    <br />
+                                    @Html.DropDownListFor(Model => Model.WaySide, Model.WaySide.GetSelectList())
+                                </div>
                             </div>
                             <br />
                             <div class="form-group">

@@ -250,7 +250,9 @@
 
         var clicked = false;
         var element = null;
+
         var userDiv = $("#userDiv");
+        var selectDiv = $(".select");
 
         $(document).ready(function () {
             $(".multidropdown").select2();
@@ -276,24 +278,42 @@
                         $(".delete-button").hide();
                     }
                     $(".table-row").click(function () { return false });
-                 
+
                     if ($(this).attr("id") != element) {
                         alert("Для выбора новой записи разактивируйте ранее выбранную!")
                     }
                 };
             });
 
-            @*$(".form-control").change(function () {
-                ajax({
-                    url: "@Url.Action("Index", "Defect")",
+
+            $("#delete-btn").click(function () {
+                $.ajax({
+                    url: "@Url.Action("DeleteUser","User")",
                     type: "POST",
                     dataType: "html",
-                    success: function () {
+                    data: { id: element },
+                    success: function (data) {
+                        alert("Удаление прошло успешно!")
                         window.location.reload();
                     }
                 });
+            });
 
-            });*@
+
+            $(".globalSect").change(function () {
+                var txt = $('.dropDownId :selected').text();
+                alert(txt);
+
+                $.ajax({
+                    url: "@Url.Action("GetLocalFromGlobal","Defect")",
+                    type: "post",
+                    cache: false,
+                    data: { 'name': txt },
+                    success: function (data) {
+                        selectDiv.html(data);
+                    },
+                });
+            });
 
             $("#delete-btn").click(function () {
                 $.ajax({

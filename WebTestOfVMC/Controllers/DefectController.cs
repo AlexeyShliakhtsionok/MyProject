@@ -149,5 +149,38 @@ namespace WebApplication.Controllers
             };
             return View(viewModel);
         }
+
+        public IActionResult GetOne()
+        {
+            return PartialView();
+        }
+
+        public IActionResult CreateDefect()
+        {
+            return View();
+        }
+
+        public IActionResult UpdateDefect()
+        {
+            return View();
+        }
+
+        public IActionResult DeleteDefect()
+        {
+            return View();
+        }
+
+        public IActionResult GetLocalFromGlobal(string name)
+        {
+            
+            List <LocalSection> localSections = _localSectionServices.GetLocalSectionList()
+                                .Where(l => l.GlobalSection.GlobalSectionName == name).ToList();
+
+            var model = new DefectInfo()
+            {
+                LocalSectionCollection = localSections
+            };
+            return PartialView(model);
+        }
     }
 }
