@@ -3,7 +3,7 @@
 @using EnumExt;
 @model DefectInfo
 
-<div id="userId">
+<div id="defectId">
     @Html.HiddenFor(Model => Model.DefectId)
 </div>
 
@@ -12,6 +12,13 @@
     <br />
     @Html.DropDownListFor(Model => Model.DefectCode, Model.DefectCode.GetSelectList())
 </div>
+
+@*<div>
+    @Html.LabelFor(Model => Model.DefectCodeName)
+    <br />
+    @Html.DropDownListFor(Model => Model.DefectCodeName, Model.DefectSelectList)
+
+</div>*@
 
 <div id="userFirstName">
     @Html.LabelFor(Model => Model.DefectDepth)

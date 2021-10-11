@@ -14,6 +14,7 @@ namespace CommonClasses.PaginationAndSort.Filters
             Defects = new SelectList(defects, "DefectId", "DefectCodeName", defect);
             
             SelectedDefect = defect;
+
             SelectedName = defectName;
         }
 

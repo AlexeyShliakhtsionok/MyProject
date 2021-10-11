@@ -37,12 +37,16 @@ namespace WebTestOfVMC.Models
         public LocalSection LocalSection { get; set; }
 
 
+        public List<Defect> DefectCollection { get; set; }
         public List<GlobalSection> GlobalSectionCollection { get; set; }
         public List<LocalSection> LocalSectionCollection { get; set; }
+        public List<int> SelectedDefect { get; set; }
         public List<int> SelectedGlobalSection { get; set; }
         public List<int> SelectedLocalSection { get; set; }
+        public SelectList DefectSelectList { get; set; }
         public SelectList GlobalSectionSelectList { get; set; }
         public SelectList LocalSectionSelectList { get; set; }
+        public MultiSelectList DefectMultiSelectList { get; set; }
         public MultiSelectList GlobalSectionMultiSelectList { get; set; }
         public MultiSelectList LocalSectionMultiSelectList { get; set; }
     }

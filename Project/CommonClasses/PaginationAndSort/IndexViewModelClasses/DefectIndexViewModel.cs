@@ -13,6 +13,9 @@ namespace CommonClasses.PaginationAndSort.IndexViewModelClasses
         public IEnumerable<Defect> Defects { get; set; }
         public PageView PageView { get; set; }
         public DefectFilter DefectFilter { get; set; }
+        public OrganisationFilter OrganisationFilter { get; set; }// Added for multifilter
+        public GlobalSectionFilter GlobalSectionFilter { get; set; }// Added for multifilter
+        public LocalSectionFilter LocalSectionFilter { get; set; }// Added for multifilter
         public DefectSortViewModel DefectSortViewModel { get; set; }
     }
 }

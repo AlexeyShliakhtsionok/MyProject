@@ -16,13 +16,13 @@
 <div class="table">
 
     <div id="manipulation-buttons">
-        <div class="create-button">
+        <div class="create-button button__style">
             @await Component.InvokeAsync("UserInfo")
         </div>
-        <div class="edit-button">
+        <div class="edit-button button__style">
             <input type="submit" class="btn btn-outline-dark" value="Редактировать" id="edit-btn" />
         </div>
-        <div class="delete-button">
+        <div class="delete-button button__style">
             <input type="submit" class="btn btn-outline-dark" value="Удалить" id="delete-btn" />
         </div>
         <div class="filters">
@@ -83,6 +83,11 @@
                    asp-route-name="@(Model.OrganisationFilter.SelectedName)"
                    asp-route-company="@(Model.OrganisationFilter.SelectedOrganisation)"><p class="p1">E-mail <img src="~/images/sort.png" id="sort" /></p></a>
             </th>
+
+            <th> 
+                <p class="p1">№ Пароль</p>
+            </th>
+
             <th>
                 <a asp-action="Index"
                    asp-controller="User"
@@ -104,6 +109,7 @@
                 <td>@u.SurName</td>
                 <td>@u.Organisation.OrgName</td>
                 <td>@u.Email</td>
+                <td>@u.Password</td>
                 <td>@u.UserRole.GetEnumDescription()</td>
             </tr>
         }
@@ -211,9 +217,9 @@
                     $(".table-row").click(function () { return false });
 
                     
-                    //if ($(this).attr("id") != element) {
-                    //    alert("Для выбора новой записи разактивируйте ранее выбранную!")
-                    //}
+                    if ($(this).attr("id") != element) {
+                        alert("Для выбора новой записи разактивируйте ранее выбранную!")
+                    }
 
 
 

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.BLL.Services.IServiceIntefaces;
 using RailDBProject.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,11 +18,13 @@ namespace WebApplication.Controllers
     {
         private readonly IDefectServices _defectService;
         private readonly ILocalSectionServices _localSectionServices;
+        private readonly IGlobalSectionServices _globalSectionServices;
 
-        public DefectController(IDefectServices _defectService, ILocalSectionServices _localSectionServices)
+        public DefectController(IDefectServices _defectService, ILocalSectionServices _localSectionServices, IGlobalSectionServices _globalSectionServices)
         {
             this._defectService = _defectService;
             this._localSectionServices = _localSectionServices;
+            this._globalSectionServices = _globalSectionServices;
         }
 
         [HttpGet]
@@ -46,16 +49,22 @@ namespace WebApplication.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Index(int? defect, string name, int page = 1, DefectSortState sortOrder = DefectSortState.DateOfDetectionAsc)
+        public async Task<IActionResult> Index(int? defect, int? glSection, string glName, string name, int page = 1, DefectSortState sortOrder = DefectSortState.DateOfDetectionAsc)
         {
             int pageSize = 10;
 
             IQueryable<Defect> defects = _defectService.GetQuarable();
 
-
             if (defect != null && defect != 0)
             {
-                defects = defects.Where(d => d.DefectId == defect);
+                var stringId = defect.ToString();
+                var selectedDefect = _defectService.GetById(Convert.ToInt32(stringId));
+                string selectedName = selectedDefect.DefectCodeName;
+                defects = defects.Where(d => d.DefectCodeName == selectedName);
+            }
+            if (glSection != null && glSection != 0)
+            {
+                defects = defects.Where(g => g.LocalSection.GlobalSection.GlobalSectId == glSection);
             }
 
             switch (sortOrder)
@@ -118,6 +127,7 @@ namespace WebApplication.Controllers
                 PageView = new PageView(count, page, pageSize),
                 DefectSortViewModel = new DefectSortViewModel(sortOrder),
                 DefectFilter = new DefectFilter(_defectService.GetDefectList(), defect, name),
+                GlobalSectionFilter = new GlobalSectionFilter(_globalSectionServices.GetGlobalSectionList(), glSection, glName),
                 Defects = items
             };
             return View(viewModel);
