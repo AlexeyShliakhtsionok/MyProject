@@ -4,8 +4,9 @@
 @model DefectInfo
 
 
-<div>
+<div id="selectDiv">
     @Html.LabelFor(@Model => Model.LocalSection)
     <br />
-    @Html.DropDownListFor(Model => Model.LocalSectionCollection, Model.GlobalSectionSelectList)
+    @Html.DropDownListFor(Model => Model.LocalSection, Model.LocalSectionSelectList)
+    <br />
 </div>

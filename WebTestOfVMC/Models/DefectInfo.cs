@@ -13,6 +13,13 @@ namespace WebTestOfVMC.Models
         [Required(ErrorMessage = "Поле не может быть пустым")]
         public DateTime DateOfDetection { get; set; }
 
+        [Display(Name = "Километр")]
+        [Required(ErrorMessage = "Поле не может быть пустым")]
+        public int Kilometer { get; set; }
+
+        [Display(Name = "Пикет")]
+        [Required(ErrorMessage = "Поле не может быть пустым")]
+        public int Pkt { get; set; }
 
         [Display(Name = "Нить: ")]
         [Required(ErrorMessage = "Поле не может быть пустым")]
@@ -55,6 +62,8 @@ namespace WebTestOfVMC.Models
 
 
         public bool IsDeleted { get; set; }
+
+        [Display(Name = "Перегон")]
         public LocalSection LocalSection { get; set; }
 
 

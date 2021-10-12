@@ -46,13 +46,42 @@
                                     <br />
                                 </div>
 
-                                <div class="localSect">
-                                    @Html.LabelFor(Model => Model.LocalSection)
+                                <div id="selectDiv"></div>
+
+                                <div class="kilometer">
+                                    @Html.LabelFor(Model => Model.Kilometer)
                                     <br />
-                                    <div class="selectDiv"></div>
-                                    @*@Html.DropDownListFor(Model => Model.LocalSection, Model.LocalSectionSelectList)*@
-                                    @Html.ValidationMessageFor(Model => Model.LocalSection)
+                                    @Html.EditorFor(Model => Model.Kilometer)
+                                </div>
+
+                                <div class="pkt">
+                                    @Html.LabelFor(Model => Model.Pkt)
                                     <br />
+                                    @Html.EditorFor(Model => Model.Pkt)
+                                </div>
+
+                                <div class="path">
+                                    @Html.LabelFor(Model => Model.Path)
+                                    <br />
+                                    @Html.EditorFor(Model => Model.Path)
+                                </div>
+
+                                <div class="waySide">
+                                    @Html.LabelFor(Model => Model.WaySide)
+                                    <br />
+                                    @Html.DropDownListFor(Model => Model.WaySide, Model.WaySide.GetSelectList())
+                                </div>
+
+                                <div class="manufactYear">
+                                    @Html.LabelFor(Model => Model.Manufacture)
+                                    <br />
+                                    @Html.DropDownListFor(Model => Model.Manufacture, Model.Manufacture.GetSelectList())
+                                </div>
+
+                                <div class="manufactYear">
+                                    @Html.LabelFor(Model => Model.ManufactureYear)
+                                    <br />
+                                    @Html.EditorFor(Model => Model.ManufactureYear)
                                 </div>
 
                                 <div class="defCode">
@@ -73,29 +102,6 @@
                                     @Html.EditorFor(Model => Model.DefectLenght)
                                 </div>
 
-                                <div class="manufactYear">
-                                    @Html.LabelFor(Model => Model.Manufacture)
-                                    <br />
-                                    @Html.DropDownListFor(Model => Model.Manufacture, Model.Manufacture.GetSelectList())
-                                </div>
-
-                                <div class="manufactYear">
-                                    @Html.LabelFor(Model => Model.ManufactureYear)
-                                    <br />
-                                    @Html.EditorFor(Model => Model.ManufactureYear)
-                                </div>
-
-                                <div class="path">
-                                    @Html.LabelFor(Model => Model.Path)
-                                    <br />
-                                    @Html.EditorFor(Model => Model.Path)
-                                </div>
-
-                                <div class="waySide">
-                                    @Html.LabelFor(Model => Model.WaySide)
-                                    <br />
-                                    @Html.DropDownListFor(Model => Model.WaySide, Model.WaySide.GetSelectList())
-                                </div>
                             </div>
                             <br />
                             <div class="form-group">
@@ -108,3 +114,4 @@
         </div>
     </div>
 </form>
+

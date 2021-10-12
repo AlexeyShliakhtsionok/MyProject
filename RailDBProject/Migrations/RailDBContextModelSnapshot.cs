@@ -64,7 +64,7 @@ namespace RailDBProject.Migrations
                     b.Property<int>("Kilometer")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LocalSectionLocalSectoionId")
+                    b.Property<int>("LocalSectionId")
                         .HasColumnType("int");
 
                     b.Property<int>("Manufacture")
@@ -85,7 +85,7 @@ namespace RailDBProject.Migrations
 
                     b.HasKey("DefectId");
 
-                    b.HasIndex("LocalSectionLocalSectoionId");
+                    b.HasIndex("LocalSectionId");
 
                     b.ToTable("Defects");
                 });
@@ -322,7 +322,9 @@ namespace RailDBProject.Migrations
                 {
                     b.HasOne("RailDBProject.Model.LocalSection", "LocalSection")
                         .WithMany("Defects")
-                        .HasForeignKey("LocalSectionLocalSectoionId");
+                        .HasForeignKey("LocalSectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("LocalSection");
                 });

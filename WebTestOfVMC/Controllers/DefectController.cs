@@ -1,8 +1,11 @@
-﻿using CommonClasses.PaginationAndSort.Filters;
+﻿using Common.ListExtentions;
+using CommonClasses.PaginationAndSort.Filters;
 using CommonClasses.PaginationAndSort.IndexViewModelClasses;
 using CommonClasses.PaginationAndSort.PageViewClass;
 using CommonClasses.PaginationAndSort.SortingClasses;
+using EnumExt;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Project.BLL.Services.IServiceIntefaces;
 using RailDBProject.Model;
@@ -150,35 +153,116 @@ namespace WebApplication.Controllers
             return View(viewModel);
         }
 
-        public IActionResult GetOne()
+        public IActionResult GetOne(int id)
         {
-            return PartialView();
+            var _defect = _defectService.GetById(id);
+
+            var model = new DefectInfo
+            {
+                DefectId = _defect.DefectId,
+                LocalSection = _defect.LocalSection,
+                DateOfDetection = _defect.DateOfDetection,
+                DefectCode = _defect.DefectCode,
+                WaySide = _defect.WaySide,
+                Path = _defect.Path,
+                Kilometer = _defect.Kilometer,
+                Pkt = _defect.Pkt,
+                Manufacture = _defect.Manufacture,
+                ManufactureYear = _defect.ManufactureYear,
+                DefectCodeName = _defect.DefectCode.GetEnumDescription(),
+                DefectDepth = _defect.DefectDepth,
+                DefectLenght = _defect.DefectLenght,
+                DefectCollection = _defectService.GetDefectList(),
+                DefectSelectList = _defectService.GetDefectList().GetDefectSelectList(),
+                LocalSectionCollection = _localSectionServices.GetLocalSectionList(),
+                LocalSectionSelectList = _localSectionServices.GetLocalSectionList().GetLocalSectionSelectList()
+            };
+            return PartialView(model);
         }
 
-        public IActionResult CreateDefect()
+        public IActionResult CreateDefect(DefectInfo info)
         {
-            return View();
+            Defect defect = new Defect
+            {
+                DateOfDetection = info.DateOfDetection,
+                LocalSection = info.LocalSection,
+                Kilometer = info.Kilometer,
+                Pkt = info.Pkt,
+                WaySide = info.WaySide,
+                Path = info.Path,
+                Manufacture = info.Manufacture,
+                ManufactureYear = info.ManufactureYear,
+                DefectCode = info.DefectCode,
+                DefectCodeName = info.DefectCode.GetEnumDescription(),
+                DefectDepth = info.DefectDepth,
+                DefectLenght = info.DefectLenght
+            };
+
+            _defectService.CreateDefect(defect);
+
+            return Json(new
+            {
+                url = Url.Action("Index", "Defect"),
+                emailMessage = "Добавление прошло успешно!"
+            });
+
         }
 
-        public IActionResult UpdateDefect()
+        public IActionResult UpdateDefect(DefectInfo info)
         {
-            return View();
+            var newLocalSect = _localSectionServices.GetById(info.LocalSection.LocalSectoionId);
+            var _defect = _defectService.GetById(info.DefectId);
+
+            _defect.DateOfDetection = info.DateOfDetection;
+            _defect.LocalSection = newLocalSect;
+            _defect.Kilometer = info.Kilometer;
+            _defect.Pkt = info.Pkt;
+            _defect.WaySide = info.WaySide;
+            _defect.Path = info.Path;
+            _defect.Manufacture = info.Manufacture;
+            _defect.ManufactureYear = info.ManufactureYear;
+            _defect.DefectCode = info.DefectCode;
+            _defect.DefectCodeName = info.DefectCode.GetEnumDescription();
+            _defect.DefectLenght = info.DefectLenght;
+            _defect.DefectDepth = info.DefectDepth;
+
+            _defectService.UpdateDefect(_defect);
+
+            return Json(new
+            {
+                newData = new
+                {
+                    emailMessage = "Редактирование прошло успешно",
+                    url = Url.Action("Index", "Defect")
+                }
+            });
         }
 
-        public IActionResult DeleteDefect()
+        public IActionResult DeleteDefect(int id)
         {
-            return View();
+            var _defect = _defectService.GetById(id);
+            _defectService.DeleteDefect(_defect);
+
+            return Json(new
+            {
+                url = Url.Action("Index", "User"),
+                emailMessage = "Удаление прошло успешно!"
+
+            });
         }
 
         public IActionResult GetLocalFromGlobal(string name)
         {
-            
-            List <LocalSection> localSections = _localSectionServices.GetLocalSectionList()
+
+            var localSections = _localSectionServices.GetLocalSectionList()
                                 .Where(l => l.GlobalSection.GlobalSectionName == name).ToList();
+            var selectList = localSections.GetLocalSectionSelectList();
 
             var model = new DefectInfo()
             {
-                LocalSectionCollection = localSections
+
+                LocalSectionCollection = localSections,
+                LocalSectionSelectList = selectList
             };
             return PartialView(model);
         }

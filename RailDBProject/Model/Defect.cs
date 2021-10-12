@@ -34,6 +34,7 @@ namespace RailDBProject.Model
         public string DefectCodeName { get; set; }
         public bool IsDeleted { get; set; }
 
+        //public int LocalSectionId { get; set; }
         public virtual LocalSection LocalSection { get; set; }
     }
 }

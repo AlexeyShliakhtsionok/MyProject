@@ -203,7 +203,7 @@
     </a>
 }
 
-<form asp-action="UpdateUser" asp-controller="User" asp-route-id="id" data-ajax="true"
+<form asp-action="UpdateDefect" asp-controller="Defect" asp-route-id="id" data-ajax="true"
       data-ajax-method="POST" data-ajax-success="onUpdate">
 
     <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -214,7 +214,7 @@
                         <div class="form-group">
                             <p id="p1">Редактирование</p>
 
-                            <div id="userDiv"></div>
+                            <div id="defectDiv"></div>
 
                             <div class="form-group">
                                 <input type="submit" class="btn btn-outline-dark" value="Сохранить изменения" id="sub" />
@@ -251,8 +251,8 @@
         var clicked = false;
         var element = null;
 
-        var userDiv = $("#userDiv");
-        var selectDiv = $(".select");
+        var defectDiv = $("#defectDiv");
+        var selectDiv = $("#selectDiv");
 
         $(document).ready(function () {
             $(".multidropdown").select2();
@@ -286,20 +286,6 @@
             });
 
 
-            $("#delete-btn").click(function () {
-                $.ajax({
-                    url: "@Url.Action("DeleteUser","User")",
-                    type: "POST",
-                    dataType: "html",
-                    data: { id: element },
-                    success: function (data) {
-                        alert("Удаление прошло успешно!")
-                        window.location.reload();
-                    }
-                });
-            });
-
-
             $(".globalSect").change(function () {
                 var txt = $('.dropDownId :selected').text();
                 alert(txt);
@@ -317,7 +303,7 @@
 
             $("#delete-btn").click(function () {
                 $.ajax({
-                    url: "@Url.Action("DeleteUser","User")",
+                    url: "@Url.Action("DeleteDefect","Defect")",
                     type: "POST",
                     dataType: "html",
                     data: { id: element },
@@ -331,12 +317,12 @@
             $("#edit-btn").click(function ()
             {
                 $.ajax({
-                        url: "@Url.Action("GetOne", "User")",
+                        url: "@Url.Action("GetOne", "Defect")",
                         type: "GET",
                         dataType: "html",
                         data: { id: element },
                     success: function (data) {
-                        userDiv.html(data);
+                        defectDiv.html(data);
 
                         $("#updateModal").modal("show");
                     }

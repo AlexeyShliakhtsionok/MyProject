@@ -17,6 +17,7 @@ namespace RailDBProject.Model
         [Required]
         public int LocalWayNumber { get; set; }
 
+        [Display(Name = "Участок")]
         public virtual GlobalSection GlobalSection { get; set; }
         public virtual ICollection<Defect> Defects  { get; set; }
     }
