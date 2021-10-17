@@ -42,7 +42,7 @@
                                     <div class="dropDownId">
                                         @Html.DropDownListFor(Model => Model.LocalSection.GlobalSection, Model.GlobalSectionSelectList)
                                     </div>
-                                    @Html.ValidationMessageFor(Model => Model.LocalSection.GlobalSection)
+                                        @Html.ValidationMessageFor(Model => Model.LocalSection.GlobalSection)
                                     <br />
                                 </div>
 
@@ -94,12 +94,14 @@
                                     @Html.LabelFor(Model => Model.DefectDepth)
                                     <br />
                                     @Html.EditorFor(Model => Model.DefectDepth)
+                                    
                                 </div>
 
                                 <div class="defLenght">
                                     @Html.LabelFor(Model => Model.DefectLenght)
                                     <br />
                                     @Html.EditorFor(Model => Model.DefectLenght)
+                                   
                                 </div>
 
                             </div>

@@ -33,9 +33,9 @@ namespace WebTestOfVMC.Controllers
 
             var model = new LocalSectionInfo
             {
-                LocalSectoionId = _localSection.LocalSectoionId,
+                LocalSectionId = _localSection.LocalSectionId,
                 LocalWayNumber = _localSection.LocalWayNumber,
-                LocaSectionlName = _localSection.LocalSectionName,
+                LocaSectionName = _localSection.LocalSectionName,
                 GlobalSection = _localSection.GlobalSection,
                 GlobalSectionCollection = _globalSectionServices.GetGlobalSectionList(),
                 SelectList = _globalSectionServices.GetGlobalSectionList().GetGlobalSectionSelectList()
@@ -46,9 +46,9 @@ namespace WebTestOfVMC.Controllers
         [HttpPost]
         public IActionResult UpdateLocalSection(LocalSectionInfo info)
         {
-            var _localSection = _localSectionServices.GetById(info.LocalSectoionId);
+            var _localSection = _localSectionServices.GetById(info.LocalSectionId);
 
-            _localSection.LocalSectionName = info.LocaSectionlName;
+            _localSection.LocalSectionName = info.LocaSectionName;
             _localSection.LocalWayNumber = info.LocalWayNumber;
             _localSection.GlobalSection = info.GlobalSection;
             
@@ -80,7 +80,7 @@ namespace WebTestOfVMC.Controllers
                 LocalSection _localSection = new LocalSection()
                 {
                     LocalWayNumber = info.LocalWayNumber,
-                    LocalSectionName = info.LocaSectionlName,
+                    LocalSectionName = info.LocaSectionName,
                     GlobalSection = _globalForLocal
                 };
 

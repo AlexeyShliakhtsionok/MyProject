@@ -15,9 +15,8 @@ namespace RailDBProject.Model
         public int SerialNumber { get; set; }
         [Required]
         public DefectoScopeType DefectoScopeType { get; set; }
-
-        public int OrganisationId { get; set; } //???
-        public int? SubOrgId { get; set; } //???
+        public DateTime LastMaintenansProcedure { get; set; }
+        public string DefectoScopeName { get; set; }
         public virtual Organisation Organisation { get; set; }
         public virtual ICollection<Operator> Operators { get; set; }
     }

@@ -1,24 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Common.ListExtentions;
+using CommonClasses.PaginationAndSort.Filters;
+using CommonClasses.PaginationAndSort.IndexViewModelClasses;
+using CommonClasses.PaginationAndSort.PageViewClass;
+using CommonClasses.PaginationAndSort.SortingClasses;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Project.BLL.Services.IServiceIntefaces;
-using System.Collections.Generic;
+using RailDBProject.Model;
 using System.Linq;
+using System.Threading.Tasks;
 using WebTestOfVMC.Models;
-using EnumExt;
 
-namespace WebTestOfVMC.Controllers.Operator
+namespace WebTestOfVMC.Controllers
 {
     public class OperatorController : Controller
     {
         private readonly IOperatorServices _operatorService;
+        private readonly IOrganisationServices _organisationServices;
 
-        public OperatorController(IOperatorServices _operatorService)
+        public OperatorController(IOperatorServices _operatorService, IOrganisationServices _organisationServices)
         {
             this._operatorService = _operatorService;
+            this._organisationServices = _organisationServices;
         }
 
         [HttpPost]
-        public IActionResult UpdateOpp(OperatorInfo info)
+        public IActionResult UpdateOperator(OperatorInfo info)
         {
             var _operator = _operatorService.GetById(info.OperatorId);
             
@@ -27,62 +34,157 @@ namespace WebTestOfVMC.Controllers.Operator
             _operator.MiddleName = info.MiddleName;
             _operator.DismissalDate = info.DismissalDate;
             _operator.Defectoscope.DefectoScopeType = info.Defectoscope.DefectoScopeType;
-            _operatorService.Update(_operator);
-
-            //SelectList select = _operator.Defectoscope.DefectoScopeType.GetSelectList();
-            
+            _operator.Qualification = info.Qualification;
+            _operator.LastQualificationTraning = info.LastQualificationTraning;
+            _operator.HireDate = info.HireDate;
+            _operator.Organisation = info.Organisation;
+            _operator.Defectoscope = _operator.Defectoscope;
+            _operatorService.UpdateOperator(_operator);
+         
 
             return Json(new
             {
-                isDismiss = _operator.DismissalDate,
+                isDismiss = _operator.DismissalDate, //!!!!!
                 newData = new { success = "Успешно" },
                 dismissalTextMessage = new { yes = "Да", no = "Нет" }
             });
-            // return Redirect(Url.Action("GetAll", "Operator"));
         }
 
         [HttpGet]
-        public IActionResult GetAll()
-        {
-            var operators = _operatorService.GetAllOpp();
-
-            var model = new List<OperatorInfo>();
-
-            model = operators.Select(o => new OperatorInfo
-            {
-                OperatorId = o.OperatorId,
-                FirstName = o.FirstName,
-                MiddleName = o.MiddleName,
-                LastName = o.LastName,
-                Qualification = o.Qualification,
-                HireDate = o.HireDate,
-                LastQualificationTraning = o.LastQualificationTraning,
-                OrganisationId = o.OrganisationId,
-                Organisation = o.Organisation,
-                Defectoscope = o.Defectoscope,
-                DismissalDate = o.DismissalDate
-            }).ToList();
-            return View(model);
-        }
-
-        [HttpGet]
-        public IActionResult GetWideInfo(int id)
+        public IActionResult GetOne(int id)
         {
             var _operator = _operatorService.GetById(id);
 
             var model = new OperatorInfo
             {
                 OperatorId = _operator.OperatorId,
-                FirstName = _operator.FirstName,
-                MiddleName = _operator.MiddleName,
-                LastName = _operator.LastName,
-                Qualification = _operator.Qualification,
-                HireDate = _operator.HireDate,
-                LastQualificationTraning = _operator.LastQualificationTraning,
                 Defectoscope = _operator.Defectoscope,
-                DismissalDate = _operator.DismissalDate
+                HireDate = _operator.HireDate,
+                DismissalDate = _operator.DismissalDate,
+                LastQualificationTraning = _operator.LastQualificationTraning,
+                MiddleName = _operator.MiddleName,
+                Qualification = _operator.Qualification,
+                FirstName = _operator.FirstName,
+                LastName = _operator.LastName,
+                Organisation = _operator.Organisation,
+                OrganisationCollection = _organisationServices.GetOrganisationList(),
+                OrganisationSelectList = _organisationServices.GetOrganisationList().GetOrganisationSelectList()
             };
-            return View(model);
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteOperator(int id)
+        {
+
+            var _operator = _operatorService.GetById(id);
+            _operatorService.DeleteOperator(_operator);
+
+            return Json(new
+            {
+                url = Url.Action("Index", "Operator"),
+                emailMessage = "Удаление прошло успешно!"
+
+            });
+        }
+
+        [HttpPost]
+        public IActionResult CreateOperator(OperatorInfo info)
+        {
+            var organisation = _organisationServices.GetById(info.Organisation.OrganisationId);
+            Operator @operator = new Operator
+            {
+               FirstName = info.FirstName,
+               MiddleName = info.MiddleName,
+               LastName = info.LastName,
+               HireDate = info.HireDate,
+               Qualification = info.Qualification,
+               LastQualificationTraning = info.LastQualificationTraning,
+               Organisation = organisation
+            };
+            _operatorService.CreateOperator(@operator);
+
+                return Json(new
+                {
+                    emailMessage = "Регистрация прошла успешно!",
+                    url = Url.Action("Index", "Operator")
+                });
+        }
+
+        public async Task<IActionResult> Index(int? company, string name, int page = 1, OperatorSortState sortOrder = OperatorSortState.FirstNameAsc)
+        {
+            int pageSize = 10;
+
+            IQueryable<Operator> operators = _operatorService.GetQuarable();
+
+            if (company != null && company != 0)
+            {
+                operators = operators.Where(p => p.Organisation.OrganisationId == company);
+            }
+
+            switch (sortOrder)
+            {
+                case OperatorSortState.FirstNameDesc:
+                    operators = operators.OrderByDescending(s => s.FirstName);
+                    break;
+                case OperatorSortState.FirstNameAsc:
+                    operators = operators.OrderBy(s => s.FirstName);
+                    break;
+                case OperatorSortState.LastNameDesc:
+                    operators = operators.OrderByDescending(s => s.LastName);
+                    break;
+                case OperatorSortState.LastNameAsc:
+                    operators = operators.OrderBy(s => s.LastName);
+                    break;
+                case OperatorSortState.OrganisationDesc:
+                    operators = operators.OrderByDescending(s => s.Organisation);
+                    break;
+                case OperatorSortState.OrganisationAsc:
+                    operators = operators.OrderBy(s => s.Organisation);
+                    break;
+                case OperatorSortState.QualificationDesc:
+                    operators = operators.OrderByDescending(s => s.Qualification);
+                    break;
+                case OperatorSortState.QualificationAsc:
+                    operators = operators.OrderBy(s => s.Qualification);
+                    break;
+                case OperatorSortState.LastQualificationTraningDesc:
+                    operators = operators.OrderByDescending(s => s.LastQualificationTraning);
+                    break;
+                case OperatorSortState.LastQualificationTraningAsc:
+                    operators = operators.OrderBy(s => s.LastQualificationTraning);
+                    break;
+                case OperatorSortState.DefectoscopeDesc:
+                    operators = operators.OrderByDescending(s => s.Defectoscope);
+                    break;
+                case OperatorSortState.DefectoscopeAsc:
+                    operators = operators.OrderBy(s => s.Defectoscope);
+                    break;
+                case OperatorSortState.HireDateDesc:
+                    operators = operators.OrderByDescending(s => s.HireDate);
+                    break;
+                case OperatorSortState.HireDateAsc:
+                    operators = operators.OrderBy(s => s.HireDate);
+                    break;
+                case OperatorSortState.DismissalDateDesc:
+                    operators = operators.OrderByDescending(s => s.DismissalDate);
+                    break;
+                case OperatorSortState.DismissalDateAsc:
+                    operators = operators.OrderBy(s => s.DismissalDate);
+                    break;
+            }
+
+            var count = await operators.CountAsync();
+            var items = await operators.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            OperatorIndexViewModel viewModel = new OperatorIndexViewModel
+            {
+                PageView = new PageView(count, page, pageSize),
+                OperatorSortViewModel = new OperatorSortViewModel(sortOrder),
+                OrganisationFilter = new OrganisationFilter(_organisationServices.GetOrganisationList(), company, name),
+                Operators = items
+            };
+            return View(viewModel);
         }
     }
 }

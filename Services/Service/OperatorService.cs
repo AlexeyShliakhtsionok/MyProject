@@ -1,6 +1,7 @@
 ﻿using Project.BLL.Services.IServiceIntefaces;
 using RailDBProject.Model;
 using RailDBProject.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,6 +14,20 @@ namespace Services.Service
         {
             _uow = uow;
         }
+
+        public void CreateOperator(Operator @operator)
+        {
+            _uow.Operators.Create(@operator);
+            _uow.SaveChanges();
+        }
+
+        public void DeleteOperator(Operator @operator)
+        {
+            
+            _uow.Operators.Delete(@operator);
+            _uow.SaveChanges();
+        }
+
         public List<Operator> GetAllOpp()
         {
             return _uow.
@@ -24,7 +39,12 @@ namespace Services.Service
             return _uow.Operators.Read(_id);
         }
 
-        public Operator Update(Operator @operator)
+        public IQueryable<Operator> GetQuarable()
+        {
+            return _uow.Operators.ReadAll();
+        }
+
+        public Operator UpdateOperator(Operator @operator)
         {
             _uow.
                 Operators.

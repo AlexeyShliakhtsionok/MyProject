@@ -60,7 +60,7 @@ namespace Common.ListExtentions
                 items.Add(new SelectListItem
                 {
                     Text = li.LocalSectionName,
-                    Value = li.LocalSectoionId.ToString()
+                    Value = li.LocalSectionId.ToString()
                 });
             }
             items.Add(new SelectListItem("-----", ""));
@@ -86,6 +86,27 @@ namespace Common.ListExtentions
                 });
             }
             items.Add(new SelectListItem("-----", ""));
+            foreach (var item in items)
+            {
+                if (item.Text == "-----")
+                {
+                    item.Selected = true;
+                }
+            }
+            return new SelectList(items, "Value", "Text");
+        }
+
+        public static SelectList GetDefectoscopeSelectList(this List<Defectoscope> list)
+        {
+            List<SelectListItem> items = new List<SelectListItem>(list.Count);
+            foreach (var li in list)
+            {
+                items.Add(new SelectListItem
+                {
+                    Text = li.DefectoScopeType.GetEnumDescription(),
+                    Value = li.DefectoScopeId.ToString()
+                });
+            }
             foreach (var item in items)
             {
                 if (item.Text == "-----")

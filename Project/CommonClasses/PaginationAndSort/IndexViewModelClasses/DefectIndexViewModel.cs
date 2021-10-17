@@ -16,6 +16,6 @@ namespace CommonClasses.PaginationAndSort.IndexViewModelClasses
         public OrganisationFilter OrganisationFilter { get; set; }// Added for multifilter
         public GlobalSectionFilter GlobalSectionFilter { get; set; }// Added for multifilter
         public LocalSectionFilter LocalSectionFilter { get; set; }// Added for multifilter
-        public DefectSortViewModel DefectSortViewModel { get; set; }
+        public DefectSortViewModel DefectSortViewModel { get; set; }// Added for multifilter
     }
 }

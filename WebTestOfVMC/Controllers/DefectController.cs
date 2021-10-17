@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebTestOfVMC.Models;
+using System.Globalization;
 
 namespace WebApplication.Controllers
 {
@@ -55,7 +56,7 @@ namespace WebApplication.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Index(int? defect, int? glSection, int? organisation, int? localSection, string localName,
+        public async Task<IActionResult> Index(int? defect, int? glSection, int? organisation, int? lcSection, string localName,
                                               string orgName, string glName, string name, int page = 1, DefectSortState sortOrder = DefectSortState.DateOfDetectionAsc)
         {
             int pageSize = 10;
@@ -75,9 +76,9 @@ namespace WebApplication.Controllers
                 defects = defects.Where(g => g.LocalSection.GlobalSection.GlobalSectId == glSection);
             }
 
-            if (localSection != null && localSection != 0)
+            if (lcSection != null && lcSection != 0)
             {
-                defects = defects.Where(l => l.LocalSection.LocalSectoionId == localSection);
+                defects = defects.Where(l => l.LocalSection.LocalSectionId == lcSection);
             }
 
             if (organisation != null && organisation != 0)
@@ -147,7 +148,7 @@ namespace WebApplication.Controllers
                 DefectFilter = new DefectFilter(_defectService.GetDefectList(), defect, name),
                 OrganisationFilter = new OrganisationFilter(_organisationServices.GetOrganisationList(), organisation, orgName),
                 GlobalSectionFilter = new GlobalSectionFilter(_globalSectionServices.GetGlobalSectionList(), glSection, glName),
-                LocalSectionFilter = new LocalSectionFilter(_localSectionServices.GetLocalSectionList(), localSection, localName),
+                LocalSectionFilter = new LocalSectionFilter(_localSectionServices.GetLocalSectionList(), lcSection, localName),
                 Defects = items
             };
             return View(viewModel);
@@ -182,10 +183,12 @@ namespace WebApplication.Controllers
 
         public IActionResult CreateDefect(DefectInfo info)
         {
+            var localSection = _localSectionServices.GetById(info.LocalSection.LocalSectionId);
+
             Defect defect = new Defect
             {
                 DateOfDetection = info.DateOfDetection,
-                LocalSection = info.LocalSection,
+                LocalSection = localSection,
                 Kilometer = info.Kilometer,
                 Pkt = info.Pkt,
                 WaySide = info.WaySide,
@@ -210,7 +213,7 @@ namespace WebApplication.Controllers
 
         public IActionResult UpdateDefect(DefectInfo info)
         {
-            var newLocalSect = _localSectionServices.GetById(info.LocalSection.LocalSectoionId);
+            var newLocalSect = _localSectionServices.GetById(info.LocalSection.LocalSectionId);
             var _defect = _defectService.GetById(info.DefectId);
 
             _defect.DateOfDetection = info.DateOfDetection;

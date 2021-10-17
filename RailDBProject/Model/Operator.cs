@@ -27,10 +27,6 @@ namespace RailDBProject.Model
         public DateTime LastQualificationTraning { get; set; }
         public DateTime? DismissalDate { get; set; }
 
-
-
-        public int OrganisationId { get; set; }
-        public int? SubOrgId { get; set; } 
         public virtual Organisation Organisation { get; set; }
         public virtual Defectoscope Defectoscope { get; set; }
     }

@@ -416,7 +416,7 @@ label {
         .test_menu li a {
             color: white;
             padding: 20px;
-            text-decoration: none;
+            text-align: center;
             display: block;
         }
 
@@ -458,3 +458,26 @@ label {
             width: 300px;
         }
 
+
+
+    .main_menu div {
+        float: left;
+        margin: 20px;
+        padding-right: 220px;
+        white-space: normal;
+    }
+
+.main_element {
+    float: left;
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+/*.image {
+    width: 500px;
+    height: auto;
+    margin: 20px 20px 20px 20px;
+    border: #002b8e solid 3px;
+    border-radius: 10px;
+}*/

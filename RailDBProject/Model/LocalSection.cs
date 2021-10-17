@@ -10,7 +10,7 @@ namespace RailDBProject.Model
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int LocalSectoionId { get; set; }
+        public int LocalSectionId { get; set; }
         [Required]
         [MaxLength(50)]
         public string LocalSectionName { get; set; }

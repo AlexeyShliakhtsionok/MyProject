@@ -72,7 +72,6 @@ namespace WebTestOfVMC.Controllers
             {
                 _organisation.Children = null;
             }
-            //_organisation.GlobalSections = info.GlobalSections;
             _organisation.OrganisationRole = info.OrganisationRole;
             _organisation.OrgName = info.OrgName;
             _organisation.Parent = _organisationServices.GetById(info.Parent.OrganisationId);
@@ -134,7 +133,6 @@ namespace WebTestOfVMC.Controllers
                     Children = _childList,
                     Users = info.Users,
                     IsDeleted = info.IsDeleted,
-                    //GlobalSections = info.GlobalSections
                 };
 
                 _organisationServices.CreateOrganisation(_organisation);
@@ -148,7 +146,6 @@ namespace WebTestOfVMC.Controllers
                     Children = _childList,
                     Users = info.Users,
                     IsDeleted = info.IsDeleted,
-                    //GlobalSections = info.GlobalSections
                 };
 
                 _organisationServices.CreateOrganisation(_organisation);
@@ -181,7 +178,7 @@ namespace WebTestOfVMC.Controllers
 
         public async Task<IActionResult> Index(int? company, string name, int page = 1, OrganisationSortState sortOrder = OrganisationSortState.OrganisationAsc)
         {
-            int pageSize = 10;
+            int pageSize = 28;
 
             IQueryable<Organisation> organisations = _organisationServices.GetQuarable();
 

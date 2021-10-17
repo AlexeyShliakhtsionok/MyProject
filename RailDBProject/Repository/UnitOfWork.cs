@@ -49,12 +49,10 @@ namespace RailDBProject.Repository
         }
 
         public IDefectoScopeRepository _defectoscopes;
-        public IDefectoScopeRepository Defectoscopes
+        public IDefectoScopeRepository DefectoScopes
         {
             get => _defectoscopes == null ? _defectoscopes = new DefectoScopeRepository(_context) : _defectoscopes;
         }
-
-        public IDefectoScopeRepository DefectoScopes => throw new NotImplementedException();
 
         public int SaveChanges()
         {

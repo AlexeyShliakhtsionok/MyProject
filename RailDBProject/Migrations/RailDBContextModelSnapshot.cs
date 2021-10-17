@@ -64,7 +64,7 @@ namespace RailDBProject.Migrations
                     b.Property<int>("Kilometer")
                         .HasColumnType("int");
 
-                    b.Property<int>("LocalSectionId")
+                    b.Property<int?>("LocalSectionId")
                         .HasColumnType("int");
 
                     b.Property<int>("Manufacture")
@@ -97,16 +97,19 @@ namespace RailDBProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("DefectoScopeName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("DefectoScopeType")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrganisationId")
+                    b.Property<DateTime>("LastMaintenansProcedure")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("OrganisationId")
                         .HasColumnType("int");
 
                     b.Property<int>("SerialNumber")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SubOrgId")
                         .HasColumnType("int");
 
                     b.HasKey("DefectoScopeId");
@@ -141,7 +144,7 @@ namespace RailDBProject.Migrations
 
             modelBuilder.Entity("RailDBProject.Model.LocalSection", b =>
                 {
-                    b.Property<int>("LocalSectoionId")
+                    b.Property<int>("LocalSectionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -157,7 +160,7 @@ namespace RailDBProject.Migrations
                     b.Property<int>("LocalWayNumber")
                         .HasColumnType("int");
 
-                    b.HasKey("LocalSectoionId");
+                    b.HasKey("LocalSectionId");
 
                     b.HasIndex("GlobalSectionGlobalSectId");
 
@@ -198,13 +201,10 @@ namespace RailDBProject.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("OrganisationId")
+                    b.Property<int?>("OrganisationId")
                         .HasColumnType("int");
 
                     b.Property<int>("Qualification")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SubOrgId")
                         .HasColumnType("int");
 
                     b.HasKey("OperatorId");
@@ -322,9 +322,7 @@ namespace RailDBProject.Migrations
                 {
                     b.HasOne("RailDBProject.Model.LocalSection", "LocalSection")
                         .WithMany("Defects")
-                        .HasForeignKey("LocalSectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LocalSectionId");
 
                     b.Navigation("LocalSection");
                 });
@@ -333,9 +331,7 @@ namespace RailDBProject.Migrations
                 {
                     b.HasOne("RailDBProject.Model.Organisation", "Organisation")
                         .WithMany()
-                        .HasForeignKey("OrganisationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrganisationId");
 
                     b.Navigation("Organisation");
                 });
@@ -357,9 +353,7 @@ namespace RailDBProject.Migrations
 
                     b.HasOne("RailDBProject.Model.Organisation", "Organisation")
                         .WithMany()
-                        .HasForeignKey("OrganisationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OrganisationId");
 
                     b.Navigation("Defectoscope");
 
