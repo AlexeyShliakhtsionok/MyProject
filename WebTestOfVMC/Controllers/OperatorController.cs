@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.BLL.Services.IServiceIntefaces;
 using RailDBProject.Model;
+using Services.Interface;
 using System.Linq;
 using System.Threading.Tasks;
 using WebTestOfVMC.Models;
@@ -17,11 +18,13 @@ namespace WebTestOfVMC.Controllers
     {
         private readonly IOperatorServices _operatorService;
         private readonly IOrganisationServices _organisationServices;
+        private readonly IUserServices _userServices;
 
-        public OperatorController(IOperatorServices _operatorService, IOrganisationServices _organisationServices)
+        public OperatorController(IOperatorServices _operatorService, IOrganisationServices _organisationServices, IUserServices _userServices)
         {
             this._operatorService = _operatorService;
             this._organisationServices = _organisationServices;
+            this._userServices = _userServices;
         }
 
         [HttpPost]
@@ -39,7 +42,6 @@ namespace WebTestOfVMC.Controllers
             _operator.HireDate = info.HireDate;
             _operator.Organisation = organisation;
             _operatorService.UpdateOperator(_operator);
-         
 
             return Json(new
             {
@@ -113,7 +115,22 @@ namespace WebTestOfVMC.Controllers
         {
             int pageSize = 10;
 
-            IQueryable<Operator> operators = _operatorService.GetQuarable();
+            var userEmail = HttpContext.User.Identity.Name;
+            var user = _userServices.GetByEmail(userEmail);
+            IQueryable<Operator> operators;
+
+            if (user.Organisation.OrganisationRole == OrganisationRole.PCH)
+            {
+                operators = _operatorService.GetQuarable().Where(o => o.Organisation.Users.Any(u => u.Email == userEmail));
+            }
+            else if (user.Organisation.OrganisationRole == OrganisationRole.NOD)
+            {
+                operators = _operatorService.GetQuarable().Where(o => o.Organisation.Parent == user.Organisation);
+            }
+            else
+            {
+                operators = _operatorService.GetQuarable();
+            }
 
             if (company != null && company != 0)
             {

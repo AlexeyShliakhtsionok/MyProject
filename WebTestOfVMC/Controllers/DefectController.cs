@@ -15,6 +15,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebTestOfVMC.Models;
 using System.Globalization;
+using Services.Interface;
 
 namespace WebApplication.Controllers
 {
@@ -24,14 +25,16 @@ namespace WebApplication.Controllers
         private readonly ILocalSectionServices _localSectionServices;
         private readonly IGlobalSectionServices _globalSectionServices;
         private readonly IOrganisationServices _organisationServices;
+        private readonly IUserServices _userServices;
 
         public DefectController(IDefectServices _defectService, ILocalSectionServices _localSectionServices,
-                IGlobalSectionServices _globalSectionServices, IOrganisationServices _organisationServices)
+                IGlobalSectionServices _globalSectionServices, IOrganisationServices _organisationServices, IUserServices _userServices)
         {
             this._defectService = _defectService;
             this._localSectionServices = _localSectionServices;
             this._globalSectionServices = _globalSectionServices;
             this._organisationServices = _organisationServices;
+            this._userServices = _userServices;
         }
 
         [HttpGet]
@@ -61,19 +64,21 @@ namespace WebApplication.Controllers
         {
             int pageSize = 10;
 
-            var user = HttpContext.User.Identity.Name;
             var userEmail = HttpContext.User.Identity.Name;
+            var user = _userServices.GetByEmail(userEmail);
             IQueryable<Defect> defects;
 
-            if (HttpContext.User.IsInRole("Administrator") || HttpContext.User.IsInRole("AdministrationSupervisor") || HttpContext.User.IsInRole("DiagnosticEmploye"))
+            if (user.Organisation.OrganisationRole == OrganisationRole.PCH)
             {
-                defects = _defectService.GetQuarable();
+                defects = _defectService.GetQuarable().Where(d => d.LocalSection.GlobalSection.Organisations.Any(o => o.Users.Any(u => u.Email == userEmail)));
+            }
+            else if (user.Organisation.OrganisationRole == OrganisationRole.NOD)
+            {
+                defects = _defectService.GetQuarable().Where(d => d.LocalSection.GlobalSection.Organisations.Any(o => o.Parent == user.Organisation));
             }
             else
             {
-                defects = _defectService.GetQuarable()
-                    .Where(d => d.LocalSection.GlobalSection.Organisations
-                    .Any(o => o.Users.Any(u => u.Email == userEmail)));
+                defects = _defectService.GetQuarable();
             }
 
             if (defect != null && defect != 0)

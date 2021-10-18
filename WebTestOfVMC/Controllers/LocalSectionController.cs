@@ -47,10 +47,12 @@ namespace WebTestOfVMC.Controllers
         public IActionResult UpdateLocalSection(LocalSectionInfo info)
         {
             var _localSection = _localSectionServices.GetById(info.LocalSectionId);
+            var _globalSection = _globalSectionServices.GetById(info.GlobalSection.GlobalSectId);
 
             _localSection.LocalSectionName = info.LocaSectionName;
             _localSection.LocalWayNumber = info.LocalWayNumber;
-            _localSection.GlobalSection = info.GlobalSection;
+            _localSection.GlobalSection = _globalSection;
+            _localSectionServices.UpdateLocalSection(_localSection);
             
             return Json(new
             {

@@ -189,7 +189,7 @@
             $("#edit-btn").click(function ()
             {
                 $.ajax({
-                        url: "@Url.Action("GetOne", "GlobalSection")",
+                        url: "@Url.Action("GetOne", "LocalSection")",
                         type: "GET",
                         dataType: "html",
                         data: { id: element },

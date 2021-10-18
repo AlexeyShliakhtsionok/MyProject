@@ -17,5 +17,7 @@ namespace Services.Interface
         public void CreateUser(User user);
         public List<Organisation> GetOrganisationList();
         public bool CheckByEmail(string email);
+        public User GetByEmail(string email);
+
     }
 }

@@ -69,5 +69,12 @@ namespace Services.Service
             }
             return false;
         }
+
+        public User GetByEmail(string email)
+        {
+            var users = _uow.Users.ReadAll();
+            var user = users.FirstOrDefault(u => u.Email == email);
+            return user;
+        }
     }
 }

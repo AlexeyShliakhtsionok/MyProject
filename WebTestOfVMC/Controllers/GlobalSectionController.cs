@@ -72,6 +72,11 @@ namespace WebTestOfVMC.Controllers
             var _globalSection = _globalSectionSetvice.GetById(id);
             var _organisations = _organisationServices.GetOrganisationList();
             
+            
+
+
+
+
             var model = new GlobalSectionInfo
             {
                 GlobalSectId = _globalSection.GlobalSectId,
