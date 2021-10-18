@@ -28,17 +28,16 @@ namespace WebTestOfVMC.Controllers
         public IActionResult UpdateOperator(OperatorInfo info)
         {
             var _operator = _operatorService.GetById(info.OperatorId);
-            
+            var organisation = _organisationServices.GetById(info.Organisation.OrganisationId);
+
             _operator.FirstName = info.FirstName;
             _operator.LastName = info.LastName;
             _operator.MiddleName = info.MiddleName;
             _operator.DismissalDate = info.DismissalDate;
-            _operator.Defectoscope.DefectoScopeType = info.Defectoscope.DefectoScopeType;
             _operator.Qualification = info.Qualification;
             _operator.LastQualificationTraning = info.LastQualificationTraning;
             _operator.HireDate = info.HireDate;
-            _operator.Organisation = info.Organisation;
-            _operator.Defectoscope = _operator.Defectoscope;
+            _operator.Organisation = organisation;
             _operatorService.UpdateOperator(_operator);
          
 

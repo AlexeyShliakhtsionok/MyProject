@@ -24,31 +24,32 @@
                             <p id="p1">Добавить организацию</p>
                             <br />
                             <div class="form-group">
-                                @Html.HiddenFor(Model => Model.OrganisationId)
-
-                                @Html.LabelFor(Model => Model.OrgName)
+                                
+                                    @Html.HiddenFor(Model => Model.OrganisationId)
+                                
+                                    @Html.LabelFor(Model => Model.OrgName)
+                                    <br />
+                                    @Html.EditorFor(Model => Model.OrgName)
+                                    @Html.ValidationMessageFor(Model => Model.OrgName)
+                                    <br />
+                                    @Html.LabelFor(Model => Model.OrganisationRole)
+                                    <br />
+                                    @Html.DropDownListFor(Model => Model.OrganisationRole, Model.OrganisationRole.GetSelectList())
+                                    <br />
+                                    @Html.LabelFor(Model => Model.Parent)
+                                    <br />
+                                    @Html.DropDownListFor(Model => Model.Parent.OrganisationId, Model.SelectList)
+                                    @Html.ValidationMessageFor(Model => Model.Parent)
+                                    <br />
+                                    @Html.LabelFor(Model => Model.Children)
+                                    <br />
+                                    @Html.ListBoxFor(Model => Model.SelectedOrganisations, Model.MultiSelectList, new { id = "multidropdown", multiple = "multiple" })
+                                </div>
                                 <br />
-                                @Html.EditorFor(Model => Model.OrgName)
-                                @Html.ValidationMessageFor(Model => Model.OrgName)
-                                <br />
-                                @Html.LabelFor(Model => Model.OrganisationRole)
-                                <br />
-                                @Html.DropDownListFor(Model => Model.OrganisationRole, Model.OrganisationRole.GetSelectList())
-                                <br />
-                                @Html.LabelFor(Model => Model.Parent)
-                                <br />
-                                @Html.DropDownListFor(Model => Model.Parent.OrganisationId, Model.SelectList)
-                                @Html.ValidationMessageFor(Model => Model.Parent)
-                                <br />
-                                @Html.LabelFor(Model => Model.Children)
-                                <br />
-                                @Html.ListBoxFor(Model => Model.SelectedOrganisations, Model.MultiSelectList, new { id = "multidropdown", multiple = "multiple" })
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-outline-dark" value="Добавить" id="sub" />
+                                </div>
                             </div>
-                            <br />
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-outline-dark" value="Добавить" id="sub" />
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

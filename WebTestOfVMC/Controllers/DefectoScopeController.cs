@@ -145,7 +145,23 @@ namespace WebTestOfVMC.Controllers
         {
             int pageSize = 10;
 
+            var user = HttpContext.User.Identity.Name;
+            var userEmail = HttpContext.User.Identity.Name;
             IQueryable<Defectoscope> defectoscopes = _defectoscopeServices.GetQuarable();
+
+            if (HttpContext.User.IsInRole("Administrator") || HttpContext.User.IsInRole("AdministrationSupervisor") || HttpContext.User.IsInRole("DiagnosticEmploye"))
+            {
+                defectoscopes = _defectoscopeServices.GetQuarable();
+            }
+            else
+            {
+                defectoscopes = _defectoscopeServices.GetQuarable().Where(o => o.Organisation.Users.Any(u => u.Email == userEmail));
+            }
+
+
+
+
+
 
             if (company != null && company != 0)
             {

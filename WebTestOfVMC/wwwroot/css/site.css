@@ -242,7 +242,7 @@ div > .model-body {
 
 .text-center-modal {
     font-size: 15px;
-    width: min-content;
+    /*width: min-content;*/
     border-radius: 10px;
     background-color: #002b8e;
     padding: 20px 20px 20px 20px;
@@ -254,8 +254,36 @@ div > .model-body {
     width: min-content;
     border-radius: 10px;
     background-color: white;
-    padding: 20px 20px 20px 20px;
+    padding: 20px;
     box-shadow: 0 0 10px;
+}
+
+.user_Div {
+    display: flex;
+    flex-direction: column;
+}
+.poss {
+    display: flex;
+    justify-content: end;
+    min-width: 50%;
+    padding: 0 3px;
+}
+
+.poss_right {
+    justify-content: flex-start;
+}
+
+.poss_flex {
+    display: flex;
+    padding: 3px 0;
+}
+
+.modal-dialogg {
+    max-width: 630px;
+}
+
+.modal-contentt {
+    width: 100%;
 }
 
 #p1 {

@@ -61,7 +61,20 @@ namespace WebApplication.Controllers
         {
             int pageSize = 10;
 
-            IQueryable<Defect> defects = _defectService.GetQuarable();
+            var user = HttpContext.User.Identity.Name;
+            var userEmail = HttpContext.User.Identity.Name;
+            IQueryable<Defect> defects;
+
+            if (HttpContext.User.IsInRole("Administrator") || HttpContext.User.IsInRole("AdministrationSupervisor") || HttpContext.User.IsInRole("DiagnosticEmploye"))
+            {
+                defects = _defectService.GetQuarable();
+            }
+            else
+            {
+                defects = _defectService.GetQuarable()
+                    .Where(d => d.LocalSection.GlobalSection.Organisations
+                    .Any(o => o.Users.Any(u => u.Email == userEmail)));
+            }
 
             if (defect != null && defect != 0)
             {

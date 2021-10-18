@@ -28,7 +28,7 @@
 <div id="operatorOrganisation">
     @Html.LabelFor(Model => Model.Organisation)
     <br />
-    @Html.DropDownListFor(Model => Model.Organisation, Model.OrganisationSelectList)
+    @Html.DropDownListFor(Model => Model.Organisation.OrganisationId, Model.OrganisationSelectList)
 </div>
 
 <div id="hireDate">

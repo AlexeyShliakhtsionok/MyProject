@@ -207,8 +207,8 @@
         function onUpdate(data) {
             $(document).on("ajaxSuccess", function () {
 
-                alert(data.newData.emailMessage);
-                window.location = data.newData.url;
+                alert(data.emailMessage);
+                window.location = data.url;
             });
         }
 
