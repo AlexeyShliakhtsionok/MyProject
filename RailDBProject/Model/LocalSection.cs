@@ -19,6 +19,7 @@ namespace RailDBProject.Model
 
         [Display(Name = "Участок")]
         public virtual GlobalSection GlobalSection { get; set; }
+        public virtual Organisation Organisation { get; set; }
         public virtual ICollection<Defect> Defects  { get; set; }
     }
 }

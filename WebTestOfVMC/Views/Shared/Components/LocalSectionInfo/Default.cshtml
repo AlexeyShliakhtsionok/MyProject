@@ -38,7 +38,12 @@
                                 <br />
                                 @Html.LabelFor(Model => Model.GlobalSection)
                                 <br />
-                                @Html.DropDownListFor(Model => Model.GlobalSection.OrganisationId, Model.SelectList) @*!!!!!!!!!!!!!!!!!!!!*@
+                                @Html.DropDownListFor(Model => Model.GlobalSection.OrganisationId, Model.SelectList)
+
+                                @Html.LabelFor(Model => Model.Organisation)
+                                <br />
+                                @Html.DropDownListFor(Model => Model.Organisation.OrganisationId, Model.OrganisationSelectList)
+
                             </div>
                             <br />
                             <div class="form-group">

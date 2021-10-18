@@ -24,3 +24,9 @@
     <br />
     @Html.DropDownListFor(Model => Model.GlobalSection.GlobalSectId, Model.SelectList) 
 </div>
+
+<div id="organisation">
+    @Html.LabelFor(Model => Model.Organisation)
+    <br />
+    @Html.DropDownListFor(Model => Model.Organisation.OrganisationId, Model.OrganisationSelectList)
+</div>

@@ -19,17 +19,19 @@ namespace WebTestOfVMC.Controllers
     {
         private readonly ILocalSectionServices _localSectionServices;
         private readonly IGlobalSectionServices _globalSectionServices;
+        private readonly IOrganisationServices _organisationServices;
 
-        public LocalSectionController(ILocalSectionServices _localSectionServices, IGlobalSectionServices _globalSectionServices) {
+        public LocalSectionController(IOrganisationServices _organisationServices, ILocalSectionServices _localSectionServices, IGlobalSectionServices _globalSectionServices) {
             this._localSectionServices = _localSectionServices;
             this._globalSectionServices = _globalSectionServices;
+            this._organisationServices = _organisationServices;
         }
 
         [HttpGet]
         public IActionResult GetOne(int id)
         {
             var _localSection = _localSectionServices.GetById(id);
-            var _globalSections = _globalSectionServices.GetGlobalSectionList();
+            var _organisations = _organisationServices.GetOrganisationList().Where(o => o.OrganisationRole == OrganisationRole.PCH).ToList();
 
             var model = new LocalSectionInfo
             {
@@ -37,6 +39,9 @@ namespace WebTestOfVMC.Controllers
                 LocalWayNumber = _localSection.LocalWayNumber,
                 LocaSectionName = _localSection.LocalSectionName,
                 GlobalSection = _localSection.GlobalSection,
+                Organisation = _localSection.Organisation,
+                OrganisationCollection = _organisations,
+                OrganisationSelectList = _organisations.GetOrganisationSelectList(),
                 GlobalSectionCollection = _globalSectionServices.GetGlobalSectionList(),
                 SelectList = _globalSectionServices.GetGlobalSectionList().GetGlobalSectionSelectList()
             };
@@ -48,10 +53,12 @@ namespace WebTestOfVMC.Controllers
         {
             var _localSection = _localSectionServices.GetById(info.LocalSectionId);
             var _globalSection = _globalSectionServices.GetById(info.GlobalSection.GlobalSectId);
+            var _organisation = _organisationServices.GetById(info.Organisation.OrganisationId);
 
             _localSection.LocalSectionName = info.LocaSectionName;
             _localSection.LocalWayNumber = info.LocalWayNumber;
             _localSection.GlobalSection = _globalSection;
+            _localSection.Organisation = _organisation;
             _localSectionServices.UpdateLocalSection(_localSection);
             
             return Json(new
@@ -79,11 +86,13 @@ namespace WebTestOfVMC.Controllers
         public IActionResult CreateLocalSection(LocalSectionInfo info)
         {
             var _globalForLocal = _globalSectionServices.GetById(info.GlobalSection.OrganisationId);
+            var _organisation = _organisationServices.GetById(info.Organisation.OrganisationId);
                 LocalSection _localSection = new LocalSection()
                 {
                     LocalWayNumber = info.LocalWayNumber,
                     LocalSectionName = info.LocaSectionName,
-                    GlobalSection = _globalForLocal
+                    GlobalSection = _globalForLocal,
+                    Organisation = _organisation
                 };
 
                 _localSectionServices.CreateLocalSection(_localSection);

@@ -13,19 +13,20 @@ namespace WebTestOfVMC.Components
     public class LocalSectionInfoViewComponent : ViewComponent
     {
         private readonly IGlobalSectionServices _globalSectionServices;
-        private readonly ILocalSectionServices _localSectionServices;
-        public LocalSectionInfoViewComponent(IGlobalSectionServices _globalSectionServices, ILocalSectionServices _localSectionService)
+        private readonly IOrganisationServices _organisationServices;
+        public LocalSectionInfoViewComponent(IGlobalSectionServices _globalSectionServices, IOrganisationServices _organisationServices)
         {
             this._globalSectionServices = _globalSectionServices;
-            this._localSectionServices = _localSectionService;
+            this._organisationServices = _organisationServices;
         }
         public IViewComponentResult Invoke()
         {
 
             LocalSectionInfo _info = new LocalSectionInfo();
-
-            _info.SelectList = _globalSectionServices.GetGlobalSectionList().GetGlobalSectionSelectList();
+            _info.OrganisationCollection = _organisationServices.GetOrganisationList().Where(o => o.OrganisationRole == RailDBProject.Model.OrganisationRole.PCH).ToList();
+            _info.OrganisationSelectList = _info.OrganisationCollection.GetOrganisationSelectList();
             _info.GlobalSectionCollection = _globalSectionServices.GetGlobalSectionList();
+            _info.SelectList = _globalSectionServices.GetGlobalSectionList().GetGlobalSectionSelectList();
             _info.MultiSelectList = new MultiSelectList(_info.GlobalSectionCollection,
                 "GlobalSectId", "GlobalSectionName");
 

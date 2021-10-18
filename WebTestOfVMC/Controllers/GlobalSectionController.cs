@@ -70,12 +70,7 @@ namespace WebTestOfVMC.Controllers
         public IActionResult GetOne(int id)
         {
             var _globalSection = _globalSectionSetvice.GetById(id);
-            var _organisations = _organisationServices.GetOrganisationList();
-            
-            
-
-
-
+            var _organisations = _organisationServices.GetOrganisationList().Where(o => o.OrganisationRole == OrganisationRole.NOD).ToList();
 
             var model = new GlobalSectionInfo
             {
