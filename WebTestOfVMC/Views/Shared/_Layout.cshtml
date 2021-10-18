@@ -37,6 +37,9 @@
                             <ul class="navbar-nav flex-grow-1">
                                 <li>
                                     <div class="form-group">
+                                        <div id="userEmail">
+                                            @Html.ViewContext.HttpContext.User.Identity.Name
+                                        </div>
                                         <a class="btn btn-outline-dark" id="logout" asp-area="" asp-controller="Account" asp-action="Logout">Выход</a>
                                     </div>
 
@@ -159,7 +162,7 @@
                 @RenderBody()
             </main>
         </div>
-
+    </div>
         @*Modals*@
 
     <div class="modal fade" id="manageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

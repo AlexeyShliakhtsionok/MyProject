@@ -44,9 +44,8 @@ namespace WebTestOfVMC.Controllers
 
             return Json(new
             {
-                isDismiss = _operator.DismissalDate, //!!!!!
-                newData = new { success = "Успешно" },
-                dismissalTextMessage = new { yes = "Да", no = "Нет" }
+                url = Url.Action("Index", "Operator"),
+                emailMessage = "Редактирование прошло успешно!"
             });
         }
 

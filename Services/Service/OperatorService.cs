@@ -39,6 +39,11 @@ namespace Services.Service
             return _uow.Operators.Read(_id);
         }
 
+        public List<Operator> GetOperatorList()
+        {
+            return _uow.Operators.ReadAll().ToList();
+        }
+
         public IQueryable<Operator> GetQuarable()
         {
             return _uow.Operators.ReadAll();

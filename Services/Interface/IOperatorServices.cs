@@ -12,5 +12,6 @@ namespace Project.BLL.Services.IServiceIntefaces
         public void DeleteOperator(Operator @operator);
         public void CreateOperator(Operator @operator);
         public IQueryable<Operator> GetQuarable();
+        public List<Operator> GetOperatorList();
     }
 }

@@ -116,5 +116,26 @@ namespace Common.ListExtentions
             }
             return new SelectList(items, "Value", "Text");
         }
+
+        public static SelectList GetOperatorSelectList(this List<Operator> list)
+        {
+            List<SelectListItem> items = new List<SelectListItem>(list.Count);
+            foreach (var li in list)
+            {
+                items.Add(new SelectListItem
+                {
+                    Text = li.LastName,
+                    Value = li.OperatorId.ToString()
+                });
+            }
+            foreach (var item in items)
+            {
+                if (item.Text == "-----")
+                {
+                    item.Selected = true;
+                }
+            }
+            return new SelectList(items, "Value", "Text");
+        }
     }
 }

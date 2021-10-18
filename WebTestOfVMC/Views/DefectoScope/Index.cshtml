@@ -4,7 +4,7 @@
 @using CommonClasses.PaginationAndSort.IndexViewModelClasses;
 @using RailDBProject.Model;
 
-@model GlobalSectionIndexViewModel
+@model DefectoscopeIndexViewModel
 
 <p class="filter-text">Учаски/Направления</p>
 <br />
@@ -14,7 +14,7 @@
 
     <div id="manipulation-buttons">
         <div class="create-button button__style">
-            @await Component.InvokeAsync("GlobalSectionInfo")
+            @await Component.InvokeAsync("DefectoscopeInfo")
         </div>
         <div class="edit-button button__style">
             <input type="submit" class="btn btn-outline-dark" value="Редактировать" id="edit-btn" />
@@ -43,39 +43,70 @@
             </th>
             <th>
                 <a asp-action="Index"
-                   asp-controller="GlobalSection"
-                   asp-route-sortOrder="@(Model.GlobalSectionSortViewModel.GlobalWaySort)">
-                    <p class="p1">№ пути<img src="~/images/sort.png" id="sort" /></p>
+                   asp-controller="Defectoscope"
+                   asp-route-sortOrder="@(Model.DefectoscopeSortViewModel.DefectoScopeTypeSort)">
+                    <p class="p1">Тип дефектоскопа<img src="~/images/sort.png" id="sort" /></p>
                 </a>
 
             </th>
 
             <th>
                 <a asp-action="Index"
-                   asp-controller="GlobalSection"
-                   asp-route-sortOrder="@(Model.GlobalSectionSortViewModel.GlobalSectionNameSort)">
-                    <p class="p1">Наименование участка<img src="~/images/sort.png" id="sort" /></p>
+                   asp-controller="Defectoscope"
+                   asp-route-sortOrder="@(Model.DefectoscopeSortViewModel.SerialNumberSort)">
+                    <p class="p1">Серийный номер<img src="~/images/sort.png" id="sort" /></p>
                 </a>
+            </th>
+
+            <th>
+                <a asp-action="Index"
+                   asp-controller="Defectoscope"
+                   asp-route-sortOrder="@(Model.DefectoscopeSortViewModel.OrganisationSort)">
+                    <p class="p1">Организация<img src="~/images/sort.png" id="sort" /></p>
+                </a>
+
+            </th>
+
+            <th>
+                <a asp-action="Index"
+                   asp-controller="Defectoscope"
+                   asp-route-sortOrder="@(Model.DefectoscopeSortViewModel.LastMaintenansProcedureSort)">
+                    <p class="p1">Поверен<img src="~/images/sort.png" id="sort" /></p>
+                </a>
+
+            </th>
+
+            <th>
+                <a asp-action="Index"
+                   asp-controller="Defectoscope"
+                   asp-route-sortOrder="@(Model.DefectoscopeSortViewModel.OperatorsSort)">
+                    <p class="p1">Операторы<img src="~/images/sort.png" id="sort" /></p>
+                </a>
+
             </th>
         </tr>
 
         @{ int rowNo = 0; }
 
-        @*@if (Model.GlobalSections != null)
-            {*@
-
-        @foreach (GlobalSection u in Model.GlobalSections)
+        @foreach (Defectoscope u in Model.Defectoscopes)
         {
-            <tr class="table-row" id="@u.GlobalSectId">
+            <tr class="table-row" id="@u.DefectoScopeId">
                 <td>@(rowNo += 1)</td>
-                <td>@u.GlobalWayNumber</td>
-                <td>@u.GlobalSectionName</td>
+                <td>@u.DefectoScopeType.GetEnumDescription()</td>
+                <td>@u.SerialNumber</td>
+                <td>@u.Organisation.OrgName</td>
+                <td>@u.LastMaintenansProcedure</td>
+                 @if (u.Operators != null)
+                {
+                    <td>
+                        @foreach (var item in u.Operators)
+                        {
+                            @item.LastName <text> | </text>
+                        }
+                    </td>
+                }
             </tr>
         }
-        @*}*@
-
-
-
     </table>
 
 
@@ -83,7 +114,7 @@
     {
         <a asp-action="Index"
            asp-route-page="@(Model.PageView.PageNumber - 1)"
-           asp-route-sortorder="@(Model.GlobalSectionSortViewModel.Current)"
+           asp-route-sortorder="@(Model.DefectoscopeSortViewModel.Current)"
            class="btn  btn-outline-dark">
             <i class="glyphicon glyphicon-chevron-left"></i>
             Назад
@@ -93,14 +124,14 @@
     {
         <a asp-action="Index"
            asp-route-page="@(Model.PageView.PageNumber + 1)"
-           asp-route-sortorder="@(Model.GlobalSectionSortViewModel.Current)"
+           asp-route-sortorder="@(Model.DefectoscopeSortViewModel.Current)"
            class="btn btn-outline-dark">
             Вперед
             <i class="glyphicon glyphicon-chevron-right"></i>
         </a>
     }
-
-    <form asp-action="UpdateGlobalSection" asp-controller="GlobalSection" asp-route-id="id" data-ajax="true"
+   
+    <form asp-action="UpdateDefectoscope" asp-controller="Defectoscope" asp-route-id="id" data-ajax="true"
           data-ajax-method="POST" data-ajax-success="onUpdate">
 
         <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -133,16 +164,15 @@
         function onSuccess(data) {
             $(document).on("ajaxSuccess", function () {
 
-                    alert(data.newData.emailMessage);
-                    window.location = data.newData.url;
+                    alert(data.emailMessage);
+                    window.location = data.url;
             });
         }
 
         function onUpdate(data) {
             $(document).on("ajaxSuccess", function () {
-
-                alert(data.newData.emailMessage);
-                window.location = data.newData.url;
+                alert(data.emailMessage);
+                window.location = data.url;
             });
         }
 
@@ -183,7 +213,7 @@
 
             $("#delete-btn").click(function () {
                 $.ajax({
-                    url: "@Url.Action("DeleteGlobalSection","GlobalSection")",
+                    url: "@Url.Action("DeleteDefectoscope","Defectoscope")",
                     type: "POST",
                     dataType: "html",
                     data: { id: element },
@@ -197,7 +227,7 @@
             $("#edit-btn").click(function ()
             {
                 $.ajax({
-                        url: "@Url.Action("GetOne", "GlobalSection")",
+                        url: "@Url.Action("GetOne", "Defectoscope")",
                         type: "GET",
                         dataType: "html",
                         data: { id: element },
