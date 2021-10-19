@@ -148,6 +148,11 @@ body, html {
     text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
 }
 
+.autorization {
+    font-size: 20px;
+    
+}
+
 .filter-text {
     font-size: 25px;
     margin: 5px;
@@ -170,6 +175,63 @@ body, html {
     background-color: #efdede;
     border: 3px;
     box-shadow: 10px;
+}
+
+.info-element {
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    border: 2px solid #002b8e;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px;
+}
+
+#info {
+    min-width: 1200px;
+    height: auto;
+    background-image: url("../images/info2.jpg");
+    background-size: cover;
+    border: 3px solid;
+    border-block-start-color: aliceblue;
+    border-right-color: aliceblue;
+    border-block-end-color: #002b8e;
+    box-shadow: 0 0 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info-text {
+    font-size: 25px;
+    margin: 5px;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+
+.info-icon {
+    width: 100px;
+    height: 100px;
+    /*display: block;*/
+}
+
+.pos-icon{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.poss-elm1{
+    order: 3
+}
+
+.poss-elm2 {
+    order: 1
+}
+
+
+.list {
+    font-size: 20px;
 }
 
 .table .form-group label {
