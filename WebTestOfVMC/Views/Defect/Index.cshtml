@@ -50,15 +50,15 @@
 
     <table class="table">
         <tr class="p1 intable">
-            <th>
-                <p class="p1">№ п/п</p>
+            <th class="size-th">
+                <p class="p1 th_size">№ п/п</p>
             </th>
             <th>
                 <a asp-action="Index"
                    asp-controller="Defect"
                    asp-route-sortOrder="@(Model.DefectSortViewModel.DateOfDetectionSort)"
                    asp-route-name="@(Model.DefectFilter.SelectedName)"
-                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><p class="p1">Дата обнаружения <img src="~/images/sort.png" id="sort" /></p></a>
+                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><div class="icon_th"><p class="p1 th_size">Дата обнаружения </p><img src="~/images/sort.png" id="sort" /></div></a>
 
             </th>
 
@@ -67,7 +67,7 @@
                    asp-controller="Defect"
                    asp-route-sortOrder="@(Model.DefectSortViewModel.LocalSectionNameSort)"
                    asp-route-name="@(Model.DefectFilter.SelectedName)"
-                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><p class="p1">Перегон <img src="~/images/sort.png" id="sort" /></p></a>
+                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><div class="icon_th"><p class="p1 th_size">Перегон </p><img src="~/images/sort.png" id="sort" /></div></a>
             </th>
 
             <th>
@@ -75,7 +75,7 @@
                    asp-controller="Defect"
                    asp-route-sortOrder="@(Model.DefectSortViewModel.LocalSectionWaySort)"
                    asp-route-name="@(Model.DefectFilter.SelectedName)"
-                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><p class="p1">№ пути <img src="~/images/sort.png" id="sort" /></p></a>
+                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><div class="icon_th"><p class="p1 th_size">№ пути </p><img src="~/images/sort.png" id="sort" /></div></a>
             </th>
 
             <th>
@@ -83,7 +83,7 @@
                    asp-controller="Defect"
                    asp-route-sortOrder="@(Model.DefectSortViewModel.KilometerSort)"
                    asp-route-name="@(Model.DefectFilter.SelectedName)"
-                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><p class="p1">Километр <img src="~/images/sort.png" id="sort" /></p></a>
+                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><div class="icon_th"><p class="p1 th_size">Километр </p><img src="~/images/sort.png" id="sort" /></div></a>
             </th>
 
             <th>
@@ -91,7 +91,7 @@
                    asp-controller="Defect"
                    asp-route-sortOrder="@(Model.DefectSortViewModel.PktSort)"
                    asp-route-name="@(Model.DefectFilter.SelectedName)"
-                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><p class="p1">Пикет <img src="~/images/sort.png" id="sort" /></p></a>
+                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><div class="icon_th"><p class="p1 th_size">Пикет </p><img src="~/images/sort.png" id="sort" /></div></a>
             </th>
 
             <th>
@@ -99,7 +99,7 @@
                    asp-controller="Defect"
                    asp-route-sortOrder="@(Model.DefectSortViewModel.PathSort)"
                    asp-route-name="@(Model.DefectFilter.SelectedName)"
-                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><p class="p1">Звено <img src="~/images/sort.png" id="sort" /></p></a>
+                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><div class="icon_th"><p class="p1 th_size">Звено </p><img src="~/images/sort.png" id="sort" /></div></a>
             </th>
 
             <th>
@@ -107,7 +107,7 @@
                    asp-controller="Defect"
                    asp-route-sortOrder="@(Model.DefectSortViewModel.WaySideSort)"
                    asp-route-name="@(Model.DefectFilter.SelectedName)"
-                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><p class="p1">Нить <img src="~/images/sort.png" id="sort" /></p></a>
+                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><div class="icon_th"><p class="p1 th_size">Нить </p><img src="~/images/sort.png" id="sort" /></div></a>
             </th>
 
             <th>
@@ -115,7 +115,7 @@
                    asp-controller="Defect"
                    asp-route-sortOrder="@(Model.DefectSortViewModel.ManufactureSort)"
                    asp-route-name="@(Model.DefectFilter.SelectedName)"
-                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><p class="p1">Производитель <img src="~/images/sort.png" id="sort" /></p></a>
+                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><div class="icon_th"><p class="p1 th_size">Производитель </p><img src="~/images/sort.png" id="sort" /></div></a>
 
             </th>
 
@@ -124,7 +124,7 @@
                    asp-controller="Defect"
                    asp-route-sortOrder="@(Model.DefectSortViewModel.ManufactureYearSort)"
                    asp-route-name="@(Model.DefectFilter.SelectedName)"
-                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><p class="p1">Год прокатки <img src="~/images/sort.png" id="sort" /></p></a>
+                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><div class="icon_th"><p class="p1 th_size">Год прокатки </p><img src="~/images/sort.png" id="sort" /></div></a>
 
             </th>
 
@@ -133,7 +133,7 @@
                    asp-controller="Defect"
                    asp-route-sortOrder="@(Model.DefectSortViewModel.DefectCodeSort)"
                    asp-route-name="@(Model.DefectFilter.SelectedName)"
-                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><p class="p1">Код дефекта <img src="~/images/sort.png" id="sort" /></p></a>
+                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><div class="icon_th"><p class="p1 th_size">Код дефекта </p><img src="~/images/sort.png" id="sort" /></div></a>
             </th>
 
             <th>
@@ -141,7 +141,7 @@
                    asp-controller="Defect"
                    asp-route-sortOrder="@(Model.DefectSortViewModel.DefectDepthSort)"
                    asp-route-name="@(Model.DefectFilter.SelectedName)"
-                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><p class="p1">Глубина залегания (H) <img src="~/images/sort.png" id="sort" /></p></a>
+                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><div class="icon_th"><p class="p1 th_size">Глубина залегания (H) </p><img src="~/images/sort.png" id="sort" /></div></a>
             </th>
 
             <th>
@@ -149,7 +149,7 @@
                    asp-controller="Defect"
                    asp-route-sortOrder="@(Model.DefectSortViewModel.DefectLenghtSort)"
                    asp-route-name="@(Model.DefectFilter.SelectedName)"
-                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><p class="p1">Протяженность (L) <img src="~/images/sort.png" id="sort" /></p></a>
+                   asp-route-company="@(Model.DefectFilter.SelectedDefect)"><div class="icon_th"><p class="p1 th_size">Протяженность (L)</p> <img src="~/images/sort.png" id="sort" /></div></a>
             </th>
 
         </tr>

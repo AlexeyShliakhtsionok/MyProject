@@ -1,9 +1,11 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+* {
+    font-size: 12px;
+}
 
 .wrapper {
     display: flex;
-    height: 100%;
     /*overflow: hidden;*/
     min-height: 100%;
     min-width: 100%;
@@ -26,6 +28,16 @@ select {
     text-align: center;
 }
 
+.form-control {
+    max-width: 150px;
+    max-height: 30px;
+    align-items: center;
+    font-size: 12px;
+}
+
+.btn {
+    font-size: 12px;
+}
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
@@ -142,7 +154,7 @@ body, html {
 }
 
 .p1 {
-    font-size: 15px;
+    font-size: 12px;
     margin: 5px;
     color: white;
     text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
@@ -192,9 +204,7 @@ body, html {
     background-image: url("../images/info2.jpg");
     background-size: cover;
     border: 3px solid;
-    border-block-start-color: aliceblue;
-    border-right-color: aliceblue;
-    border-block-end-color: #002b8e;
+    border-color: #002b8c;
     box-shadow: 0 0 10px;
     border-radius: 10px;
     display: flex;
@@ -212,7 +222,6 @@ body, html {
 .info-icon {
     width: 100px;
     height: 100px;
-    /*display: block;*/
 }
 
 .pos-icon{
@@ -244,7 +253,7 @@ body, html {
 }
 
 .table {
-    font-size: 15px;
+    font-size: 12px;
     width: 100%;
     border-radius: 5px;
     background-color: #002b8e;
@@ -264,7 +273,7 @@ body, html {
 
     .table td, .table th {
         padding: 1px;
-        vertical-align: baseline;
+        vertical-align: inherit;
         border-top: 2px solid darkblue;
         height: 20px;
         text-align: center;
@@ -276,6 +285,23 @@ td {
     border-bottom: 2px solid darkblue;
     border-left: 2px solid darkblue;
     border-collapse: collapse;
+}
+
+th { 
+    vertical-align: inherit;
+}
+
+.th_size {
+    font-size: 10px;
+}
+
+.icon_th{
+    display: flex;
+    justify-content: center;
+}
+
+.size-th {
+    width: 55px;
 }
 
 .btn-td {
@@ -349,7 +375,7 @@ div > .model-body {
 }
 
 #p1 {
-    font-size: 20px;
+    font-size: 15px;
     color: white;
     text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
     text-align: center;
@@ -404,6 +430,7 @@ label {
 .nodes-container {
     margin: 0 20px;
     display: flex;
+    min-height: 580px;
 }
 
 .nodes {
@@ -413,6 +440,7 @@ label {
 
 .nodes__1 {
     display: flex;
+    justify-content: space-around;
 }
 
 .node {
@@ -424,6 +452,8 @@ label {
     text-align: center;
     background-color: #002b8e;
     flex: 1 33.333%;
+    max-width: 25%;
+    border: 2px solid;
 }
 
 .node-image {
@@ -431,6 +461,7 @@ label {
     max-width: 100%;
     height: auto;
     border-radius: 10px;
+    padding: 5px;
 }
 
 .button__style {
@@ -448,6 +479,8 @@ label {
 #sort {
     height: 15px;
     width: auto;
+    padding: 2px;
+    margin: auto 0;
 }
 
 #main-menu-window {
@@ -508,6 +541,9 @@ label {
             padding: 20px;
             text-align: center;
             display: block;
+            border: 3px solid;
+            border-radius: 20px;
+            margin: 2px 0;
         }
 
             .test_menu li a:hover {
@@ -526,6 +562,7 @@ label {
         }
         .test_menu li ul li a {
             border-radius: 10px;
+            margin: 0;
         }
 
         .test_menu li.active ul.small a:hover {
