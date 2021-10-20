@@ -56,6 +56,10 @@ select {
     }
 }
 
+#Password {
+    width: 200px;
+}
+
 .border-top {
     border-top: 1px solid #e5e5e5;
 }
@@ -196,6 +200,17 @@ body, html {
     border-radius: 10px;
     padding: 10px;
     margin: 15px;
+}
+
+.bg_img {
+    display: flex;
+    flex-direction: column;
+    background-image: url("../images/info2.jpg");
+    background-size: cover;
+    border: 3px solid;
+    border-color: #002b8c;
+    box-shadow: 0 0 10px;
+    border-radius: 10px;
 }
 
 #info {
@@ -522,6 +537,7 @@ label {
 .test_menu {
     position: relative;
     display: inline-block;
+    margin: 0 3px 0px -5px;
 }
 
     .test_menu li {
@@ -533,27 +549,29 @@ label {
         background-color: #002b8e;
         margin-left: -35px;
         border-radius: 10px;
+        
     }
 
 
         .test_menu li a {
             color: white;
-            padding: 20px;
+            padding: 10px;
             text-align: center;
             display: block;
             border: 3px solid;
-            border-radius: 20px;
+            border-radius: 10px;
             margin: 2px 0;
+            transition: all .5s;
         }
 
             .test_menu li a:hover {
-                background: #0B3A66;
+                background: #004ac5;
                 color: black;
             }
 
         .test_menu li ul a {
             color: blue;
-            padding: 20px;
+            padding: 10px;
             text-decoration: none;
             display: block;
             border: solid;
