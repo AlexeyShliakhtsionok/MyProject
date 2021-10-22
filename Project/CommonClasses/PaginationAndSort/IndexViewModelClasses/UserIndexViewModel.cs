@@ -8,6 +8,7 @@ using System.Text;
 
 namespace CommonClasses.PaginationAndSort.IndexViewModelClasses
 {
+    [Serializable]
     public class UserIndexViewModel
     {
         public IEnumerable<User> Users { get; set; }

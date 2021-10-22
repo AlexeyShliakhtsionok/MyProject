@@ -9,8 +9,10 @@
 
 @model UserIndexViewModel
 
-<p class="filter-text">Пользователи</p>
-<br />
+<div class="headerOfTable">
+    <div><p class="filter-text">Пользователи</p></div>
+    <div class="excel-div"><img class="excel" src="~/images/exportToExcel.png" /></div>
+</div>
 
 
 <div class="table">
@@ -218,7 +220,7 @@
                     }
                     $(".table-row").click(function () { return false });
 
-                    
+
                     if ($(this).attr("id") != element) {
                         alert("Для выбора новой записи разактивируйте ранее выбранную!")
                     }
@@ -255,6 +257,12 @@
                     }
                 });
             });
+
+            $(".excel").click(function ()
+            {
+                window.location.href =  "@Url.Action("Export", "User")"
+            });
+
         });
 
     </script>
