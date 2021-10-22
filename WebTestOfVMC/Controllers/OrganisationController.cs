@@ -178,7 +178,7 @@ namespace WebTestOfVMC.Controllers
 
         public async Task<IActionResult> Index(int? company, string name, int page = 1, OrganisationSortState sortOrder = OrganisationSortState.OrganisationAsc)
         {
-            int pageSize = 28;
+            int pageSize = 12;
 
             IQueryable<Organisation> organisations = _organisationServices.GetQuarable();
 

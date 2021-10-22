@@ -13,6 +13,11 @@ for details on configuring this project to bundle and minify static web assets. 
     justify-content: space-between;
 }
 
+.pb-1 {
+    padding: 0px;
+    min-width: 100%;
+}
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -177,8 +182,10 @@ body, html {
 }
 
 .container {
+    display: flex;
     margin: 0px;
     min-width: 100%;
+    min-height: 100%;
 }
 
 .autorization-window {
@@ -205,12 +212,14 @@ body, html {
 .bg_img {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     background-image: url("../images/info2.jpg");
     background-size: cover;
     border: 3px solid;
     border-color: #002b8c;
     box-shadow: 0 0 10px;
     border-radius: 10px;
+    min-height: 100%;
 }
 
 #info {
@@ -267,6 +276,10 @@ body, html {
     width: 200px;
 }
 
+tbody { 
+    display: table;
+}
+
 .table {
     font-size: 12px;
     width: 100%;
@@ -274,6 +287,9 @@ body, html {
     background-color: #002b8e;
     padding: 5px 20px 20px 20px;
     box-shadow: 0 0 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0px;
 }
 
     .table > table {
@@ -416,6 +432,12 @@ div > .model-body {
     color: black;
 }
 
+.logotype_m {
+    display: flex;
+    flex-direction: column;
+    flex: 0 15%;
+    justify-content: space-between;
+}
 
 label {
     display: inline-block;
@@ -439,13 +461,11 @@ label {
 .nodes-title {
     text-align: center;
     font-size: 20px;
-    margin-bottom: 30px;
 }
 
 .nodes-container {
     margin: 0 20px;
     display: flex;
-    min-height: 580px;
 }
 
 .nodes {
@@ -465,10 +485,13 @@ label {
     margin: 5px;
     box-shadow: 10px;
     text-align: center;
-    background-color: #002b8e;
     flex: 1 33.333%;
     max-width: 25%;
-    border: 2px solid;
+    border: 2px solid #fff; 
+}
+
+.bg_node {
+    background: linear-gradient(145deg, #fff, #002394);
 }
 
 .node-image {
@@ -532,7 +555,9 @@ label {
     margin: 0 20px;
 }
 
-
+.logotype_p {
+    padding: 20px;
+}
 
 .test_menu {
     position: relative;
@@ -560,7 +585,7 @@ label {
             display: block;
             border: 3px solid;
             border-radius: 10px;
-            margin: 2px 0;
+            margin-bottom: 20px;
             transition: all .5s;
         }
 
@@ -621,4 +646,25 @@ label {
     color: white;
     text-align: center;
     float: left;
+}
+
+.headerOfTable {
+    display: flex;
+    justify-content: space-between;
+}
+
+.excel {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    padding: 5px;
+}
+
+.excel-div{
+    display: flex;
+    max-height: 50px;
+    max-width: 50px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    margin-right: 20px;
 }

@@ -94,7 +94,7 @@
                 <td>@u.DefectoScopeType.GetEnumDescription()</td>
                 <td>@u.SerialNumber</td>
                 <td>@u.Organisation.OrgName</td>
-                <td>@u.LastMaintenansProcedure</td>
+                <td>@u.LastMaintenansProcedure.ToShortDateString()</td>
                  @if (u.Operators != null)
                 {
                     <td>

@@ -8,8 +8,12 @@
 @using CommonClasses.PaginationAndSort.Filters
 
 @model OperatorIndexViewModel
-
-<p class="filter-text">Операторы</p>
+   
+ <div class="headerOfTable">
+        <div><p class="filter-text">Операторы</p></div>
+        <div class="excel-div"><img class="excel" src="~/images/exportToExcel.png" /></div>
+ </div>
+   
 <br />
 <div class="table">
 
@@ -124,10 +128,10 @@
                 <td>@o.FirstName</td>
                 <td>@o.MiddleName</td>
                 <td>@o.Organisation.OrgName</td>
-                <td>@o.HireDate</td>
+                <td>@o.HireDate.ToShortDateString()</td>
                 <td>@o.DismissalDate</td>
                 <td>@o.Qualification.GetEnumDescription()</td>
-                <td>@o.LastQualificationTraning</td>
+                <td>@o.LastQualificationTraning.ToShortDateString()</td>
                 @if (o.Defectoscope != null)
                 {
                     <td>@o.Defectoscope.DefectoScopeType.GetEnumDescription()</td>
@@ -274,6 +278,10 @@
                         $("#updateModal").modal("show");
                     }
                 });
+            });
+
+            $(".excel-div").click(function () {
+                alert("!!!");
             });
         });
 
