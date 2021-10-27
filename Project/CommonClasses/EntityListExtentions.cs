@@ -96,6 +96,28 @@ namespace Common.ListExtentions
             return new SelectList(items, "Value", "Text");
         }
 
+        public static SelectList GetDangerousDefectSelectList(this List<DangerousDefect> list)
+        {
+            List<SelectListItem> items = new List<SelectListItem>(list.Count);
+            foreach (var li in list)
+            {
+                items.Add(new SelectListItem
+                {
+                    Text = li.DangerousDefectCode.GetEnumDescription(),
+                    Value = li.DangerousDefectId.ToString()
+                });
+            }
+            items.Add(new SelectListItem("-----", ""));
+            foreach (var item in items)
+            {
+                if (item.Text == "-----")
+                {
+                    item.Selected = true;
+                }
+            }
+            return new SelectList(items, "Value", "Text");
+        }
+
         public static SelectList GetDefectoscopeSelectList(this List<Defectoscope> list)
         {
             List<SelectListItem> items = new List<SelectListItem>(list.Count);
