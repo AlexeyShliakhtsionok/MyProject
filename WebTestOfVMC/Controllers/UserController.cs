@@ -226,15 +226,17 @@ namespace WebTestOfVMC.Controllers
                 worksheet.Range(2, 1, 2, 7).SetAutoFilter();
                 worksheet.Row(1).Style.Font.Bold = true;
 
-                for (int i = 0; i < currentModel.Users.ToList().Count; i++)
+                var users = _userServices.GetUsers().ToList();
+
+                for (int i = 0; i < users.Count; i++)
                 {
-                    worksheet.Cell(i + 3, 1).Value = currentModel.Users.ToList()[i].LastName;
-                    worksheet.Cell(i + 3, 2).Value = currentModel.Users.ToList()[i].FirstName;
-                    worksheet.Cell(i + 3, 3).Value = currentModel.Users.ToList()[i].SurName;
-                    worksheet.Cell(i + 3, 4).SetValue(currentModel.Users.ToList()[i].PhoneNumber);
-                    worksheet.Cell(i + 3, 5).Value = currentModel.Users.ToList()[i].Email;
-                    worksheet.Cell(i + 3, 6).Value = currentModel.Users.ToList()[i].Organisation.OrgName;
-                    worksheet.Cell(i + 3, 7).Value = currentModel.Users.ToList()[i].UserRole.GetEnumDescription();
+                    worksheet.Cell(i + 3, 1).Value = users[i].LastName;
+                    worksheet.Cell(i + 3, 2).Value = users[i].FirstName;
+                    worksheet.Cell(i + 3, 3).Value = users[i].SurName;
+                    worksheet.Cell(i + 3, 4).SetValue(users[i].PhoneNumber);
+                    worksheet.Cell(i + 3, 5).Value = users[i].Email;
+                    worksheet.Cell(i + 3, 6).Value = users[i].Organisation.OrgName;
+                    worksheet.Cell(i + 3, 7).Value = users[i].UserRole.GetEnumDescription();
                 }
 
                 using (var stream = new MemoryStream())
