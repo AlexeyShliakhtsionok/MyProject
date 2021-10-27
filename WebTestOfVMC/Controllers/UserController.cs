@@ -12,6 +12,7 @@ using Project.BLL.Services.IServiceIntefaces;
 using RailDBProject.Model;
 using Services.Interface;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -249,6 +250,25 @@ namespace WebTestOfVMC.Controllers
                     };
                 }
             }
+        }
+
+        public IActionResult Contacts()
+        {
+            var allUsers = _userServices.GetQuarable().ToList();
+            var users = new List<UserInfo>();
+            foreach (var item in allUsers)
+            {
+                users.Add(new UserInfo()
+                {
+                    FirstName = item.FirstName,
+                    LastName = item.LastName,
+                    SurName = item.LastName,
+                    Organisation = item.Organisation,
+                    Email = item.Email,
+                    PhoneNumber = item.PhoneNumber
+                });
+            }
+            return View(users);
         }
     }
 }

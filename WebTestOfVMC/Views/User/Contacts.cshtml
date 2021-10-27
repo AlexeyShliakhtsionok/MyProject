@@ -1,0 +1,78 @@
+﻿
+@using WebTestOfVMC.Models
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using EnumExt;
+@using Microsoft.AspNetCore.Mvc.Rendering;
+@using CommonClasses.PaginationAndSort.IndexViewModelClasses
+@using RailDBProject.Model;
+@using CommonClasses.PaginationAndSort.Filters
+
+@model List<UserInfo>
+
+<div class="headerOfTable">
+    <div><p class="filter-text">Список контактов</p></div>
+    <div class="excel-div"><img class="excel" src="~/images/exportToExcel.png" /></div>
+</div>
+
+<div class="table">
+    <br />
+    <table class="table">
+        <tr class="p1 intable">
+            <th class="size-th">
+                <p class="p1">№ п/п</p>
+            </th>
+            <th>
+                <p class="p1">Фамилия</p></a>
+
+            </th>
+
+            <th>
+                <p class="p1">Имя</p></a>
+            </th>
+
+            <th>
+                <p class="p1">Отчество</p></a>
+            </th>
+
+            <th>
+                <p class="p1">Телефон</p></a>
+            </th>
+
+            <th>
+                <p class="p1">Организация</p></a>
+            </th>
+
+            <th>
+                <p class="p1">E-mail</p></a>
+            </th>
+        </tr>
+
+        @{ int rowNo = 0; }
+        @foreach (UserInfo u in Model)
+        {
+<tr class="table-row">
+    <td>@(rowNo += 1)</td>
+    <td>@u.LastName</td>
+    <td>@u.FirstName</td>
+    <td>@u.SurName</td>
+    <td>@u.PhoneNumber</td>
+    <td>@u.Organisation.OrgName</td>
+    <td>@u.Email</td>
+</tr>
+       }
+    </table>
+</div>
+
+
+
+
+    @section Scripts{
+
+        <script>
+            $(".excel").click(function ()
+            {
+                window.location.href = "@Url.Action("Export", "User")"
+
+            });
+        </script>
+    }
