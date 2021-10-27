@@ -20,6 +20,7 @@
   <ItemGroup>
     <None Include="Views\Account\Login.cshtml" />
     <None Include="Views\Account\Register.cshtml" />
+    <None Include="Views\File\Index.cshtml" />
     <None Include="Views\GlobalSection\GetOne.cshtml" />
     <None Include="Views\GlobalSection\Index.cshtml" />
     <None Include="Views\Shared\Components\GlobalSectionInfo\Default.cshtml" />
@@ -38,6 +39,10 @@
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="Select2.js" Version="4.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\documents\" />
   </ItemGroup>
 
 </Project>

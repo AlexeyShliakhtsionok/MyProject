@@ -1,0 +1,44 @@
+﻿@model List<string>
+
+<div class="table">
+
+    <table class="table">
+
+        <tr class="p1 intable">
+
+            <th class="size-th">
+                <p class="p1">№ п/п</p>
+            </th>
+
+            <th class="size-th">
+                <p class="p1">Наименование документа</p>
+            </th>
+
+        </tr>
+
+        @{ int rowNo = 0; }
+
+        @foreach (var d in Model)
+        {
+            <tr class="table-row">
+                <td>@(rowNo += 1)</td>
+             <td> <a href="/File/DownloadFile/?filePath=@d">@d</a></td>
+        </tr>
+        }
+
+    </table>
+
+</div>
+<br />
+
+
+@using (Html.BeginForm("Index", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="">
+        <input type="file" class="form-control" name="myFile" />
+    </div>
+    <div class="form-group col-md-6">
+        <input type="submit" class="filesubmit" name="Upload" />
+    </div>
+}
