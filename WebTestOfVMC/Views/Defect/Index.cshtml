@@ -262,6 +262,18 @@
             $(".edit-button").hide();
             $(".delete-button").hide();
 
+            var txt = $('.dropDownId :selected').text();
+
+             $.ajax({
+                 url: "@Url.Action("GetLocalFromGlobal","Defect")",
+                 type: "post",
+                 cache: false,
+                 data: { 'name': txt },
+                 success: function (data) {
+                     selectDiv.html(data);
+                 },
+             });
+
             $(".table-row").click(function () {
 
                 if (!clicked)
@@ -291,7 +303,7 @@
 
             $(".globalSect").change(function () {
                 var txt = $('.dropDownId :selected').text();
-                alert(txt);
+              /*  alert(txt);*/
 
                 $.ajax({
                     url: "@Url.Action("GetLocalFromGlobal","Defect")",

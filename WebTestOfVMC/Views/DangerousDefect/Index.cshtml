@@ -280,6 +280,19 @@
             $(".edit-button").hide();
             $(".delete-button").hide();
 
+
+            var txt = $('.dropDownId :selected').text();
+
+                $.ajax({
+                    url: "@Url.Action("GetLocalFromGlobal","DangerousDefect")",
+                    type: "post",
+                    cache: false,
+                    data: { 'name': txt },
+                    success: function (data) {
+                        selectDiv.html(data);
+                    },
+                });
+
             $(".table-row").click(function () {
 
                 if (!clicked)
