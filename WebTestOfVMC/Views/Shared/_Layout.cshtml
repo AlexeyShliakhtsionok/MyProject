@@ -83,7 +83,7 @@
 
                         </li>
 
-                        @if (!ViewContext.HttpContext.User.IsInRole("NewUser"))
+                        @if (!ViewContext.HttpContext.User.IsInRole("newUser"))
                         {
                             <li>
                                 <a class="nav-link text-white" asp-area="" asp-controller="File" asp-action="Index">Нормативная документация</a>
